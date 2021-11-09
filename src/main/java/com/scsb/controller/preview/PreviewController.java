@@ -217,7 +217,8 @@ public class PreviewController {
 	 public String previewIndexAnnounce(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
 		try {
 			String base64 = convertToBase64(form.getImageFile());
-			System.out.println(form.getContent());
+			
+			model.addAttribute("title",form.getTitle());
 			model.addAttribute("image",base64);
 			model.addAttribute("content",form.getContent());
 		} catch (Exception e) {
@@ -233,6 +234,7 @@ public class PreviewController {
 	 public String previewIndexActivity(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
 		try {
 			String base64 = convertToBase64(form.getImageFile());
+			model.addAttribute("title",form.getTitle());
 			model.addAttribute("image",base64);
 			model.addAttribute("content",form.getContent());
 		} catch (Exception e) {
