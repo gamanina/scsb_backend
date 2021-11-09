@@ -14,7 +14,7 @@
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content"> 
+            <div id="content">
 
                 <!-- Topbar -->
                 <nav th:include="views/common/navbar :: navbar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
@@ -26,7 +26,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0">�雿��� - 撱���憚�</h1>
+                        <h1 class="h3 mb-0">數位金融 - 廣告輪播</h1>
                     </div>
 
                     <div class="formWizard">
@@ -34,28 +34,28 @@
                             <li class="active">
                                 <i class="fas fa-edit"></i>
                                 <p>
-                                    蝬齒
+                                    經辦
                                 </p>
                             </li>
                             <li>
                                 <div class="nav-wedge"></div>
                                 <i class="fas fa-user-check"></i>
                                 <p>
-                                    撖拇
+                                    審核
                                 </p>
                             </li>
                             <li>
                                 <div class="nav-wedge"></div>
                                 <i class="fas fa-user-check"></i>
                                 <p>
-                                    ����
+                                    公關
                                 </p>
                             </li>
                             <li>
                                 <div class="nav-wedge"></div>
                                 <i class="fas fa-user-check"></i>
                                 <p>
-                                    閬
+                                    覆核
                                 </p>
                             </li>
                         </ul>
@@ -68,7 +68,7 @@
                             <div class="card shadow mb-4">
                                 <div class="card-header">
                                     <div class="navbar">
-                                        <h6 class="m-0 font-weight-bold">�雿��� - 撱���憚��隢�</h6>
+                                        <h6 class="m-0 font-weight-bold">數位金融 - 廣告輪播申請</h6>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -82,23 +82,23 @@
                                     <div class="row ml-0 mr-0">
                                         <div class="col-lg-12 card-table">
                                             <p>
-                                            	�隢犖嚗� <span th:text=*{applicant}></span>
+                                            	申請人： <span th:text=*{applicant}></span>
                                             </p>
                                             <p>
-                                               	 �隢雿�� <span th:text=*{applicantUnit}></span>
+                                               	 申請單位： <span th:text=*{applicantUnit}></span>
                                             </p>
                                             <div class="card-select">
                                                 <div class="form-group form-datepicker">
                                                     <div class="row">
                                                         <div class="outsideInp">
-                                                            <label for="">������</label>
+                                                            <label for="">刊登日期</label>
                                                             <div class="input-group date">
                                                                 <input class="form-control fromdate" type="text" th:field="*{onTimeDate}" required>
                                                                 
                                                             </div>
                                                         </div>
                                                         <div class="outsideInp">
-                                                        	<label for="">����</label>
+                                                        	<label for="">時間</label>
 															<div>
 																<select class="form-control form-selectdate" th:field="*{onTimeHour}">
 																	<option value="00">00</option>
@@ -126,25 +126,25 @@
 																	<option value="22">22</option>
 																	<option value="23">23</option>
 																</select>
-																<span class="symbol"> 嚗� </span>
+																<span class="symbol"> ： </span>
 																<select class="form-control form-selectdate" th:field="*{onTimeMin}">
 																	<option value="00">00</option>
 																	<option value="15">15</option>
 																	<option value="30">30</option>
 																	<option value="45">45</option>
 																</select>
-																<span class="symbol butterfly"> 嚚� </span>
+																<span class="symbol butterfly"> ～ </span>
                                                             </div>
                                                         </div> 
                                                         <div class="outsideInp">
-                                                            <label for="">������</label>
+                                                            <label for="">停刊日期</label>
                                                             <div class="input-group date">
                                                                 <input class="form-control todate" type="text" th:field="*{offTimeDate}" required>
                                                                 
                                                             </div>
                                                         </div>
                                                         <div class="outsideInp">
-                                                            <label for="">����</label>
+                                                            <label for="">時間</label>
                                                         	 <div style="width: 300px;">
 	                                                            <select class="form-control form-selectdate" th:field="*{offTimeHour}">
 	                                                                <option value="00">00</option>
@@ -172,7 +172,7 @@
 	                                                                <option value="22">22</option>
 	                                                                <option value="23">23</option>
 	                                                            </select>
-                                                        		<span class="symbol"> 嚗� </span>
+                                                        		<span class="symbol"> ： </span>
                                                             	<select class="form-control form-selectdate" th:field="*{offTimeMin}">
 	                                                                <option value="00">00</option>
 	                                                                <option value="15">15</option>
@@ -190,17 +190,17 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label for="">�����撅斤偷�鈭箏</label>
+                                                            <label for="">您的下一層簽核人員</label>
                                                             <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." required="required" th:field="*{nextApproverId}">
-                                                            	<option value="">隢���</option>
+                                                            	<option value="">請選擇</option>
                                                                 <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{nextApproverId}"></option>
                                                             </select>
                                                             <div class="invalidColor" th:if="${#fields.hasErrors('nextApprover')}" th:errors="*{nextApprover}"></div>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label for="">�����撅斤偷�鈭箏銋誨��犖</label>
+                                                            <label for="">您的下一層簽核人員之代理人</label>
                                                             <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." th:field="*{agentId}">
-                                                            	<option value="">隢���</option>
+                                                            	<option value="">請選擇</option>
                                                                 <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{agentId}"></option>
                                                             </select>
                                                         </div>
@@ -209,45 +209,45 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="titlename">璅��</label>
+                                                <label for="titlename">標題</label>
                                                 <input type="text" class="form-control" id="titlename" placeholder="" th:field="*{title}">
                                                 <div class="invalidColor" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>
-                                                   	PC �����
-                                                    <span>嚗偕撖賂��2050*420 px嚗� 閮鳴���������������誑����������神�� </span>
+                                                   	PC 版圖檔
+                                                    <span>（尺寸：2050*420 px） 註：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。 </span>
                                                 </label>
                                                 <br>
                                                 <div class="fileUpload btn btn-upload btn-icon-split">
                                                     <span class="icon">
                                                         <i class="fas fa-plus"></i>
                                                     </span>
-                                                    <span class="text">銝</span>
+                                                    <span class="text">上傳</span>
                                                     <input id="up_imgfile" type="file" class="upload" th:field="*{imageFile}">
                                                 </div>
-                                                <input id="show_imgfile" class="fileUpload" placeholder="����遙雿���" disabled="disabled">
+                                                <input id="show_imgfile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                              	<div class="invalidColor" th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></div>
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    Mobile �����
-                                                    <span>嚗偕撖賂��720*520 px嚗� 閮鳴���������������誑����������神��</span>
+                                                    Mobile 版圖檔
+                                                    <span>（尺寸：720*520 px） 註：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。</span>
                                                 </label>
                                                 <br>
                                                 <div class="fileUpload btn btn-upload btn-icon-split">
                                                     <span class="icon">
                                                         <i class="fas fa-plus"></i>
                                                     </span>
-                                                    <span class="text">銝</span>
+                                                    <span class="text">上傳</span>
                                                     <input id="up_imgfileMobile" type="file" class="upload" th:field="*{imageMobileFile}">
                                                 </div>
-                                                <input id="show_imgfileMobile" class="fileUpload" placeholder="����遙雿���" disabled="disabled">
+                                                <input id="show_imgfileMobile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                             	<div class="invalidColor" th:if="${#fields.hasErrors('imageMobileFile')}" th:errors="*{imageMobileFile}"></div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="imgurl">�����蝯�</label>
+                                                <label for="imgurl">圖檔連結</label>
                                                 <input type="text" class="form-control" id="imgurl" placeholder="" th:field="*{imageUrl}">
                                             </div>
                                         </div>
@@ -262,10 +262,10 @@
 
                     <div class="btnNext">
                         <a href="#" class="btn btn-return" onclick="preview()">
-                            <span class="">��汗</span>
+                            <span class="">預覽</span>
                         </a>
                         <a href="#" class="btn btn-next" onclick="submit()">
-                            <span class="">�銵典</span>
+                            <span class="">送出表單</span>
                         </a>
                     </div>
 
@@ -283,7 +283,7 @@
 $('#nextApproverId').change(function(){
 	var nextApprover = $("#nextApproverId").find('option:selected').text();
 	
-	if (nextApprover != "隢���"){
+	if (nextApprover != "請選擇"){
 		$('#nextApprover').val(nextApprover);		
 	}
 	else{
@@ -294,7 +294,7 @@ $('#nextApproverId').change(function(){
 $('#agentId').change(function(){
 	var agent = $("#agentId").find('option:selected').text();
 	
-	if (agent != "隢���"){
+	if (agent != "請選擇"){
 		$('#agent').val(agent);		
 	}
 	else{
@@ -304,8 +304,8 @@ $('#agentId').change(function(){
 
 function preview(){
 	document.forms['sForm'].target = '_blank';
-	// ��閬耨����
-	document.forms['sForm'].action = '/scsb-springboot-0.0.3/previewDigitBanner';
+	// 需要修改的地方
+	document.forms['sForm'].action = '/previewDigitBanner';
 	document.forms['sForm'].submit();
 }
 
