@@ -8,24 +8,25 @@
 	th:href="@{/assets/css/preview.css}">
 </head>
 <body>
-	<div class="main">
+	<div class="mainDetail">
 		<div class="header">
 			<img th:src="@{/assets/img/header.png}" alt="">
 		</div>
 
 		<div class="inner-kv">
-			<div class="inner-kv-wrap">
-				<div class="inner-kv-img">
-					<div class="sharebar d-flex justify-content-end">
-						
+			<div class="inner-kv-wrap" style="display: flex;">
+				<div class="inner-kv-img" style="width: 100%;background-color: #efefef;margin-top: 10px;">
+					
+					<div class="inner-tag">
+						<div class="distag">銀行資訊</div>
+						<div class="date">110/12/31止</div>
 					</div>
-					
-					
 				</div>
 				<div class="inner-kv-slogan d-flex align-items-sm-center">
 
 
 					<div class="inner-kv-item">
+
 						<h2>[[${title}]]</h2>
 						<div class="wording"></div>
 
@@ -34,7 +35,7 @@
 			</div>
 		</div>
 
-		
+
 
 		<div class="banner">
 			<img th:src="${image}" alt="">

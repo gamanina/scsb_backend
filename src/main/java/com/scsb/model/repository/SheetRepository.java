@@ -32,7 +32,7 @@ public interface SheetRepository extends JpaRepository<Sheet, String>
 	//依員工編號&條件取得表單
 	@Query(value =	" SELECT * FROM SCSB_SHEET LEFT JOIN SCSB_SHEET_APPROVAL ON SCSB_SHEET.ID = SCSB_SHEET_ID WHERE SCSB_SHEET.APPLICANT_ID = ?1 "
 					+" AND SCSB_SHEET.APPLICANT LIKE %?2% "
-					+" AND SCSB_SHEET.TYPE LIKE %?3% "
+					+" AND SCSB_SHEET.TYPE = ?3 "
 					+" AND SCSB_SHEET.STATUS LIKE %?4% "
 					+ " ORDER BY SCSB_SHEET_APPROVAL.CREATE_TIME ASC ", nativeQuery = true)
 	List<Sheet> getSheetAndConditionByApplicant(String memberId,String name, String type, String status);
