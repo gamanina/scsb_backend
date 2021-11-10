@@ -171,6 +171,8 @@ public class PreviewController {
 		Sheet sheet = sheetService.getSheetById(Integer.parseInt(form.getScsbSheetId()));
 		//TODO: image路徑待確認
 		model.addAttribute("image",sheet.getImage());
+		model.addAttribute("title",sheet.getTitle());
+		model.addAttribute("content",sheet.getContent());
 		
 		//取得預覽頁面
 		String previewPage="/";
@@ -200,6 +202,18 @@ public class PreviewController {
 	        break;
 	    case Constants.DIGIT_AD_SHEET_TYPE:
 	    	previewPage = Constants.PREVIEW_DIGIT_AD;
+	        break;
+	    case Constants.INDEX_ANNOUNCE_SHEET_TYPE:
+	    	previewPage = Constants.PREVIEW_INDEX_ANNOUNCE;
+	        break;
+	    case Constants.INDEX_ACTIVITY_SHEET_TYPE:
+	    	previewPage = Constants.PREVIEW_INDEX_ACTIVITY;
+	        break;
+	    case Constants.INDEX_BANNER_SHEET_TYPE:
+	    	previewPage = Constants.PREVIEW_INDEX_BANNER;
+	        break;
+	    case Constants.INDEX_WINNERS_SHEET_TYPE:
+	    	previewPage = Constants.PREVIEW_INDEX_WINNERS;
 	        break;
 	        
 	    default:
