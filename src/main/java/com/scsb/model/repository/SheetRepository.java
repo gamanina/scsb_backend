@@ -41,7 +41,7 @@ public interface SheetRepository extends JpaRepository<Sheet, String>
 	Sheet  getSheetById(int id);
 	
 	// 依員工編號與狀態取得表單
-	@Query(value = "SELECT * FROM SCSB_SHEET WHERE STATUS = ?1 AND NEXT_APPROVER_ID = ?2 OR AGENT_ID = ?2", nativeQuery = true)
+	@Query(value = "SELECT * FROM SCSB_SHEET WHERE STATUS = ?1 AND ( NEXT_APPROVER_ID = ?2 OR AGENT_ID = ?2 )", nativeQuery = true)
 	List<Sheet> getSheetListByStatusAndCn(String status, String Cn);
 	
 	@Query(value = "SELECT * FROM SCSB_SHEET WHERE STATUS in (?1)", nativeQuery = true)

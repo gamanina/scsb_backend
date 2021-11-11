@@ -1,5 +1,7 @@
 package com.scsb.controller.sheet;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -311,8 +313,8 @@ public class SheetController {
 			sheet.setStep(1); //審核階段
 			sheet.setStatus("4"); //狀態 -下架處理中
 			sheet.setModifier(ldap.getCn());
-			sheet.setModifyTime(sheet.getDateTime());
-
+			sheet.setModifyTime(new Timestamp(System.currentTimeMillis()));
+			sheet.setCreateTime(new Timestamp(System.currentTimeMillis()));
 			//取前端資料Cancel sheet
 			sheetCancel.setScsbSheetId(id);
 			sheetCancel.setApproverId(ldap.getCn());

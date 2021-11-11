@@ -126,8 +126,12 @@ public class PendingSheetController
 			
 			// 拿取待核表單列表
 			Ldap ldap = setCommon(model, request);
+			
+			System.out.println(ldap.getCn());
+			
 			List<Sheet> sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
 			
+			System.out.println(sheetList.toString());
 			model.addAttribute("sheetList", sheetList);
 		} 
 		catch (Exception e) 
