@@ -242,6 +242,7 @@ public class PreviewController {
 			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
 			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
 			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -266,6 +267,7 @@ public class PreviewController {
 			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
 			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
 			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -303,6 +305,7 @@ public class PreviewController {
 			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
 			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
 			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
+			model.addAttribute("sheet",null);
 			
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);

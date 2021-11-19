@@ -19,7 +19,7 @@
 					
 					<div class="inner-tag">
 						<div class="distag">銀行資訊</div>
-						<div class="date">110/12/31止</div>
+						<div class="date" th:text="${offTimeDate}">110/12/31止</div>
 					</div>
 				</div>
 				<div class="inner-kv-slogan d-flex align-items-sm-center">
@@ -37,26 +37,54 @@
 
 
 
-		<div class="banner">
-			<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
-			<p th:text="*{content}"></p>
-			<!--             banner img -->
+		<div class="banner" style="height: 100%;">
+			<div th:if="${sheet==null}">
+				<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
+				<div class="test" th:utext="${content}"></div>
+			</div>
+			<div th:if="${sheet!=null}">
+				<a th:href="${sheet.imageUrl}"><img th:src="@{${sheet.image}}" alt=""></a>
+				<div class="test" th:utext="${content}"></div>
+			</div>
+			
 		</div>
 		<div>
 			<a href="#">[[${fileName}]]</a>
+			<div th:if="${sheet!=null and sheet.file != null}">
+			<a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
+			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName2}]]</a>
+			<div th:if="${sheet!=null and sheet.file2 != null}">
+			<a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
+			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName3}]]</a>
+			<div th:if="${sheet!=null and sheet.file3 != null}">
+			<a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
+			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName4}]]</a>
+			<div th:if="${sheet!=null and sheet.file4 != null}">
+			<a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
+			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName5}]]</a>
+			<div th:if="${sheet!=null and sheet.file5 != null}">
+			<a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
+			</div>
+			
 		</div>
+
+		<!--         <div class="footer"> -->
+		<!--             <img th:src="@{/assets/img/curve.png}" alt=""> -->
+		<!--             <img th:src="@{/assets/img/body.png}" alt=""> -->
+
+		<!--         </div> -->
 	</div>
 </body>
 </html>

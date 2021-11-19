@@ -37,39 +37,44 @@
 
 
 
-		<div class="banner">
-			<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
-			<div class="test" th:utext="${content}"></div>
-			<!--             banner img -->
+		<div class="banner" style="height: 100%;">
+			<div th:if="${sheet==null}">
+				<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
+				<div class="test" th:utext="${content}"></div>
+			</div>
+			<div th:if="${sheet!=null}">
+				<a th:href="${sheet.imageUrl}"><img th:src="@{${sheet.image}}" alt=""></a>
+				<div class="test" th:utext="${content}"></div>
+			</div>
 			
 		</div>
 		<div>
 			<a href="#">[[${fileName}]]</a>
-			<div th:if="${sheet.file != null}">
+			<div th:if="${sheet!=null and sheet.file != null}">
 			<a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
 			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName2}]]</a>
-			<div th:if="${sheet.file2 != null}">
+			<div th:if="${sheet!=null and sheet.file2 != null}">
 			<a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
 			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName3}]]</a>
-			<div th:if="${sheet.file3 != null}">
+			<div th:if="${sheet!=null and sheet.file3 != null}">
 			<a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
 			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName4}]]</a>
-			<div th:if="${sheet.file4 != null}">
+			<div th:if="${sheet!=null and sheet.file4 != null}">
 			<a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
 			</div>
 		</div>
 		<div>
 			<a href="#">[[${fileName5}]]</a>
-			<div th:if="${sheet.file5 != null}">
+			<div th:if="${sheet!=null and sheet.file5 != null}">
 			<a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
 			</div>
 			
