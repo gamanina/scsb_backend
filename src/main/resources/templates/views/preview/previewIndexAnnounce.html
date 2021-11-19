@@ -38,16 +38,26 @@
 
 
 		<div class="banner">
-			<img th:src="@{${image}}" alt="">
+			<a th:href="${imageUrl}"><img th:src="@{${image}}" alt=""></a>
 			<p th:text="*{content}"></p>
 			<!--             banner img -->
 		</div>
 
-		<!--         <div class="footer"> -->
-		<!--             <img th:src="@{/assets/img/curve.png}" alt=""> -->
-		<!--             <img th:src="@{/assets/img/body.png}" alt=""> -->
-
-		<!--         </div> -->
+		<div>
+			<a href="#">[[${fileName}]]</a>
+		</div>
+		<div>
+			<a href="#">[[${fileName2}]]</a>
+		</div>
+		<div>
+			<a href="#">[[${fileName3}]]</a>
+		</div>
+		<div>
+			<a href="#">[[${fileName4}]]</a>
+		</div>
+		<div>
+			<a href="#">[[${fileName5}]]</a>
+		</div>
 	</div>
 </body>
 </html>

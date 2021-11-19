@@ -8,22 +8,25 @@
 	th:href="@{/assets/css/preview.css}">
 </head>
 <body>
-	<div class="main">
+	<div class="main" style="width: 100%;">
 		<div class="header">
 <!-- 			<img th:src="@{/assets/img/header.png}" alt=""> -->
 		</div>
 
 		<div class="inner-kv">
-			<div class="inner-kv-wrap">
-				<div class="inner-kv-img">
-					<div class="sharebar d-flex justify-content-end"></div>
-
-
+			<div class="inner-kv-wrap" style="display: flex;">
+				<div class="inner-kv-img" style="width: 100%;background-color: #efefef;margin-top: 10px;">
+					
+					<div class="inner-tag">
+						<div class="distag">銀行資訊</div>
+						<div class="date" th:text="${offTimeDate}">110/12/31止</div>
+					</div>
 				</div>
 				<div class="inner-kv-slogan d-flex align-items-sm-center">
 
 
 					<div class="inner-kv-item">
+
 						<h2>[[${title}]]</h2>
 						<div class="wording"></div>
 
@@ -35,9 +38,41 @@
 
 
 		<div class="banner">
-			<img th:src="${image}" alt="">
-			<p th:text="*{content}"></p>
+			<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
+			<div class="test" th:utext="${content}"></div>
 			<!--             banner img -->
+			
+		</div>
+		<div>
+			<a href="#">[[${fileName}]]</a>
+			<div th:if="${sheet.file != null}">
+			<a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
+			</div>
+		</div>
+		<div>
+			<a href="#">[[${fileName2}]]</a>
+			<div th:if="${sheet.file2 != null}">
+			<a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
+			</div>
+		</div>
+		<div>
+			<a href="#">[[${fileName3}]]</a>
+			<div th:if="${sheet.file3 != null}">
+			<a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
+			</div>
+		</div>
+		<div>
+			<a href="#">[[${fileName4}]]</a>
+			<div th:if="${sheet.file4 != null}">
+			<a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
+			</div>
+		</div>
+		<div>
+			<a href="#">[[${fileName5}]]</a>
+			<div th:if="${sheet.file5 != null}">
+			<a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
+			</div>
+			
 		</div>
 
 		<!--         <div class="footer"> -->

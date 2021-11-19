@@ -126,7 +126,7 @@ public class Constants {
     public static final String PREVIEW_DEPOSIT_AD="views/preview/previewDepositAd";
     public static final String PREVIEW_DEPOSIT_BANNER="views/preview/previewDepositBanner";
     public static final String PREVIEW_DIGIT_AD="views/preview/previewDigitAd";
-    public static final String PREVIEW_DIGIT_BANNER="views/preview/previewDigitBanner";
+    public static final String PREVIEW_DIGIT_BANNER="views/preview/PreviewDigitBanner";
     public static final String PREVIEW_INDEX_ANNOUNCE="views/preview/previewIndexAnnounce";
     public static final String PREVIEW_INDEX_ACTIVITY="views/preview/previewIndexActivity";
     public static final String PREVIEW_INDEX_BANNER="views/preview/previewIndexBanner";

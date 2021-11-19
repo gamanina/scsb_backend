@@ -83,17 +83,33 @@
                                                 	公告內容：
                                                 </p>
                                                     <ul>
-                                                        <li th:if="${sheet.image != null}">
+                                                        <li th:if="${sheet.image != null and sheet.type == '2'}">
                                                         	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
                                                         </li>
-                                                        <li th:if="${sheet.imageMobile != null}">
+                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '2'}">
                                                         	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
                                                         </li>
+                                                        <li th:if="${sheet.image != null and sheet.type != '2'}">
+                                                        	・圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
+                                                        </li>
+                        
                                                         <li th:if="${sheet.imageUrl != null}">
                                                         	・圖檔連結 <a th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a>
                                                         </li>
                                                         <li th:if="${sheet.file != null}">
                                                         	 ・附檔 <a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
+                                                        </li>
+                                                         <li th:if="${sheet.file2 != null}">
+                                                        	 ・附檔 <a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
+                                                        </li>
+                                                         <li th:if="${sheet.file3 != null}">
+                                                        	 ・附檔 <a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
+                                                        </li>
+                                                         <li th:if="${sheet.file4 != null}">
+                                                        	 ・附檔 <a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
+                                                        </li>
+                                                         <li th:if="${sheet.file5 != null}">
+                                                        	 ・附檔 <a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
                                                         </li>
                                                     </ul>
                                                     <div th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(sheet.content),'\n','&lt;br/&gt;'))}"></div>
@@ -129,7 +145,7 @@
 	                                                            	<option value="">請選擇</option>
 	                                                                <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{nextApproverId}"></option>
 	                                                            </select>
-	                                                            <div class="invalidColor" th:if="${#fields.hasErrors('nextApprover')}" th:errors="*{nextApprover}"></div>
+	                                                            <div id="errorCheck" class="invalidColor" th:if="${#fields.hasErrors('nextApprover')}" th:errors="*{nextApprover}"></div>
 	                                                        </div>
 	                                                        <div class="col-md-4">
 	                                                            <label for="">您的下一層簽核人員之代理人</label>
@@ -231,7 +247,7 @@ function pass(){
 
 function refuse(){
 	$('#check').val('2');
-	
+	$('#errorCheck').remove()
 	document.forms['sForm'].target = '_self';
 	document.forms['sForm'].action = 'save';
 	popComfirm('sForm','確認退回','確認退回?','退回');
@@ -240,7 +256,7 @@ function refuse(){
 
 function preview() {
 	document.forms['sForm'].target = '_blank';
-	document.forms['sForm'].action = '/scsb-springboot/previewImgUrl';
+	document.forms['sForm'].action = '/scsb-springboot-0.0.3/previewImgUrl';
 	document.forms['sForm'].submit();
 }
 </script>

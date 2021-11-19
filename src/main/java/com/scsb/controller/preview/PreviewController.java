@@ -173,7 +173,7 @@ public class PreviewController {
 		model.addAttribute("image",sheet.getImage());
 		model.addAttribute("title",sheet.getTitle());
 		model.addAttribute("content",sheet.getContent());
-		
+		model.addAttribute("sheet",sheet);
 		//取得預覽頁面
 		String previewPage="/";
 		
@@ -235,6 +235,13 @@ public class PreviewController {
 			model.addAttribute("title",form.getTitle());
 			model.addAttribute("image",base64);
 			model.addAttribute("content",form.getContent());
+			model.addAttribute("offTimeDate",form.getOffTimeDate());
+			model.addAttribute("imageUrl",form.getImageUrl());
+			model.addAttribute("fileName", form.getFile().getOriginalFilename());
+			model.addAttribute("fileName2", form.getFile2().getOriginalFilename());
+			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
+			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
+			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -249,8 +256,16 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("title",form.getTitle());
+			model.addAttribute("title",form.getTitle());
 			model.addAttribute("image",base64);
 			model.addAttribute("content",form.getContent());
+			model.addAttribute("offTimeDate",form.getOffTimeDate());
+			model.addAttribute("imageUrl",form.getImageUrl());
+			model.addAttribute("fileName", form.getFile().getOriginalFilename());
+			model.addAttribute("fileName2", form.getFile2().getOriginalFilename());
+			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
+			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
+			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -278,8 +293,17 @@ public class PreviewController {
 	 public String previewIndexWinners(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
 		try {
 			String base64 = convertToBase64(form.getImageFile());
+			model.addAttribute("title",form.getTitle());
 			model.addAttribute("image",base64);
 			model.addAttribute("content",form.getContent());
+			model.addAttribute("offTimeDate",form.getOffTimeDate());
+			model.addAttribute("imageUrl",form.getImageUrl());
+			model.addAttribute("fileName", form.getFile().getOriginalFilename());
+			model.addAttribute("fileName2", form.getFile2().getOriginalFilename());
+			model.addAttribute("fileName3", form.getFile3().getOriginalFilename());
+			model.addAttribute("fileName4", form.getFile4().getOriginalFilename());
+			model.addAttribute("fileName5", form.getFile5().getOriginalFilename());
+			
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);

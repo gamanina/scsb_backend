@@ -141,6 +141,9 @@ public class LoginController {
 	{
 		try
 		{
+			
+			System.out.println("=========empNo:"+empNo);
+			
 			Ldap ldap = ldapService.getDataByEmpNo(empNo);
 			
 			if(ldap == null || StringUtils.isBlank(ldap.getCn()))

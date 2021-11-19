@@ -98,6 +98,15 @@ public class Sheet
 	@Transient
 	private String fileName;
 	
+	@Transient
+	private String fileName2;
+	@Transient
+	private String fileName3;
+	@Transient
+	private String fileName4;
+	@Transient
+	private String fileName5;
+	
 	public Sheet()
 	{
 		
@@ -355,6 +364,35 @@ public class Sheet
 	
 	public String getFileName() {
 		if (StringUtils.isBlank(getFile()))
+		{
+			return "";
+		}
+		return getFile().substring(getFile().lastIndexOf("/") + 1);
+	}
+	
+	public String getFileName2() {
+		if (StringUtils.isBlank(getFile2()))
+		{
+			return "";
+		}
+		return getFile().substring(getFile().lastIndexOf("/") + 1);
+	}
+	public String getFileName3() {
+		if (StringUtils.isBlank(getFile3()))
+		{
+			return "";
+		}
+		return getFile().substring(getFile().lastIndexOf("/") + 1);
+	}
+	public String getFileName4() {
+		if (StringUtils.isBlank(getFile4()))
+		{
+			return "";
+		}
+		return getFile().substring(getFile().lastIndexOf("/") + 1);
+	}
+	public String getFileName5() {
+		if (StringUtils.isBlank(getFile5()))
 		{
 			return "";
 		}
