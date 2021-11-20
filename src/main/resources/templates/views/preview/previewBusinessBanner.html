@@ -13,9 +13,14 @@
         </div>
 
         <div class="banner">
-            <img th:src="${image}" alt="">
-<!--             banner img -->
-        </div>
+			<div th:if="${sheet==null}">
+				<img th:src="${image}" alt="">
+				<!--             banner img -->
+			</div>
+			<div th:if="${sheet!=null}">
+				<img th:src="@{${sheet.image}}" alt="">
+			</div>
+		</div>
 
         <div class="footer">
             <img th:src="@{/assets/img/curve.png}" alt="">

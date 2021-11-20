@@ -38,6 +38,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet", null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -53,6 +54,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -67,6 +69,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet", null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -82,6 +85,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -96,6 +100,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet", null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -111,6 +116,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -125,6 +131,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet", null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -140,6 +147,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -282,6 +290,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
