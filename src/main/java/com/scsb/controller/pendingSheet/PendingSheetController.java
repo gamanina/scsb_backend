@@ -186,7 +186,12 @@ public class PendingSheetController
 			
 			// 表單
 			Sheet sheet = sheetService.getSheetById(Integer.valueOf(form.getScsbSheetId()));
-			boolean finalStepCheck = commonService.checkFinalStep(sheet, Constants.PAGE_KEY_APPROVAL);
+			boolean finalStepCheck = false;
+			if(form.getCheck().equals(Constants.SHEET_APPROVAL_REFUSE)) {
+				finalStepCheck = true;
+			}else{
+				finalStepCheck = commonService.checkFinalStep(sheet, Constants.PAGE_KEY_APPROVAL);
+			}
 			Ldap ldap = setCommon(model, request);
 			formValidator.validate(form, bindingResult, finalStepCheck);
 			if (bindingResult.hasErrors()) 
