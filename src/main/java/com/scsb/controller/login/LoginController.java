@@ -92,7 +92,7 @@ public class LoginController {
 			}
 			member.setRole(role);
 			member.setLdap(ldap);
-			
+			member.setName(ldap.getGivenName());
 			//設置權限查詢表
 	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	        request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
@@ -164,6 +164,7 @@ public class LoginController {
 			}
 			member.setRole(role);
 			member.setLdap(ldap);
+			member.setName(ldap.getGivenName());
 			
 			//設置權限查詢表
 	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
@@ -237,6 +238,7 @@ public class LoginController {
 				}
 				member.setRole(role);
 	    		member.setLdap(ldap);
+	    		member.setName(ldap.getGivenName());
 	    		
 	    		Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	            request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
@@ -295,6 +297,7 @@ public class LoginController {
 			}
     		member.setRole(role);
 			member.setLdap(ldap);
+			member.setName(ldap.getGivenName());
 	        
 	        //設置權限查詢表
 	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
