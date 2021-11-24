@@ -24,11 +24,11 @@ public class ScheduledTasks
 	@Scheduled(cron = "0/5 * * * * *")
 	@Async("multiThreadPoolTaskExecutor")
 	public void sendAprroveRemindEmailCron() {
-//		if(!isTest) {
+		if(!isTest) {
 			log.info("===SendAprroveRemindEmailCron: start ===");
 			sendAprroveRemindEmailWork.work();
 			log.info("===SendAprroveRemindEmailCron: end ===");
-//		}
+		}
 	}
 
 }

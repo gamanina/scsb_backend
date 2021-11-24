@@ -300,7 +300,7 @@
                                             
                                             <div class="form-group">
                                                 <label for="titlename">最新活動內容</label>
-                                                <textarea class="form-control" rows="10" placeholder="" th:field="*{content}"></textarea>
+                                                <textarea class="ckeditor" rows="10" placeholder="" th:field="*{content}"></textarea>
                                             	<div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
                                             </div>
                                         </div>
@@ -329,7 +329,7 @@
         </div>
 
     </div>
-
+<script src="../assets/ckeditor/ckeditor.js"></script>
 </body>
 <footer th:include="views/common/footer :: footer"></footer>
 <script>

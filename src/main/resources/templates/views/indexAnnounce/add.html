@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
-<head th:include="views/common/head :: head"></head>
+<head th:include="views/common/head :: head">
+
+</head>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -293,7 +295,7 @@
                                             
                                             <div class="form-group">
                                                 <label for="titlename">本行公告內容</label>
-                                                <textarea class="form-control" rows="20" placeholder="" th:field="*{content}"></textarea>
+                                                <textarea class="ckeditor" rows="20" placeholder="" th:field="*{content}"></textarea>
                                                 <div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
                                             </div>
                                         </div>
@@ -322,7 +324,7 @@
         </div>
 
     </div>
-
+<script src="../assets/ckeditor/ckeditor.js"></script>
 </body>
 <footer th:include="views/common/footer :: footer"></footer>
 <script>
