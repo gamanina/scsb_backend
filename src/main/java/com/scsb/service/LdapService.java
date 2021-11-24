@@ -4,8 +4,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import org.springframework.stereotype.Service;
 
@@ -172,4 +174,25 @@ public class LdapService
 		finalList.addAll(c);
 		return finalList;
 	}
+	
+	// 取得公關部門的所有人員
+		public String getAuthorityForSystem(String userdn,String emppwd) throws Exception
+		{
+			ldapOperator ldapOper = new ldapOperator();
+			
+			Map<String, Object> map = ldapOper.userLoginLdap(userdn, emppwd);
+
+			Vector securityequals = (Vector)map.get("securityEquals");
+			//預設沒有權限
+			String usable = "N";
+				  
+			Iterator<?> iterator = securityequals.iterator();
+			while(iterator.hasNext()) {
+			    String secequals = (String)iterator.next();
+				if ("cn=OnlineWorkTimeRecGrp,o=apgroup,c=tw".equals(secequals)) {
+				    usable = "Y";//有權限
+				}
+			}
+			return usable;
+		}
 }

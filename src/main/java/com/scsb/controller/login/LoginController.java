@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,8 @@ import com.scsb.util.LogUtil;
 @RequestMapping("/")
 public class LoginController {
 
+	Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@Autowired
 	private CommonService commonService;
 	@Autowired
@@ -142,7 +146,7 @@ public class LoginController {
 		try
 		{
 			
-			System.out.println("=========empNo:"+empNo);
+			logger.info("=========empNo:"+empNo);
 			
 			Ldap ldap = ldapService.getDataByEmpNo(empNo);
 			
@@ -278,7 +282,12 @@ public class LoginController {
 			
 			// ldap登入
 			Ldap ldap = ldapService.login(form.getZhho(), form.getMima());
+			String authorityForSystem = ldapService.getAuthorityForSystem(form.getZhho(), form.getMima());
 	        
+			if ("N".equals(authorityForSystem)) {
+				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_RIGHTS_ERROR, Constants.LOGIN_URL);
+			}
+			
 	        if (ldap == null) 
 				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_ACCOUNT_ERROR, Constants.LOGIN_URL);
 	        
@@ -318,6 +327,7 @@ public class LoginController {
 	        
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
+	        
 	        
 	        // 若有停刊申請的待核表單
 	        System.out.println("###############"+ldap.getCn());

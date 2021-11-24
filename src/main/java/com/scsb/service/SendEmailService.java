@@ -86,7 +86,7 @@ public class SendEmailService {
 			//測試寄給測試email
 			toList.add(fromEmail);
 		} else {
-			toList.add(vo.getRecipientEmail());
+			toList.add("iverson830521@gmail.com");
 		}
 		sendthymeleafEmail(toList,subject,"email/remindEmail.html",map);
 	}

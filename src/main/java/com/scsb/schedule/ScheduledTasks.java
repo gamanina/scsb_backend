@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.scsb.schedule.work.SendAprroveRemindEmailWork;
-import com.scsb.schedule.work.TestWork;
 
 @Component
 public class ScheduledTasks 
@@ -22,14 +21,14 @@ public class ScheduledTasks
 	private SendAprroveRemindEmailWork sendAprroveRemindEmailWork;
 
 	//TODO 詹時關閉排程
-//	@Scheduled(cron = "0 0 * * * ?")//每小時執行一次
-//	@Async("multiThreadPoolTaskExecutor")
-//	public void sendAprroveRemindEmailCron() {
+	@Scheduled(cron = "0/5 * * * * *")
+	@Async("multiThreadPoolTaskExecutor")
+	public void sendAprroveRemindEmailCron() {
 //		if(!isTest) {
-//			log.info("===SendAprroveRemindEmailCron: start ===");
-//			sendAprroveRemindEmailWork.work();
-//			log.info("===SendAprroveRemindEmailCron: end ===");
+			log.info("===SendAprroveRemindEmailCron: start ===");
+			sendAprroveRemindEmailWork.work();
+			log.info("===SendAprroveRemindEmailCron: end ===");
 //		}
-//	}
+	}
 
 }

@@ -76,8 +76,10 @@ public class SendAprroveRemindEmailWork
 			{
 				try 
 		    	{
-					Ldap approver = ldapService.getDataByEmpNo(sheet.getNextApproverId());
-					Ldap agent = ldapService.getDataByEmpNo(sheet.getAgentId());
+//					Ldap approver = ldapService.getDataByEmpNo(sheet.getNextApproverId());
+//					Ldap agent = ldapService.getDataByEmpNo(sheet.getAgentId());
+					Ldap approver = new Ldap();
+					Ldap agent = new Ldap(); 
 					//收件人為空則忽略
 					if(approver == null) {
 						log.info("=== sheet send remind email error sheet id:" + sheet.getId() + " ===");
@@ -107,7 +109,7 @@ public class SendAprroveRemindEmailWork
     	}
     	catch (Exception e) 
     	{
-			log.info("=== SendAprroveRemindEmailWork has error ===");
+			log.info(e);
 		}
     	log.info("=== SendAprroveRemindEmailWork: end ===");
     }
@@ -130,7 +132,7 @@ public class SendAprroveRemindEmailWork
 		} else {
 			emailRecipient.setSheetCount(1);
 			emailRecipient.setEmailUrlType(sheet.getStatus());
-			emailRecipient.setRecipientEmail(recipient.getMail());
+			emailRecipient.setRecipientEmail("iverson830521@gmail.com");
 			emailMap.put(recipientId, emailRecipient);
 		}
 		
