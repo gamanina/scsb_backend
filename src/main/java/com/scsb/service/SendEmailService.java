@@ -55,6 +55,10 @@ public class SendEmailService {
 	 * @throws Exception 
 	 */
 	public void sendSheetApproveEmail(HttpServletRequest request, String nextApproverId, String agentId) throws Exception {
+		// TODO 刪除
+		if (isTest) {
+			return;// 本機測試環境不寄信
+		}
 		List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 		Map<String, String> emailMap = approverList.stream().collect(Collectors.toMap(Ldap::getCn, Ldap::getMail));
 		String approverEmail = emailMap.get(nextApproverId);

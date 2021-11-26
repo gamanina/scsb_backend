@@ -3,6 +3,8 @@ package com.scsb.config;
 import java.util.Arrays;
 import java.util.List;
 
+import com.scsb.util.WebUtil;
+
 /**
  * 
  * 建立日期：2020/04/15
@@ -64,6 +66,13 @@ public class Constants {
     public static final String PAGE_KEY_DEPOSIT_AD = "10010"; //台外幣存匯-廣告
     public static final String PAGE_KEY_DIGIT_BANNER = "10011"; //數位金融-廣告輪播
     public static final String PAGE_KEY_DIGIT_AD = "10012"; //數位金融-廣告
+    public static final String PAGE_KEY_CARD_BANNER = "10013"; //信用卡 - 廣告輪播
+    public static final String PAGE_KEY_CARD_AD = "10014"; //信用卡 - 廣告
+    public static final String PAGE_KEY_CARD_SWIPE_HOT = "10015"; //信用卡 - 刷卡優惠 > 熱門活動
+    public static final String PAGE_KEY_CARD_SWIPE_GIFT = "10016"; //信用卡 -  刷卡優惠 > 新戶禮
+    public static final String PAGE_KEY_CARD_SWIPE_DISCOUNT_SHOP = "10017"; //信用卡 - 刷卡優惠 > 優惠商店
+    public static final String PAGE_KEY_CARD_REWARD = "10018";//信用卡>紅利積點>紅利兌換
+    public static final String PAGE_KEY_CARD_DEBIT_DISCOUNT = "10019"; //信用卡 - Debit卡 > 刷卡優惠
     public static final String PAGE_KEY_RECORDSHEET = "200"; //待核表單
     public static final String PAGE_KEY_APPROVAL = "20001"; //刊登
     public static final String PAGE_KEY_CANCEL = "20002"; //停刊
@@ -94,6 +103,22 @@ public class Constants {
     public static final String DEPOSIT_AD_SHEET_TYPE = "9";
     public static final String DIGIT_BANNER_SHEET_TYPE = "10";
     public static final String DIGIT_AD_SHEET_TYPE = "11";
+    /** 信用卡 - 廣告輪播 */
+    public static final String CARD_BANNER_SHEET_TYPE = "12";
+    /** 信用卡 - 廣告 */
+    public static final String CARD_AD_SHEET_TYPE = "13";
+    /** 信用卡 - 刷卡優惠 > 熱門活動 */
+    public static final String CARD_SWIPE_HOT_SHEET_TYPE = "14";
+    /** 信用卡 - 刷卡優惠 > 新戶禮 */
+    public static final String CARD_SWIPE_GIFT_SHEET_TYPE = "15";
+    /** 信用卡 - 刷卡優惠 > 優惠商店 */
+    public static final String CARD_SWIPE_DISCOUNT_SHOP_SHEET_TYPE = "16";
+    /** 信用卡 - 紅利積點 > 紅利兌換 */
+    public static final String CARD_REWARD_SHEET_TYPE = "17";
+    /** 信用卡 - 紅利積點 > 紅利折抵 */
+    public static final String CARD_REWARD_REDEEM_SHEET_TYPE = "18";
+    /** 信用卡 - Debit卡 > 刷卡優惠 */
+    public static final String CARD_DEBIT_DISCOUNT_SHEET_TYPE = "19";
     
     /** 簽核意見狀態 **/
     public static final String SHEET_APPROVAL_APPLICATION = "0";
@@ -106,13 +131,36 @@ public class Constants {
     /** 簽核表單順序 **/
     public static final int SORT_0 = 0; // 經辦
     
+    static {
+    	// 將contextPath抽出來，若之後war檔名稱有換可以避免忘記改動讀不到頁面的麻煩
+//        public static final String LOGIN_URL = "/scsb-springboot-0.0.3/login";
+//        public static final String INDEX_BANNER_URL = "/scsb-springboot-0.0.3/indexBanner/add";
+//        public static final String PENDINGSHEET_URL = "/scsb-springboot-0.0.3/pendingSheet/list";
+//        public static final String CANCELSHEET_URL = "/scsb-springboot-0.0.3/cancelSheet/list";
+//        public static final String RECORDSHEET_URL = "/scsb-springboot-0.0.3/recordSheet/list";
+//        public static final String REMIND_EMAIL_URL = "/scsb-springboot-0.0.3/remindEmailSetting/edit";
+    	LOGIN_URL = WebUtil.getContextPath() + "/login";
+    	INDEX_BANNER_URL = WebUtil.getContextPath() + "/indexBanner/add";
+    	PENDINGSHEET_URL = WebUtil.getContextPath() + "/pendingSheet/list";
+    	CANCELSHEET_URL = WebUtil.getContextPath() + "/cancelSheet/list";
+    	RECORDSHEET_URL = WebUtil.getContextPath() + "/recordSheet/list";
+    	REMIND_EMAIL_URL = WebUtil.getContextPath() + "/remindEmailSetting/edit";
+    	System.out.println("====LOGIN_URL>>>" + WebUtil.getContextPath() + "/login");
+    	System.out.println("====INDEX_BANNER_URL>>>" + WebUtil.getContextPath() + "/indexBanner/add");
+    	System.out.println("====PENDINGSHEET_URL>>>" + WebUtil.getContextPath() + "/pendingSheet/list");
+    	System.out.println("====CANCELSHEET_URL>>>" + WebUtil.getContextPath() + "/cancelSheet/list");
+    	System.out.println("====RECORDSHEET_URL>>>" + WebUtil.getContextPath() + "/recordSheet/list");
+    	System.out.println("====REMIND_EMAIL_URL>>>" + WebUtil.getContextPath() + "/remindEmailSetting/edit");
+    }
+    
     /** 連結網址 **/
-    public static final String LOGIN_URL = "/scsb-springboot-0.0.3/login";
-    public static final String INDEX_BANNER_URL = "/scsb-springboot-0.0.3/indexBanner/add";
-    public static final String PENDINGSHEET_URL = "/scsb-springboot-0.0.3/pendingSheet/list";
-    public static final String CANCELSHEET_URL = "/scsb-springboot-0.0.3/cancelSheet/list";
-    public static final String RECORDSHEET_URL = "/scsb-springboot-0.0.3/recordSheet/list";
-    public static final String REMIND_EMAIL_URL = "/scsb-springboot-0.0.3/remindEmailSetting/edit";
+    public static final String LOGIN_URL;
+    public static final String INDEX_BANNER_URL;
+    public static final String PENDINGSHEET_URL;
+    public static final String CANCELSHEET_URL;
+    public static final String RECORDSHEET_URL;
+    public static final String REMIND_EMAIL_URL;
+
     
     /** 表單頁訊息提示 **/
     public static final String MSG_NO_CONDITION = "請先選擇搜尋條件";
@@ -131,9 +179,17 @@ public class Constants {
     public static final String PREVIEW_INDEX_ACTIVITY="views/preview/previewIndexActivity";
     public static final String PREVIEW_INDEX_BANNER="views/preview/previewIndexBanner";
     public static final String PREVIEW_INDEX_WINNERS="views/preview/previewIndexWinners";
+    public static final String PREVIEW_CARD_AD="views/preview/previewCardAd";
+    public static final String PREVIEW_CARD_BANNER = "views/preview/previewCardBanner";
+    public static final String PREVIEW_CARD_DISCOUNT_HOT = "views/preview/previewCardSwipeDiscountHot";
+    public static final String PREVIEW_CARD_DISCOUNT_GIFT = "views/preview/previewCardSwipeDiscountGift";
+    public static final String PREVIEW_CARD_DISCOUNT_SHOP = "views/preview/previewCardDiscountShop";
+    public static final String PREVIEW_CARD_REWARD = "views/preview/previewCardReward";
+    public static final String PREVIEW_CARD_DEBIT = "views/preview/previewCardDebit";
     
     /** ldap權限群組字 **/
     public static final String SECURITYEQUALS_SUPERUSERGRP = "superuserGrp";
     public static final String SECURITYEQUALS_GENERALGRP = "generalGrp";
+	
 
 }

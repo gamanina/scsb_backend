@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
+<head th:include="views/common/head :: head"></head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul th:include="views/common/sidebar :: sidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav th:include="views/common/navbar :: navbar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <!-- End of Topbar -->
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0">信用卡 - 紅利積點 > 紅利兌換</h1>
+                    </div>
+
+                    <div class="formWizard">
+                        <ul class="nav">
+                            <li class="active">
+                                <i class="fas fa-edit"></i>
+                                <p>
+                                    經辦
+                                </p>
+                            </li>
+                            <li>
+                                <div class="nav-wedge"></div>
+                                <i class="fas fa-user-check"></i>
+                                <p>
+                                    審核
+                                </p>
+                            </li>
+                            <li>
+                                <div class="nav-wedge"></div>
+                                <i class="fas fa-user-check"></i>
+                                <p>
+                                    覆核
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12 mb-4">
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <div class="navbar">
+                                        <h6 class="m-0 font-weight-bold">信用卡 - 紅利積點 > 紅利兌換申請</h6>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                <form id="sForm" enctype="multipart/form-data" method="post" th:object="${cardRewardForm}">
+                                    <input type="hidden" th:field="*{applicantId}">
+                                    <input type="hidden" th:field="*{applicant}">
+                                    <input type="hidden" th:field="*{applicantUnitId}">
+                                    <input type="hidden" th:field="*{applicantUnit}">
+                                    <input type="hidden" th:field="*{nextApprover}">
+                                    <input type="hidden" th:field="*{agent}">
+                                    <input type="hidden" th:field="*{type}">
+                                    <div class="row ml-0 mr-0">
+                                        <div class="col-lg-12 card-table">
+                                            <p>
+                                            	申請人： <span th:text=*{applicant}></span>
+                                            </p>
+                                            <p>
+                                               	 申請單位： <span th:text=*{applicantUnit}></span>
+                                            </p>
+                                            <div class="card-select">
+                                                <div class="form-group form-datepicker">
+                                                    <div class="row">
+                                                        <div class="outsideInp">
+                                                            <label for="">刊登日期</label>
+                                                            <div class="input-group date">
+                                                                <input id="fromNodate" class="form-control" type="text" th:field="*{onTimeDate}" required>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="outsideInp">
+                                                        	<label for="">時間</label>
+															<div>
+																<select class="form-control form-selectdate" th:field="*{onTimeHour}">
+																	<option value="00">00</option>
+																	<option value="01">01</option>
+																	<option value="02">02</option>
+																	<option value="03">03</option>
+																	<option value="04">04</option>
+																	<option value="05">05</option>
+																	<option value="06">06</option>
+																	<option value="07">07</option>
+																	<option value="08">08</option>
+																	<option value="09">09</option>
+																	<option value="10">10</option>
+																	<option value="11">11</option>
+																	<option value="12">12</option>
+																	<option value="13">13</option>
+																	<option value="14">14</option>
+																	<option value="15">15</option>
+																	<option value="16">16</option>
+																	<option value="17">17</option>
+																	<option value="18">18</option>
+																	<option value="19">19</option>
+																	<option value="20">20</option>
+																	<option value="21">21</option>
+																	<option value="22">22</option>
+																	<option value="23">23</option>
+																</select>
+																<span class="symbol"> ： </span>
+																<select class="form-control form-selectdate" th:field="*{onTimeMin}">
+																	<option value="00">00</option>
+																	<option value="15">15</option>
+																	<option value="30">30</option>
+																	<option value="45">45</option>
+																</select>
+																<span class="symbol butterfly"> ～ </span>
+                                                            </div>
+                                                        </div> 
+                                                        <div class="outsideInp">
+                                                            <label for="">停刊日期</label>
+                                                            <div class="input-group date">
+                                                                <input id="toNodate" class="form-control" type="text" th:field="*{offTimeDate}" required>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="outsideInp">
+                                                            <label for="">時間</label>
+                                                        	 <div style="width: 300px;">
+	                                                            <select class="form-control form-selectdate" th:field="*{offTimeHour}">
+	                                                                <option value="00">00</option>
+	                                                                <option value="01">01</option>
+	                                                                <option value="02">02</option>
+	                                                                <option value="03">03</option>
+	                                                                <option value="04">04</option>
+	                                                                <option value="05">05</option>
+	                                                                <option value="06">06</option>
+	                                                                <option value="07">07</option>
+	                                                                <option value="08">08</option>
+	                                                                <option value="09">09</option>
+	                                                                <option value="10">10</option>
+	                                                                <option value="11">11</option>
+	                                                                <option value="12">12</option>
+	                                                                <option value="13">13</option>
+	                                                                <option value="14">14</option>
+	                                                                <option value="15">15</option>
+	                                                                <option value="16">16</option>
+	                                                                <option value="17">17</option>
+	                                                                <option value="18">18</option>
+	                                                                <option value="19">19</option>
+	                                                                <option value="20">20</option>
+	                                                                <option value="21">21</option>
+	                                                                <option value="22">22</option>
+	                                                                <option value="23">23</option>
+	                                                            </select>
+                                                        		<span class="symbol"> ： </span>
+                                                            	<select class="form-control form-selectdate" th:field="*{offTimeMin}">
+	                                                                <option value="00">00</option>
+	                                                                <option value="15">15</option>
+	                                                                <option value="30">30</option>
+	                                                                <option value="45">45</option>
+	                                                            </select>
+                                                        	</div>
+                                                    	</div>
+                                                    </div>
+                                                    <div class="invalidColor" th:if="${#fields.hasErrors('onTimeDate')}" th:errors="*{onTimeDate}"></div>
+                                                </div>
+                                            </div>                                         
+
+                                            <div class="card-select">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="">您的下一層簽核人員</label>
+                                                            <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." required="required" th:field="*{nextApproverId}">
+                                                            	<option value="">請選擇</option>
+                                                                <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{nextApproverId}"></option>
+                                                            </select>
+                                                            <div class="invalidColor" th:if="${#fields.hasErrors('nextApprover')}" th:errors="*{nextApprover}"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="">您的下一層簽核人員之代理人</label>
+                                                            <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." th:field="*{agentId}">
+                                                            	<option value="">請選擇</option>
+                                                                <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{agentId}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="card-select">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="">類別</label>
+                                                            <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." required="required" th:field="*{category}">
+                                                            	<option value="">請選擇</option>
+                                                                <option th:each="category:${categoryMap}" th:value="${category.key}" th:text="${category.value}" th:selected="${category.key} == *{category}"></option>
+                                                            </select>
+                                                            <div class="invalidColor" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="titlename">標題<span><br>註：上限 30 字</span></label>
+                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="40" required th:field="*{title}">
+                                                <div class="invalidColor" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                            </div>
+
+                                            
+                                            <div class="form-group">
+                                                <label for="titlename">內容</label>
+                                                <textarea class="ckeditor" rows="20" placeholder="" id="tmp"></textarea>
+                                                <textarea class="" rows="20" placeholder="" th:field="*{content}" style="display:none"></textarea>
+                                            	<div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="btnNext">
+                        <a href="#" class="btn btn-return" onclick="preview()">
+                            <span class="">預覽</span>
+                        </a>
+                        <a href="#" class="btn btn-next" onclick="submit()">
+                            <span class="">送出表單</span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<footer th:include="views/common/footer :: footer"></footer>
+<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>
+<script>
+window.onload = new Initial().init();
+
+function Initial() {
+	
+	function fillsample() {
+		const content = $('textarea.ckeditor').val();
+		if (content && content.trim() != '') {
+			return;
+		}
+		$('textarea.ckeditor').val(
+ 				'<div class=\"mainBox\">\r\n' + 
+ 				'<div class=\"blockWrap\">\r\n' + 
+ 				'<div class=\"row pointExchange\">\r\n' + 
+ 				'	<div class=\"col-lg-9\">\r\n' + 
+ 				'		<ul class=\"pointInfo\">\r\n' + 
+ 				'			<li>兌換編號：9801</li>\r\n' + 
+ 				'			<li>免費點數：<span class=\"ft-base\">20000點</span>\r\n' + 
+ 				'			</li>\r\n' + 
+ 				'			<li>限量：100</li>\r\n' + 
+ 				'		</ul>\r\n' + 
+ 				'	</div>\r\n' + 
+ 				'	<div class=\"col-lg-3\">\r\n' + 
+ 				'		<a href=\"#!\" title=\"兌換\" class=\"btn btn-gdt-link px-5 d-block d-sm-inline-block\">兌換</a>\r\n' + 
+ 				'	</div>\r\n' + 
+ 				'</div>\r\n' + 
+ 				'<p>預約專線：格上租車　電話：0800-281-885</p>\r\n' + 
+ 				'<div class=\"notice collapseLister\">\r\n' + 
+ 				'	<div class=\"noticeTitle\">\r\n' + 
+ 				'		<p class=\"card-link\" data-toggle=\"collapse\" aria-expanded=\"true\" href=\"#note_a_01\">注意事項</p>\r\n' + 
+ 				'	</div>\r\n' + 
+ 				'	<ul class=\"decimalType collapse show\" id=\"note_a_01\" style=\"\">\r\n' + 
+ 				'		<li>使用2.0國產車或同等級車種，指定進口車或七人座車，升等加價300元。</li>\r\n' + 
+ 				'		<li>紅利兌換請於出發前十個工作日(不含出發日當天)進行兌換。</li>\r\n' + 
+ 				'		<li>兌換完成後本行將以簡訊傳送兌換序號至您留存於本行的手機號碼，請於兌換前再次確認您所留存的手機號碼是否正確，以確保您的權益。</li>\r\n' + 
+ 				'		<li>請於出發日前二個工作日致電0800-281-885服務專線提供簡訊上之兌換序號進行預約，連續假期請於七個工作日前預約。（假期規範依人事行政局規定），以上工作日\r\n' + 
+ 				'			不含致電進線預約當日，例如6/1進線，可預約6/4(含)以後接送日期。</li>\r\n' + 
+ 				'		<li>取消預約：如欲取消接送服務，請於預約時間前24小時致電0800-281-885取消，未於24小時前取消預約，視同服務乙次。</li>\r\n' + 
+ 				'		<li>變更預約時間：須於原約定時間前24小時，來電服務專線變更或取消。24小時內預約接送資料無法變更；24小時內取消者視同使用乙次服務。若異動日期提前者仍須符合二個工作天前來電異動(連續假日及春節期間需七個工作天前)。\r\n' + 
+ 				'		</li>\r\n' + 
+ 				'		<li>送機時間：請於飛機起飛二小時前到達機場確認機位，請務必預留車程時間，倘若遇不可避免的外力因素造成車程時間過長所衍生之問題，恕不負責。</li>\r\n' + 
+ 				'		<li>接機時間：接機時，若班機提前抵達，請致電0800-281-885服務專線告知，服務中心將儘速調派車輛前往，但服務時間仍以原網路公告之班機抵達時間為主，請耐心等候</li>\r\n' + 
+ 				'		<li>加點服務：接送地點以單一定點為基準，途中如須增加停靠點時，應於預約時主動告知，每增加一同行政區停靠點須另加收NT$200(例如：台北市大安區送大安區)，同縣市跨區或跨縣市則另行報價，最多增加二個停靠點為限，以順路為原則。恕不提供臨時加點或臨時變更地點服務。\r\n' + 
+ 				'		</li>\r\n' + 
+ 				'		<li>其他額外加費：接送地點於山區、海濱..等偏遠地區、要求提供嬰幼兒安全座椅、舉牌等服務需另行於線上報價收費<br>待時費：等待時間如超過原預約時間30分鐘以上，每等待一小時加收待時費用300元整，不足一小時以一小時為單位計費。\r\n' + 
+ 				'			</li>\r\n' + 
+ 				'			<li>不可抗力因素：國內/國外天災地變/戰亂/暴動等不可抗力因素，符合以下其中一項原因者，請於預約時間前12小時致電0800-281-885服務專線取消機場接送服務（台灣本島以外地區因不可抗力因素致取消或延誤機場接送服務，請於一週內傳真相關證明），即可退還當次權益或交通費用（退費基準以一台四人座車車資為準），行遍天下不再另行派車，如未於上述規範時間內進線取消者則視同服務一次。\r\n' + 
+ 				'				<ul class=\"lowerAlphaType\">\r\n' + 
+ 				'					<li>原航班較原預約時間延遲4小時以上或跨日抵達台灣而無法臨時調度接送</li>\r\n' + 
+ 				'					<li>變更航班及時間，於原預約時間12小時前致電客服中心取消</li>\r\n' + 
+ 				'				</ul>\r\n' + 
+ 				'			</li>\r\n' + 
+ 				'			<li>兌換序號遺失：本服務認序號不認人，遺失將無法補發，請小心保管您的兌換序號。</li>\r\n' + 
+ 				'			<li>每組兌換序號只可兌換一次接機服務，一經兌換即失效，也不可重複使用。兌換序號使用期限至2021/12/31止。</li>\r\n' + 
+ 				'			<li>若逾使用期限仍未使用，則視同放棄，已扣除之紅利點數則恕無法返還。</li>\r\n' + 
+ 				'	</ul>\r\n' + 
+ 				'</div>\r\n' + 
+ 				'</div>\r\n' + 
+ 				'</div>'
+ 		);
+		CKEDITOR.stylesSet.add('scsb', [
+		    { name: '注意事項', element: 'div', attributes: { 'class': 'notice collapseLister' } },
+		    { name: '注意事項標題區塊', element: 'div', attributes: { 'class': 'noticeTitle' } },
+		    { name: '標題', element: 'p', attributes: { 'class': 'titleBlk_b' } },
+		    { name: '內文', element: 'p' },
+		    { name: '兌換按鈕', element: 'a', attributes: { 'class': 'btn btn-gdt-link px-5 d-block d-sm-inline-block' } },
+		    { name: '注意事項標題', element: 'p', attributes: { 'class': 'card-link' } },
+		    { name: '特別標註', element: 'span', attributes: { 'class': 'ft-base' } },
+		    { name: '無序清單', element: 'ul', attributes: { 'class': 'dotLister' } },
+		    { name: '資訊清單', element: 'ul', attributes: { 'class': 'pointInfo' } },
+		    { name: '注意事項清單', element: 'ul', attributes: { 'class': 'decimalType collapse show' } },
+		    { name: '注意事項清單2', element: 'ul', attributes: { 'class': 'lowerAlphaType' } },
+		]);
+ 		// For inline style definition.
+ 		CKEDITOR.config.stylesSet = 'scsb';
+		CKEDITOR.config.contentsCss = '[[@{/assets/preview/styles/all.css}]]';
+	}
+	
+	return {
+		init: function() {
+			fillsample();
+		}
+	}
+}
+
+$('#nextApproverId').change(function(){
+	var nextApprover = $("#nextApproverId").find('option:selected').text();
+	
+	if (nextApprover != "請選擇"){
+		$('#nextApprover').val(nextApprover);		
+	}
+	else{
+		$('#nextApprover').val("");
+	}
+});
+
+$('#agentId').change(function(){
+	var agent = $("#agentId").find('option:selected').text();
+	
+	if (agent != "請選擇"){
+		$('#agent').val(agent);		
+	}
+	else{
+		$('#agent').val("");
+	}
+});
+
+function preview(){
+	document.forms['sForm'].target = '_blank';
+	document.forms['sForm'].action = contextPath + '/previewCardReward';
+	const content = CKEDITOR.instances['tmp'].getData();
+	$tmp = $(content).find('div.blockWrap')
+	// 重新封裝注意事項區塊, 保留隱藏效果
+	$tmp.find('p.card-link')
+		.attr('data-toggle', 'collapse')
+		.attr('aria-expanded', 'false')
+		.attr('href', '#note_a_01')
+	$tmp.find('ul.collapse')
+		.removeClass('show')
+		.attr('id', 'note_a_01')
+	$('textarea#content').val($tmp.html())
+	document.forms['sForm'].submit();
+}
+
+function submit(){
+	const content = CKEDITOR.instances['tmp'].getData();
+	$tmp = $(content).find('div.blockWrap')
+	// 重新封裝注意事項區塊, 保留隱藏效果
+	$tmp.find('p.card-link')
+		.attr('data-toggle', 'collapse')
+		.attr('aria-expanded', 'false')
+		.attr('href', '#note_a_01')
+	$tmp.find('ul.collapse')
+		.removeClass('show')
+		.attr('id', 'note_a_01')
+	$('textarea#content').val($tmp.html())
+	document.forms['sForm'].target = '_self';
+	document.forms['sForm'].action = 'save';
+	document.forms['sForm'].submit();
+}
+</script>
+</html>

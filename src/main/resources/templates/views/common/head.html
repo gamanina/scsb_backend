@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="head">
+<head th:fragment="head" xmlns:th="http://www.thymeleaf.org">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -44,7 +44,12 @@ hr.hr-open:after {
 }
 </style>
 
-
+<!-- 寫在header中讓每個頁面都能取server的contextPath -->
+<script th:inline="javascript">
+	let tmp = /*[[@{/}]]*/''
+    const contextPath = tmp.substring(0, tmp.length - 1)
+    tmp = undefined
+</script>
 
 </head>
 

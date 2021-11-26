@@ -15,8 +15,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.internal.util.Cloneable;
 
 import com.scsb.util.LogUtil;
+
+import lombok.Data;
 
 /**
  * 
@@ -28,9 +31,10 @@ import com.scsb.util.LogUtil;
  * @version 1.0
  * @since 1.0
  */
+@Data
 @Entity
 @Table(name = "SCSB_SHEET")
-public class Sheet
+public class Sheet implements java.lang.Cloneable
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_seq")
@@ -92,6 +96,8 @@ public class Sheet
 	private String modifier;
 	@Column(name="MODIFY_TIME", insertable=false, updatable=false)
 	private Timestamp modifyTime;
+	@Column(name="CATEGORY")
+	private String category;
 	
 	@Transient
 	private String imageName;
@@ -451,4 +457,9 @@ public class Sheet
 
 		return date;
 	}
+	
+	public Sheet clone() throws CloneNotSupportedException {
+		return (Sheet) super.clone();
+	}
+	
 }

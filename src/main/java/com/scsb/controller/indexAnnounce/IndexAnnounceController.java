@@ -35,7 +35,7 @@ import com.scsb.util.LogUtil;
 @Controller
 @RequestMapping("/indexAnnounce")
 public class IndexAnnounceController {
-	
+
 	@Autowired
     private CommonService commonService;
 	@Autowired

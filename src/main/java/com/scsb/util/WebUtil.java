@@ -1,5 +1,7 @@
 package com.scsb.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +21,18 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
+@Service
 public class WebUtil {
+	
+	static WebUtil webUtil;
+	
+	@Autowired
+	public void setWebUtil(WebUtil instance) {
+		webUtil = instance;
+	}
+	
+	@Autowired
+	private ServletContext context;
 
     /**
      * @param input
@@ -774,5 +787,9 @@ public class WebUtil {
             subDomain += serverNames[i];
         }
         return subDomain;
+    }
+    
+    public static String getContextPath() {
+    	return webUtil.context.getContextPath();
     }
 }

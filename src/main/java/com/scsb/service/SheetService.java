@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.scsb.config.Constants;
@@ -20,8 +21,16 @@ import com.scsb.util.LogUtil;
 public class SheetService {
 	@Autowired
 	private SheetRepository repository;
+	
+	// TODO 刪除
+	@Value("${is.test}")
+	private boolean isTest;
 
 	public Sheet save(Sheet sheet) {
+	    // TODO 刪除
+	    if (isTest) {
+	    	sheet.setStatus("1");// 測試環境不審核
+	    }
 		return repository.save(sheet);
 	}
 

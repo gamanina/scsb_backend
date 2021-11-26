@@ -31,9 +31,10 @@
 <footer th:include="views/common/footer :: footer"></footer>
 <script>
 $(function() {
-	var result = '[[${result}]]';
-	var msg = '[[${msg}]]';
-	var redirectUrl = '[[${redirectUrl}]]';
+	const result = '[[${result}]]';
+	const msg = '[[${msg}]]';
+	const redirectUrl = '[[${redirectUrl}]]';
+	const closeWindow = [[${closeWindow == true}]]
 	if(result != ''){
 		popAlert(result,msg);
 	}
@@ -41,11 +42,14 @@ $(function() {
 		redirect(redirectUrl);
 	});
 
-});
-function redirect(redirectUrl){
-	if(redirectUrl != ''){
-		location.href = redirectUrl;
+	function redirect(redirectUrl){
+		if (closeWindow) {
+			window.close();
+		}
+		if(redirectUrl && redirectUrl != ''){
+			location.href = redirectUrl;
+		}
 	}
-}
+});
 </script>
 </html>

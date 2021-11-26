@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
+<head th:include="views/common/head :: head">
+</head>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul th:include="views/common/sidebar :: sidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"></ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav th:include="views/common/navbar :: navbar" class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+                <!-- End of Topbar -->
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0">信用卡 - Debit卡 > 刷卡優惠</h1>
+                    </div>
+
+                    <div class="formWizard">
+                        <ul class="nav">
+                            <li class="active">
+                                <i class="fas fa-edit"></i>
+                                <p>
+                                    經辦
+                                </p>
+                            </li>
+                            <li>
+                                <div class="nav-wedge"></div>
+                                <i class="fas fa-user-check"></i>
+                                <p>
+                                    審核
+                                </p>
+                            </li>
+                            <li>
+                                <div class="nav-wedge"></div>
+                                <i class="fas fa-user-check"></i>
+                                <p>
+                                    覆核
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-12 mb-4">
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header">
+                                    <div class="navbar">
+                                        <h6 class="m-0 font-weight-bold">信用卡 - Debit卡 > 刷卡優惠申請</h6>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                <form id="sForm" enctype="multipart/form-data" method="post" th:object="${cardDebitForm}">
+                                    <input type="hidden" th:field="*{applicantId}">
+                                    <input type="hidden" th:field="*{applicant}">
+                                    <input type="hidden" th:field="*{applicantUnitId}">
+                                    <input type="hidden" th:field="*{applicantUnit}">
+                                    <input type="hidden" th:field="*{nextApprover}">
+                                    <input type="hidden" th:field="*{agent}">
+                                    <input type="hidden" th:field="*{type}">
+                                    <div class="row ml-0 mr-0">
+                                        <div class="col-lg-12 card-table">
+                                            <p>
+                                            	申請人： <span th:text=*{applicant}></span>
+                                            </p>
+                                            <p>
+                                               	 申請單位： <span th:text=*{applicantUnit}></span>
+                                            </p>
+                                            <div class="card-select">
+                                                <div class="form-group form-datepicker">
+                                                    <div class="row">
+                                                        <div class="outsideInp">
+                                                            <label for="">刊登日期</label>
+                                                            <div class="input-group date">
+                                                                <input id="fromNodate" class="form-control" type="text" th:field="*{onTimeDate}" required>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="outsideInp">
+                                                        	<label for="">時間</label>
+															<div>
+																<select class="form-control form-selectdate" th:field="*{onTimeHour}">
+																	<option value="00">00</option>
+																	<option value="01">01</option>
+																	<option value="02">02</option>
+																	<option value="03">03</option>
+																	<option value="04">04</option>
+																	<option value="05">05</option>
+																	<option value="06">06</option>
+																	<option value="07">07</option>
+																	<option value="08">08</option>
+																	<option value="09">09</option>
+																	<option value="10">10</option>
+																	<option value="11">11</option>
+																	<option value="12">12</option>
+																	<option value="13">13</option>
+																	<option value="14">14</option>
+																	<option value="15">15</option>
+																	<option value="16">16</option>
+																	<option value="17">17</option>
+																	<option value="18">18</option>
+																	<option value="19">19</option>
+																	<option value="20">20</option>
+																	<option value="21">21</option>
+																	<option value="22">22</option>
+																	<option value="23">23</option>
+																</select>
+																<span class="symbol"> ： </span>
+																<select class="form-control form-selectdate" th:field="*{onTimeMin}">
+																	<option value="00">00</option>
+																	<option value="15">15</option>
+																	<option value="30">30</option>
+																	<option value="45">45</option>
+																</select>
+																<span class="symbol butterfly"> ～ </span>
+                                                            </div>
+                                                        </div> 
+                                                        <div class="outsideInp">
+                                                            <label for="">停刊日期</label>
+                                                            <div class="input-group date">
+                                                                <input id="toNodate" class="form-control" type="text" th:field="*{offTimeDate}" required>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                        <div class="outsideInp">
+                                                            <label for="">時間</label>
+                                                        	 <div style="width: 300px;">
+	                                                            <select class="form-control form-selectdate" th:field="*{offTimeHour}">
+	                                                                <option value="00">00</option>
+	                                                                <option value="01">01</option>
+	                                                                <option value="02">02</option>
+	                                                                <option value="03">03</option>
+	                                                                <option value="04">04</option>
+	                                                                <option value="05">05</option>
+	                                                                <option value="06">06</option>
+	                                                                <option value="07">07</option>
+	                                                                <option value="08">08</option>
+	                                                                <option value="09">09</option>
+	                                                                <option value="10">10</option>
+	                                                                <option value="11">11</option>
+	                                                                <option value="12">12</option>
+	                                                                <option value="13">13</option>
+	                                                                <option value="14">14</option>
+	                                                                <option value="15">15</option>
+	                                                                <option value="16">16</option>
+	                                                                <option value="17">17</option>
+	                                                                <option value="18">18</option>
+	                                                                <option value="19">19</option>
+	                                                                <option value="20">20</option>
+	                                                                <option value="21">21</option>
+	                                                                <option value="22">22</option>
+	                                                                <option value="23">23</option>
+	                                                            </select>
+                                                        		<span class="symbol"> ： </span>
+                                                            	<select class="form-control form-selectdate" th:field="*{offTimeMin}">
+	                                                                <option value="00">00</option>
+	                                                                <option value="15">15</option>
+	                                                                <option value="30">30</option>
+	                                                                <option value="45">45</option>
+	                                                            </select>
+                                                        	</div>
+                                                    	</div>
+                                                    </div>
+                                                    <div class="invalidColor" th:if="${#fields.hasErrors('onTimeDate')}" th:errors="*{onTimeDate}"></div>
+                                                </div>
+                                            </div>                                         
+
+                                            <div class="card-select">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="">您的下一層簽核人員</label>
+                                                            <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." required="required" th:field="*{nextApproverId}">
+                                                            	<option value="">請選擇</option>
+                                                                <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{nextApproverId}"></option>
+                                                            </select>
+                                                            <div class="invalidColor" th:if="${#fields.hasErrors('nextApprover')}" th:errors="*{nextApprover}"></div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="">您的下一層簽核人員之代理人</label>
+                                                            <select class="form-control chosen-select" tabindex="2" data-placeholder="Choose..." th:field="*{agentId}">
+                                                            	<option value="">請選擇</option>
+                                                                <option th:each="approver:${approverList}" th:value="${approver.cn}" th:text="${approver.givenName}" th:selected="${approver.cn} == *{agentId}"></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="titlename">標題<span><br>註：上限 30 字</span></label>
+                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="40" required th:field="*{title}">
+                                                <div class="invalidColor" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>
+                                                    圖檔
+                                                    <span>寬度1299px，高度729px <br>
+                                                    	註1：圖片比例若不正確可能圖片會被標題遮擋。<br>
+                                                    	註2：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。<br>
+                                                    </span>
+                                                </label>
+                                                <br>
+                                                <div class="fileUpload btn btn-upload btn-icon-split">
+                                                    <span class="icon">
+                                                        <i class="fas fa-plus"></i>
+                                                    </span>
+                                                    <span class="text">上傳</span>
+                                                    <input id="up_imgfile" type="file" class="upload" th:field="*{imageFile}">
+                                                </div>
+                                                <input id="show_imgfile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
+                                             	<div class="invalidColor" th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="titlename">內容</label>
+                                                <textarea class="ckeditor" rows="20" placeholder="" id="tmp"></textarea>
+                                                <textarea rows="20" placeholder="" th:field="*{content}" style="display:none"></textarea>
+                                            	<div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="btnNext">
+                        <a href="#" class="btn btn-return" onclick="preview()">
+                            <span class="">預覽</span>
+                        </a>
+                        <a href="#" class="btn btn-next" onclick="submit()">
+                            <span class="">送出表單</span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>
+</body>
+<footer th:include="views/common/footer :: footer"></footer>
+<script>
+window.onload = new Initial().init();
+
+function Initial() {
+	
+	function fillsample() {
+		const content = $('textarea#content').val();
+		if (content && content.trim() != '') {
+			return;
+		}
+ 		$('textarea.ckeditor').text(
+                '<div class="mainBox">\r\n' +
+                '<p>即日起至2021/4/30止，使用上海銀行之Visa信用卡/金融卡於蝦皮購物海外直送館專區刷卡消費，有機會享以下優惠。</p>\r\n' +
+                '<div class="titleBlk_a h4">優惠一</div>\r\n' +
+                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
+                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，單筆消費滿250元且每個指定活動時段內(如下)消費次數達3次，<span class="ft-base">享100元優惠券乙張</span>，每指定活動時間限量名額如下：</p>\r\n' +
+                '<ul class="dotLister">\r\n' +
+                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+                '</ul>\r\n' +
+                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
+                '<p>&nbsp;</p>\r\n' +
+                '<div class="titleBlk_a h4">優惠二</div>\r\n' +
+                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
+                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，且輸入折扣碼<span class="ft-base">visa1101</span>，單筆消費滿<span class="ft-base">1500元</span>可享<span class="ft-base">25%折扣</span>，最高折抵<span class="ft-base">$500</span>，限量300組。</p>\r\n' +
+                '<ul class="dotLister">\r\n' +
+                '	<li>儲蓄 : 提供台、外幣之多功能儲蓄帳戶 。</li>\r\n' +
+                '	<li>保險 : 專屬族群規劃之醫療險及台、外幣增額終身壽險商品。</li>\r\n' +
+                '	<li>基金 : 提供完整、便利的基金商品平台，另可搭配「理財妙管家」自動停損停利設定。</li>\r\n' +
+                '	<li>信託 : 規劃專屬信託商品，提供量身訂作信託服務。</li>\r\n' +
+                '</ul>\r\n' +
+                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
+                '<p>&nbsp;</p>\r\n' +
+                '<div class="notice">\r\n' +
+                '    <p>注意事項</p>\r\n' +
+                '    <ul class="decimalType">\r\n' +
+                '        <li>注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
+                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意注</li>\r\n' +
+                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
+                '    </ul>\r\n' +
+                '</div>\r\n' +
+                '</div>'
+ 		);
+		CKEDITOR.stylesSet.add('scsb', [
+		    { name: '標題', element: 'div', attributes: { 'class': 'titleBlk_a h4' } },
+		    { name: '注意事項', element: 'div', attributes: { 'class': 'notice' } },
+		    { name: '內文', element: 'p' },
+		    { name: '無序清單', element: 'ul', attributes: { 'class': 'dotLister' } },
+		    { name: '注意事項清單區塊', element: 'ul', attributes: { 'class': 'decimalType' } },
+		]);
+ 		// For inline style definition.
+ 		CKEDITOR.config.stylesSet = 'scsb';
+		CKEDITOR.config.contentsCss = '[[@{/assets/preview/styles/all.css}]]';
+ 		
+	}
+	
+	return {
+		init: function() {
+			fillsample();
+		}
+	}
+}
+
+$('#nextApproverId').change(function(){
+	var nextApprover = $("#nextApproverId").find('option:selected').text();
+	
+	if (nextApprover != "請選擇"){
+		$('#nextApprover').val(nextApprover);		
+	}
+	else{
+		$('#nextApprover').val("");
+	}
+});
+
+$('#agentId').change(function(){
+	var agent = $("#agentId").find('option:selected').text();
+	
+	if (agent != "請選擇"){
+		$('#agent').val(agent);		
+	}
+	else{
+		$('#agent').val("");
+	}
+});
+
+function preview(){
+	const content = CKEDITOR.instances['tmp'].getData();// 取得ckeditor最新狀態
+	$('textarea#content').val(content)
+	document.forms['sForm'].target = '_blank';
+	document.forms['sForm'].action = contextPath + '/previewCardDebitDiscount';
+	document.forms['sForm'].submit();
+}
+
+function submit(){
+	const content = CKEDITOR.instances['tmp'].getData();// 取得ckeditor最新狀態
+	$('textarea#content').val(content)
+	document.forms['sForm'].target = '_self';
+	document.forms['sForm'].action = 'save';
+	document.forms['sForm'].submit();
+}
+</script>
+</html>

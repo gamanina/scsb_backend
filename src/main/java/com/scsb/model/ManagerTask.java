@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.scsb.util.WebUtil;
+
 
 /**
  * 
@@ -73,7 +75,7 @@ public class ManagerTask {
 	}
 
 	public String getUrl() {
-		return url;
+		return WebUtil.getContextPath() + url;
 	}
 
 	public void setUrl(String url) {
