@@ -227,7 +227,7 @@
                                             <div class="form-group">
                                                 <label>
                                                     圖檔
-                                                    <span>寬度1299px，高度729px <br>
+                                                    <span>寬度900px<br>
                                                     	註1：圖片比例若不正確可能圖片會被標題遮擋。<br>
                                                     	註2：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。<br>
                                                     </span>
@@ -238,7 +238,7 @@
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                     <span class="text">上傳</span>
-                                                    <input id="up_imgfile" type="file" class="upload" th:field="*{imageFile}">
+                                                    <input id="up_imgfile" type="file" accept="image/*" class="upload" th:field="*{imageFile}">
                                                 </div>
                                                 <input id="show_imgfile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                              	<div class="invalidColor" th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></div>
@@ -288,42 +288,43 @@ function Initial() {
 	function fillsample() {
 		const content = $('textarea#content').val();
 		if (content && content.trim() != '') {
-			return;
+			$('textarea.ckeditor').text(content)
+		} else {
+			$('textarea.ckeditor').text(
+	                '<div class="mainBox">\r\n' +
+	                '<p>即日起至2021/4/30止，使用上海銀行之Visa信用卡/金融卡於蝦皮購物海外直送館專區刷卡消費，有機會享以下優惠。</p>\r\n' +
+	                '<div class="titleBlk_a h4">優惠一</div>\r\n' +
+	                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
+	                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，單筆消費滿250元且每個指定活動時段內(如下)消費次數達3次，<span class="ft-base">享100元優惠券乙張</span>，每指定活動時間限量名額如下：</p>\r\n' +
+	                '<ul class="dotLister">\r\n' +
+	                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+	                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+	                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
+	                '</ul>\r\n' +
+	                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
+	                '<p>&nbsp;</p>\r\n' +
+	                '<div class="titleBlk_a h4">優惠二</div>\r\n' +
+	                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
+	                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，且輸入折扣碼<span class="ft-base">visa1101</span>，單筆消費滿<span class="ft-base">1500元</span>可享<span class="ft-base">25%折扣</span>，最高折抵<span class="ft-base">$500</span>，限量300組。</p>\r\n' +
+	                '<ul class="dotLister">\r\n' +
+	                '	<li>儲蓄 : 提供台、外幣之多功能儲蓄帳戶 。</li>\r\n' +
+	                '	<li>保險 : 專屬族群規劃之醫療險及台、外幣增額終身壽險商品。</li>\r\n' +
+	                '	<li>基金 : 提供完整、便利的基金商品平台，另可搭配「理財妙管家」自動停損停利設定。</li>\r\n' +
+	                '	<li>信託 : 規劃專屬信託商品，提供量身訂作信託服務。</li>\r\n' +
+	                '</ul>\r\n' +
+	                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
+	                '<p>&nbsp;</p>\r\n' +
+	                '<div class="notice">\r\n' +
+	                '    <p>注意事項</p>\r\n' +
+	                '    <ul class="decimalType">\r\n' +
+	                '        <li>注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
+	                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意注</li>\r\n' +
+	                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
+	                '    </ul>\r\n' +
+	                '</div>\r\n' +
+	                '</div>'
+	 		);
 		}
- 		$('textarea.ckeditor').text(
-                '<div class="mainBox">\r\n' +
-                '<p>即日起至2021/4/30止，使用上海銀行之Visa信用卡/金融卡於蝦皮購物海外直送館專區刷卡消費，有機會享以下優惠。</p>\r\n' +
-                '<div class="titleBlk_a h4">優惠一</div>\r\n' +
-                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
-                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，單筆消費滿250元且每個指定活動時段內(如下)消費次數達3次，<span class="ft-base">享100元優惠券乙張</span>，每指定活動時間限量名額如下：</p>\r\n' +
-                '<ul class="dotLister">\r\n' +
-                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
-                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
-                '	<li>指定活動時段1：2020/11/10~2020/12/31，限量6000組</li>\r\n' +
-                '</ul>\r\n' +
-                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
-                '<p>&nbsp;</p>\r\n' +
-                '<div class="titleBlk_a h4">優惠二</div>\r\n' +
-                '	<p>活動時間：即日起至2021/4/30</p>\r\n' +
-                '	<p>於蝦皮海外直送館刷上海銀行Visa卡，且輸入折扣碼<span class="ft-base">visa1101</span>，單筆消費滿<span class="ft-base">1500元</span>可享<span class="ft-base">25%折扣</span>，最高折抵<span class="ft-base">$500</span>，限量300組。</p>\r\n' +
-                '<ul class="dotLister">\r\n' +
-                '	<li>儲蓄 : 提供台、外幣之多功能儲蓄帳戶 。</li>\r\n' +
-                '	<li>保險 : 專屬族群規劃之醫療險及台、外幣增額終身壽險商品。</li>\r\n' +
-                '	<li>基金 : 提供完整、便利的基金商品平台，另可搭配「理財妙管家」自動停損停利設定。</li>\r\n' +
-                '	<li>信託 : 規劃專屬信託商品，提供量身訂作信託服務。</li>\r\n' +
-                '</ul>\r\n' +
-                '<a href="https://www.scsb.com.tw">官方網站</a>\r\n' +
-                '<p>&nbsp;</p>\r\n' +
-                '<div class="notice">\r\n' +
-                '    <p>注意事項</p>\r\n' +
-                '    <ul class="decimalType">\r\n' +
-                '        <li>注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
-                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意注</li>\r\n' +
-                '        <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項</li>\r\n' +
-                '    </ul>\r\n' +
-                '</div>\r\n' +
-                '</div>'
- 		);
 		CKEDITOR.stylesSet.add('scsb', [
 		    { name: '標題', element: 'div', attributes: { 'class': 'titleBlk_a h4' } },
 		    { name: '注意事項', element: 'div', attributes: { 'class': 'notice' } },
@@ -334,7 +335,6 @@ function Initial() {
  		// For inline style definition.
  		CKEDITOR.config.stylesSet = 'scsb';
 		CKEDITOR.config.contentsCss = '[[@{/assets/preview/styles/all.css}]]';
- 		
 	}
 	
 	return {

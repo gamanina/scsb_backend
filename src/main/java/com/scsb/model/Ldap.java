@@ -2,6 +2,8 @@ package com.scsb.model;
 
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * 
  * 建立日期：2021/05/03
@@ -12,6 +14,7 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
+@Data
 public class Ldap {
 	
 	/** 行員編號 **/
@@ -50,140 +53,4 @@ public class Ldap {
 	/** 權限群組物件 **/
 	private SecurityEquals seObject;
 
-	public String getCn() {
-		return cn;
-	}
-
-	public void setCn(String cn) {
-		this.cn = cn;
-	}
-
-	public String getGivenName() {
-		return givenName;
-	}
-
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
-	}
-
-	public String getDepartmentNumber() {
-		return departmentNumber;
-	}
-
-	public void setDepartmentNumber(String departmentNumber) {
-		this.departmentNumber = departmentNumber;
-	}
-
-	public String getDepartmentNumberName() {
-		return departmentNumberName;
-	}
-
-	public void setDepartmentNumberName(String departmentNumberName) {
-		this.departmentNumberName = departmentNumberName;
-	}
-
-	public String getEmploymentStatus() {
-		return employmentStatus;
-	}
-
-	public void setEmploymentStatus(String employmentStatus) {
-		this.employmentStatus = employmentStatus;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-	public String getSupervisorAcno() {
-		return supervisorAcno;
-	}
-
-	public void setSupervisorAcno(String supervisorAcno) {
-		this.supervisorAcno = supervisorAcno;
-	}
-
-	public String getSupervisorName() {
-		return supervisorName;
-	}
-
-	public void setSupervisorName(String supervisorName) {
-		this.supervisorName = supervisorName;
-	}
-
-	public String getCardtitle() {
-		return cardtitle;
-	}
-
-	public void setCardtitle(String cardtitle) {
-		this.cardtitle = cardtitle;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getTitleno() {
-		return titleno;
-	}
-
-	public void setTitleno(String titleno) {
-		this.titleno = titleno;
-	}
-
-	public String getOu() {
-		return ou;
-	}
-
-	public void setOu(String ou) {
-		this.ou = ou;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getManAcctno() {
-		return manAcctno;
-	}
-
-	public void setManAcctno(String manAcctno) {
-		this.manAcctno = manAcctno;
-	}
-
-	public String getObserver() {
-		return observer;
-	}
-
-	public void setObserver(String observer) {
-		this.observer = observer;
-	}
-	
-	public List<String> getSecurityEquals() {
-		return securityEquals;
-	}
-
-	public void setSecurityEquals(List<String> securityEquals) {
-		this.securityEquals = securityEquals;
-	}
-
-	public SecurityEquals getSeObject() {
-		return seObject;
-	}
-
-	public void setSeObject(SecurityEquals seObject) {
-		this.seObject = seObject;
-	}
-	
 }

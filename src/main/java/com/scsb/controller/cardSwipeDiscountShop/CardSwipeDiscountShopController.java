@@ -77,8 +77,8 @@ public class CardSwipeDiscountShopController {
 	        form.setApplicantUnitId(manager.getLdap().getDepartmentNumber());
 	        form.setApplicantUnit(manager.getLdap().getDepartmentNumberName());
 	        form.setType(Constants.CARD_SWIPE_DISCOUNT_SHOP_SHEET_TYPE);// 加入表單類別，用以驗證預覽時是否填寫類別
-	        form.setOnTimeDate("2021/01/01");
-	        form.setOffTimeDate("2021/12/30");
+//	        form.setOnTimeDate("2021/01/01");
+//	        form.setOffTimeDate("2021/12/30");
 	        
 	        List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 
@@ -103,6 +103,10 @@ public class CardSwipeDiscountShopController {
 			if (approverList != null)
 			{
 				model.addAttribute("approverList", approverList);
+				
+				// 取得類別清單
+				Map<String, String> categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_DISCOUNT_SHOP_CATEGORYS);
+				model.addAttribute("categoryMap", categoryMap);
 			}
 			else
 			{

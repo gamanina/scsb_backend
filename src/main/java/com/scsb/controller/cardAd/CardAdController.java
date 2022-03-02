@@ -71,8 +71,8 @@ public class CardAdController {
 	        form.setApplicant(manager.getLdap().getGivenName());
 	        form.setApplicantUnitId(manager.getLdap().getDepartmentNumber());
 	        form.setApplicantUnit(manager.getLdap().getDepartmentNumberName());
-	        form.setOnTimeDate("2021/01/01");
-	        form.setOffTimeDate("2021/12/30");
+//	        form.setOnTimeDate("2021/01/01");
+//	        form.setOffTimeDate("2021/12/30");
 	        List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 
 	        model.addAttribute("approverList", approverList);

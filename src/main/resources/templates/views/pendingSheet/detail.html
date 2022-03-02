@@ -23,7 +23,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0">待核表單</h1>
@@ -79,40 +78,40 @@
                                                 <p>
                                                    	 標題： <span>[[${sheet.title}]]</span>
                                                 </p>
-                                                <p class="announcement">
-                                                	公告內容：
-                                                </p>
-                                                    <ul>
-                                                        <li th:if="${sheet.image != null and sheet.type == '2'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '2'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.image != null and sheet.type != '2'}">
-                                                        	・圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
+<!--                                                 <p class="announcement"> -->
+<!--                                                 	公告內容： -->
+<!--                                                 </p> -->
+<!--                                                     <ul> -->
+<!--                                                         <li th:if="${sheet.image != null and sheet.type == '2'}"> -->
+<!--                                                         	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                         <li th:if="${sheet.imageMobile != null and sheet.type == '2'}"> -->
+<!--                                                         	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                         <li th:if="${sheet.image != null and sheet.type != '2'}"> -->
+<!--                                                         	・圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a> -->
+<!--                                                         </li> -->
                         
-                                                        <li th:if="${sheet.imageUrl != null}">
-                                                        	・圖檔連結 <a th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.file != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
-                                                        </li>
-                                                         <li th:if="${sheet.file2 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
-                                                        </li>
-                                                         <li th:if="${sheet.file3 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
-                                                        </li>
-                                                         <li th:if="${sheet.file4 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
-                                                        </li>
-                                                         <li th:if="${sheet.file5 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
-                                                        </li>
-                                                    </ul>
-                                                    <div th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(sheet.content),'\n','&lt;br/&gt;'))}"></div>
+<!--                                                         <li th:if="${sheet.imageUrl != null}"> -->
+<!--                                                         	・圖檔連結 <a th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                         <li th:if="${sheet.file != null}"> -->
+<!--                                                         	 ・附檔 <a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                          <li th:if="${sheet.file2 != null}"> -->
+<!--                                                         	 ・附檔 <a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                          <li th:if="${sheet.file3 != null}"> -->
+<!--                                                         	 ・附檔 <a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                          <li th:if="${sheet.file4 != null}"> -->
+<!--                                                         	 ・附檔 <a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                          <li th:if="${sheet.file5 != null}"> -->
+<!--                                                         	 ・附檔 <a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a> -->
+<!--                                                         </li> -->
+<!--                                                     </ul> -->
+<!--                                                     <div th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(sheet.content),'\n','&lt;br/&gt;'))}"></div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -136,6 +135,14 @@
                                             <input type="hidden" th:field="*{check}">
                                             <input type="hidden" th:field="*{nextApprover}">
                                     		<input type="hidden" th:field="*{agent}">
+<!--                                     		<input id="fromNodate" type="hidden" th:field="*{onTimeDate}"> -->
+<!--                                     		<input id="toNodate" type="hidden" th:field="*{offTimeDate}"> -->
+<!--                                     		<th:block th:unless="${categoryMap.empty}"> -->
+<!--                     		                <select style="display:none;" th:field="*{category}"> -->
+<!--                                             	<option value="">請選擇</option> -->
+<!--                                                 <option th:each="category:${categoryMap}" th:value="${category.key}" th:text="${category.value}" th:selected="${category.key} == *{category}"></option> -->
+<!--                                             </select> -->
+<!--                                             </th:block> -->
                                                 <div class="card-select">
                                                     <div class="form-group">
                                                         <div class="row" th:if="${!finalStepFilter}">

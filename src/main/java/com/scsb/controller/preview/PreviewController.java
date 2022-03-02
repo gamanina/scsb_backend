@@ -1,6 +1,8 @@
 package com.scsb.controller.preview;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -243,6 +245,24 @@ public class PreviewController {
 		return doPreviewSheet(form, model, request, result, Constants.PREVIEW_CARD_DEBIT, Constants.CARD_DEBIT_DISCOUNT_SHEET_TYPE);
 	}
 	
+	@RequestMapping("/previewIndexAnnounce")
+	public String previewIndexAnnounce(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request, BindingResult result) 
+	{
+		return doPreviewSheet(form, model, request, result, Constants.PREVIEW_INDEX_ANNOUNCE, Constants.INDEX_ANNOUNCE_SHEET_TYPE);
+	}
+	
+	@RequestMapping("/previewIndexActivity")
+	public String previewIndexActivity(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request, BindingResult result) 
+	{
+		return doPreviewSheet(form, model, request, result, Constants.PREVIEW_INDEX_ACTIVITY, Constants.INDEX_ACTIVITY_SHEET_TYPE);
+	}
+	
+	@RequestMapping("/previewIndexWinners")
+	public String previewIndexWinners(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request, BindingResult result) 
+	{
+		return doPreviewSheet(form, model, request, result, Constants.PREVIEW_INDEX_WINNERS, Constants.INDEX_WINNERS_SHEET_TYPE);
+	}
+	
 	@RequestMapping("/previewSheet")
 	public String previewSheet(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request) {
 		return doPreviewSheet(form, model, request);
@@ -316,7 +336,22 @@ public class PreviewController {
 		return previewPage;
 	}
 	
-	@RequestMapping("/previewIndexAnnounce")
+	@RequestMapping("/previewIndexBanner")
+	 public String previewIndexBanner(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
+		try {
+			String base64 = convertToBase64(form.getImageFile());
+			model.addAttribute("image",base64);
+			model.addAttribute("sheet",null);
+		} catch (Exception e) {
+			model.addAttribute("result",Constants.RESULT_ERROR);
+			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
+			model.addAttribute("closeWindow", true);
+			return "views/common/alert";
+		}
+		return Constants.PREVIEW_INDEX_BANNER;
+	 }
+	
+	/*@RequestMapping("/previewIndexAnnounce")
 	 public String previewIndexAnnounce(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
 		try {
 			String base64 = convertToBase64(form.getImageFile());
@@ -366,21 +401,6 @@ public class PreviewController {
 		return Constants.PREVIEW_INDEX_ACTIVITY;
 	 }
 	
-	@RequestMapping("/previewIndexBanner")
-	 public String previewIndexBanner(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
-		try {
-			String base64 = convertToBase64(form.getImageFile());
-			model.addAttribute("image",base64);
-			model.addAttribute("sheet",null);
-		} catch (Exception e) {
-			model.addAttribute("result",Constants.RESULT_ERROR);
-			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
-			model.addAttribute("closeWindow", true);
-			return "views/common/alert";
-		}
-		return Constants.PREVIEW_INDEX_BANNER;
-	 }
-	
 	@RequestMapping("/previewIndexWinners")
 	 public String previewIndexWinners(@ModelAttribute PreviewForm form, Model model, HttpServletRequest request){
 		try {
@@ -404,7 +424,7 @@ public class PreviewController {
 			return "views/common/alert";
 		}
 		return Constants.PREVIEW_INDEX_WINNERS;
-	 }
+	 }*/
 	
 	private String doPreviewSheet(PreviewForm form, Model model, HttpServletRequest request) {
 		return doPreviewSheet(form, model, request, null, null, null);
@@ -425,9 +445,9 @@ public class PreviewController {
 			
 			model.addAttribute("image",sheet.getImage());// 圖片
 			model.addAttribute("title",sheet.getTitle());// 標題
-			model.addAttribute("ontime",sheet.getOnTime());// 上架時間
-			model.addAttribute("offtime",sheet.getOffTime());// 下架時間
-			model.addAttribute("content",form.getContent());// 內文
+			model.addAttribute("onTime", sheet.getOnTime());// 上架時間
+			model.addAttribute("offTime", sheet.getOffTime());// 下架時間
+			model.addAttribute("content",sheet.getContent());// 內文
 			
 			// 此處sheet.getFile()不一定有值，如果有值且讀取第一個檔案的檔名為空，表示使用者沒有上傳檔案
 			if (sheet.getFile() != null && !"".equals(sheet.getFile())) {
@@ -439,10 +459,43 @@ public class PreviewController {
 				addDownloadListSaved(downloadList, sheet.getFile5());
 				model.addAttribute("downloadList",downloadList);
 			}
-			
+
 			Map<String, String> categoryMap = null;
 			switch(sheet.getType()) {
-			
+			case Constants.INDEX_BANNER_SHEET_TYPE:// 首頁輪播
+				previewPage = Constants.PREVIEW_BUSINESS_BANNER;
+				break;
+			case Constants.BUSINESS_BANNER_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_BUSINESS_BANNER;
+				break;
+			case Constants.BUSINESS_AD_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_BUSINESS_AD;
+				break;
+			case Constants.PERSONAL_BANNER_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_PERSONAL_BANNER;
+				break;
+			case Constants.PERSONAL_AD_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_PERSONAL_AD;
+				break;
+			case Constants.DEPOSIT_BANNER_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_DEPOSIT_BANNER;
+				break;
+			case Constants.DEPOSIT_AD_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_DEPOSIT_AD;
+				break;
+			case Constants.DIGIT_BANNER_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_DIGIT_BANNER;
+				break;
+			case Constants.DIGIT_AD_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_DIGIT_AD;
+				break;
+			case Constants.INDEX_ANNOUNCE_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_INDEX_ANNOUNCE;
+				break;
+			case Constants.INDEX_ACTIVITY_SHEET_TYPE:
+				previewPage = Constants.PREVIEW_INDEX_ACTIVITY;
+				categoryMap = null;//TODO 實作中獎名單TAG
+				break;
 			case Constants.INDEX_WINNERS_SHEET_TYPE:
 				previewPage = Constants.PREVIEW_INDEX_WINNERS;
 				categoryMap = null;//TODO 實作中獎名單TAG
@@ -459,6 +512,10 @@ public class PreviewController {
 		    	break;
 		    case Constants.CARD_REWARD_SHEET_TYPE:
 		    	previewPage = Constants.PREVIEW_CARD_REWARD;
+		    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_REWARD_CATEGORYS);
+		    	break;
+		    case Constants.CARD_DEBIT_DISCOUNT_SHEET_TYPE:
+		    	previewPage = Constants.PREVIEW_CARD_DEBIT;
 		    	break;
 		        
 		    default:
@@ -467,6 +524,10 @@ public class PreviewController {
 					model.addAttribute("redirectUrl","/");
 				    LogUtil.setActionLog(" previewSheet loadPage: ", "id: " + sheet.getId() + " type: " + sheet.getType());
 					return "views/common/alert";
+			}
+			
+			if (!Constants.NONE_PORMOTION_LIST.contains(sheet.getType())) {
+				model.addAttribute("sheet", sheet);
 			}
 			
 			// 如果預覽頁面有實作則加入sheetTag返回對應預覽頁

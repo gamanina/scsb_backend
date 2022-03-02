@@ -56,7 +56,7 @@ public class CommonService
 		}
 		else
 		{
-			if (type.equals("0") || type.equals("3"))
+			if (Constants.NONE_PORMOTION_LIST.contains(type))// 非廣告類表單只需單位主管審批
 			{
 				return Arrays.asList("審核", "覆核");
 			}
@@ -73,7 +73,7 @@ public class CommonService
 		boolean result = false; 
 		if (page.equals(Constants.PAGE_KEY_APPROVAL))
 		{
-			if (sheet.getType().equals("0") || sheet.getType().equals("3"))
+			if (Constants.NONE_PORMOTION_LIST.contains(sheet.getType()))// 非廣告類表單只需單位主管審批
 			{
 				if (sheet.getStep() == 2)
 					result = true;

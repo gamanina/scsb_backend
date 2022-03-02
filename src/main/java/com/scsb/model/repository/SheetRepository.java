@@ -1,6 +1,7 @@
 package com.scsb.model.repository;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,12 +31,16 @@ public interface SheetRepository extends JpaRepository<Sheet, String>
 	List<Sheet> getSheetByApplicant(String memberId);
 
 	//依員工編號&條件取得表單
-	@Query(value =	" SELECT * FROM SCSB_SHEET LEFT JOIN SCSB_SHEET_APPROVAL ON SCSB_SHEET.ID = SCSB_SHEET_ID WHERE SCSB_SHEET.APPLICANT_ID = ?1 "
-					+" AND SCSB_SHEET.APPLICANT LIKE %?2% "
-					+" AND SCSB_SHEET.TYPE = ?3 "
+	@Query(value =	" SELECT * FROM SCSB_SHEET LEFT JOIN SCSB_SHEET_APPROVAL ON SCSB_SHEET.ID = SCSB_SHEET_ID "
+			        + "WHERE SCSB_SHEET.APPLICANT_ID = NVL(?1, SCSB_SHEET.APPLICANT_ID)"
+			        + "AND (UPPER(SCSB_SHEET.APPLICANT_ID) LIKE %?2% OR UPPER(SCSB_SHEET.APPLICANT) LIKE %?2%)"
+					+" AND SCSB_SHEET.TYPE = NVL(?3, SCSB_SHEET.TYPE) "
 					+" AND SCSB_SHEET.STATUS LIKE %?4% "
+//					+" AND (SCSB_SHEET.TITLE LIKE NVL(?5, SCSB_SHEET.TITLE) OR SCSB_SHEET.CONTENT LIKE NVL(?5, SCSB_SHEET.CONTENT))"
+					+" AND SCSB_SHEET.CREATE_TIME >= NVL(?5, SCSB_SHEET.CREATE_TIME)"
+					+" AND SCSB_SHEET.CREATE_TIME <= NVL(?6, SCSB_SHEET.CREATE_TIME)"
 					+ " ORDER BY SCSB_SHEET_APPROVAL.CREATE_TIME ASC ", nativeQuery = true)
-	List<Sheet> getSheetAndConditionByApplicant(String memberId,String name, String type, String status);
+	List<Sheet> getSheetAndConditionByApplicant(String memberId,String name, String type, String status, Date date, Date date2);
 	
 	@Query(value = "SELECT * FROM SCSB_SHEET WHERE ID = ?1", nativeQuery = true)
 	Sheet  getSheetById(int id);

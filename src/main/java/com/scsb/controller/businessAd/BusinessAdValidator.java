@@ -38,6 +38,7 @@ public class BusinessAdValidator {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.TIME_FORMAT_YYYYMMDD_HHMMSS);
 			LocalDateTime onTime = LocalDateTime.parse(onTimeStr, formatter);
 			LocalDateTime offTime = LocalDateTime.parse(offTimeStr, formatter);
+			LocalDateTime today = LocalDateTime.now();
 			
 			Duration duration = Duration.between(onTime, offTime);
 			
@@ -48,7 +49,11 @@ public class BusinessAdValidator {
 			else if (duration.toDays() > 365)
 			{
 				result.rejectValue("onTimeDate", "error", "刊登時間不得超過一年");
-			}	
+			}
+//			else if (onTime.isBefore(today))
+//			{
+//				result.rejectValue("onTimeDate", "error", "刊登時間不得早於當前時間");
+//			}
 		}
 		
 		if (StringUtils.isBlank(form.getNextApproverId()))

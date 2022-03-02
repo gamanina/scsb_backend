@@ -76,8 +76,8 @@ public class CardSwipeDiscountGiftController {
 	        form.setApplicant(manager.getLdap().getGivenName());
 	        form.setApplicantUnitId(manager.getLdap().getDepartmentNumber());
 	        form.setApplicantUnit(manager.getLdap().getDepartmentNumberName());
-	        form.setOnTimeDate("2021/01/01");
-	        form.setOffTimeDate("2021/12/30");
+//	        form.setOnTimeDate("2021/01/01");
+//	        form.setOffTimeDate("2021/12/30");
 	        
 	        List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 
@@ -102,6 +102,10 @@ public class CardSwipeDiscountGiftController {
 			if (approverList != null)
 			{
 				model.addAttribute("approverList", approverList);
+				
+				// 取得類別清單
+				Map<String, String> categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_HOT_CATEGORYS);
+				model.addAttribute("categoryMap", categoryMap);
 			}
 			else
 			{

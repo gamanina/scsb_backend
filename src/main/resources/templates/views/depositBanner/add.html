@@ -225,7 +225,7 @@
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                     <span class="text">上傳</span>
-                                                    <input id="up_imgfile" type="file" class="upload" th:field="*{imageFile}">
+                                                    <input id="up_imgfile" type="file" accept="image/*" class="upload" th:field="*{imageFile}">
                                                 </div>
                                                 <input id="show_imgfile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                              	<div class="invalidColor" th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></div>
@@ -233,7 +233,7 @@
                                             <div class="form-group">
                                                 <label>
                                                     Mobile 版圖檔
-                                                    <span>（尺寸：720*520 px） 註：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。</span>
+                                                    <span>（尺寸：360*260 px） 註：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。</span>
                                                 </label>
                                                 <br>
                                                 <div class="fileUpload btn btn-upload btn-icon-split">
@@ -241,7 +241,7 @@
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                     <span class="text">上傳</span>
-                                                    <input id="up_imgfileMobile" type="file" class="upload" th:field="*{imageMobileFile}">
+                                                    <input id="up_imgfileMobile" type="file" accept="image/*" class="upload" th:field="*{imageMobileFile}">
                                                 </div>
                                                 <input id="show_imgfileMobile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                             	<div class="invalidColor" th:if="${#fields.hasErrors('imageMobileFile')}" th:errors="*{imageMobileFile}"></div>

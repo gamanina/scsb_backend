@@ -1,93 +1,247 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
+<!--[if IE ]><![endif]-->
+<!doctype html>
+<!--[if IE 8 ]> <html class="no-js lt-ie9 ie8" lang="zh-TW"> <![endif]-->
+<!--[if IE 9 ]> <html class="no-js lt-ie10 ie9" lang="zh-TW"> <![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html class="no-js" lang="zh-TW" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>review-enterprise-index-announce-首頁 - 本行公告</title>
-<link rel="stylesheet" type="text/css"
-	th:href="@{/assets/css/preview.css}">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<!-- <meta http-equiv="X-UA-Compatible"content="IE=EmulateIE11"> -->
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
+<meta http-equiv="content-language" content="zh-tw">
+<title>上海商業儲蓄銀行</title>
+<link rel="image_src"
+	href="https://www.scsb.com.tw/newscsbweb/content/images/card_img/share/FB.jpg">
+<link href="favicon.ico" rel="shortcut icon">
+
+<link rel="stylesheet" th:href="@{/assets/preview/styles/all.css}">
+
 </head>
-<body>
-	<div class="main" style="width: 100%;">
-		<div class="header">
-			<!-- 			<img th:src="@{/assets/img/header.png}" alt=""> -->
+<body id="activeCont">
+
+
+	<!--========== HEADER ==============-->
+	<header class="header fixed-top">
+		<button class="js-toggle-left-slidebar hamburger d-block d-lg-none"
+			type="button"></button>
+        <div class="header-wrap" include-html="assets/preview/common/template_header.html"></div>
+	</header>
+	<!--========== END Header ==========-->
+
+	<!--========== Loading =============-->
+	<div class="overlayMask _open">
+		<div class="loader">
+			<!-- 如果要顯示無進度條的豆豆，把這段取消註解 -->
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<!-- 如果要顯示無進度條的豆豆，把這段取消註解 -->
 		</div>
-
-		<div class="inner-kv">
-			<div class="inner-kv-wrap" style="display: flex;">
-				<div class="inner-kv-img"
-					style="width: 100%; background-color: #efefef; margin-top: 10px;">
-
-					<div class="inner-tag">
-						<div class="distag">銀行資訊</div>
-						<div class="date" th:text="${offTimeDate}">110/12/31止</div>
-					</div>
-				</div>
-				<div class="inner-kv-slogan d-flex align-items-sm-center">
-
-
-					<div class="inner-kv-item">
-
-						<h2>[[${title}]]</h2>
-						<div class="wording"></div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-
-		<div class="banner" style="height: 100%;">
-			<div th:if="${sheet==null}">
-				<a th:href="${imageUrl}"><img th:src="${image}" alt=""></a>
-				<div class="test" th:utext="${content}"></div>
-			</div>
-			<div th:if="${sheet!=null}">
-				<a th:href="${sheet.imageUrl}"><img th:src="@{${sheet.image}}" alt=""></a>
-				<div class="test" th:utext="${content}"></div>
-			</div>
-
-			<!--             banner img -->
-
-		</div>
-		<div>
-			<a href="#">[[${fileName}]]</a>
-			<div th:if="${sheet!=null and sheet.file != null}">
-				<a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
-			</div>
-		</div>
-		<div>
-			<a href="#">[[${fileName2}]]</a>
-			<div th:if="${sheet!=null and sheet.file2 != null}">
-				<a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
-			</div>
-		</div>
-		<div>
-			<a href="#">[[${fileName3}]]</a>
-			<div th:if="${sheet!=null and sheet.file3 != null}">
-				<a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
-			</div>
-		</div>
-		<div>
-			<a href="#">[[${fileName4}]]</a>
-			<div th:if="${sheet!=null and sheet.file4 != null}">
-				<a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
-			</div>
-		</div>
-		<div>
-			<a href="#">[[${fileName5}]]</a>
-			<div th:if="${sheet!=null and sheet.file5 != null}">
-				<a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
-			</div>
-
-		</div>
-
-		<!--         <div class="footer"> -->
-		<!--             <img th:src="@{/assets/img/curve.png}" alt=""> -->
-		<!--             <img th:src="@{/assets/img/body.png}" alt=""> -->
-
-		<!--         </div> -->
 	</div>
+	<!--========== END Loading =========-->
+
+	<!--========== Content =============-->
+	<div canvas="container">
+		<div class="mainWrap">
+			<div class="container-fluid">
+				<div class="middleWrap fixed-1200">
+					<div class="row">
+						<div class="col-3 leftCol d-none d-lg-block">
+							<!-- 內頁左側選單 -->
+                            <div class="leftCol_menu" include-html="assets/preview/common/announcement_left_menu.html"></div>
+						</div>
+
+						<div class="col-12 col-lg-9 rightCol">
+							<ol class="breadcrumb d-none d-lg-flex" aria-label="麵包屑"
+								data-menu-indexer data-ly-a="A01" data-ly-b="B01" data-ly-c="C01">
+								<li class="accesskey"><a accesskey="C" href="sitemap.jsp"
+									id="accesskey-c" title="中央主內容區塊">:::</a></li>
+								<li class="breadcrumb-item"><a
+									href="https://www.scsb.com.tw/" target="_blank"
+									title="開新視窗-上海商業銀行首頁"><span class="icon-home2"></span></a></li>
+								
+								<li class="breadcrumb-item active">本行公告</li>
+							</ol>
+							<div class="inner-kv">
+								<div class="inner-kv-wrap">
+									<div class="inner-kv-img">
+										<div class="sharebar d-flex justify-content-end">
+											                                         <div class="shareNav d-flex align-items-center">
+                                                <div class="item">分享：</div>
+                                                <div class="item"><a href="javascript:void(0);" class="fb" title="Facebook分享" onclick="shareThisPage('fb')"><img th:src="@{/assets/preview/images/fb.svg}" class="img-fluid" alt="Facebook分享"></a></div>
+                                                <div class="item"><a href="javascript:void(0);" class="line" title="LINE分享" onclick="shareThisPage('line')"><img th:src="@{/assets/preview/images/line.svg}" class="img-fluid" alt="Line分享"></a></div>
+                                                <div class="item d-none d-lg-block"><a href="javascript:void(0);" class="favorite" title="加入收藏"><span>收藏</span></a></div>
+                                                <div class="item d-none"><a href="javascript:void(0);" class="favorite-mb" title="加入收藏"><span>收藏</span></a></div>
+                                            </div>
+										</div>
+										<div class="inner-mask announceKv2">
+                                            <img on-image-load th:src="@{/assets/preview/images/share/inner-kv-mask-1024.png}" class="img-fluid" alt="*">
+                                        </div>
+										<div class="inner-tag">
+											<div class="distag bonus">銀行資訊</div>
+											<div class="date" th:text="${#dates.format(offTime, 'YYYY/MM/dd')}+止"></div>
+											
+										</div>
+									</div>
+									<div class="inner-kv-slogan d-flex align-items-sm-center">
+
+											<div class="inner-kv-item">
+												<div class="date">110/12/31止</div>
+												<div class="title h2">[[${title}]]</div>
+												<div class="wording"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="mainBox">
+								<div>
+									<img th:src="@{${image}}" class="img-fluid">
+									<div th:utext="${content}"></div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!--========== 信用卡分期注意事項 ==========-->
+<!--     <div class="loanNotice" include-html="assets/preview/common/template_creditcard.html"></div> -->
+    <!--========== Footer ==========-->
+    <footer class="footer" include-html="assets/preview/common/template_footer.html"></footer>
+    <!--========== END Footer ======-->
+	</div>
+	    <!-- The Modal -->
+    <div class="modal fade scsbModal" id="myModal">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header border-0 pb-0">
+                    <!-- <h4 class="modal-title">Mobile Phone</h4> -->
+                    <button type="button" class="close" data-dismiss="modal"><img src="../images/close.svg" class="img-fluid" alt="關閉視窗"></button>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body text-center">
+                    <div class="titleBlk_a h6 bold mb-3">掃描QR Code下載</div>
+                    <p><img src="../images/u3005.jpg" class="img-fluid" alt="掃描 台灣PAY 示意"></p>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <!--========== END Content =========-->
+
+    <!--========== Mobile Menu =========-->
+    <div off-canvas="slidebar-1 left overlay" class="sidemenuWrap" include-html="assets/preview/common/template_mobile_menu.html"></div>
+    <!--========== END Mobile Menu =====-->
+
+    <!--========== Scroll Top ==========-->
+    <div class="js-back-to-top back-to-top" include-html="assets/preview/common/back-to-top.html"></div>
+    <!--========== END Scroll Top ======-->
+
+	<script th:src="@{/assets/preview/scripts/jquery.min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/bootstrap-toolkit.min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/jquery.matchHeight-min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/animate.js}"></script>
+    <script th:src="@{/assets/preview/scripts/includeExternalHtml.js}"></script>
+    <script th:src="@{/assets/preview/scripts/swiper.min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/slidebars.js}"></script>
+    <script th:src="@{/assets/preview/scripts/loadingProgress.js}"></script>
+    <script th:src="@{/assets/preview/scripts/picturefill.min.js}"></script>
+    <script th:src="@{/assets/preview/scripts/jquery.back-to-top.js}"></script>
+    <script th:src="@{/assets/preview/scripts/responsive-paginate.js}"></script>
+    <script th:src="@{/assets/preview/scripts/main.js}"></script>
+    <script>
+    window.onload = new Initial().init();
+    
+    function Initial() {
+    	
+    	const actions = {
+    			disableATag: function() {
+	    			// mainBox內的超連結不禁用
+	    			$('div.mainBox').find('a').each(function(idx, it) {
+	    				$(it).addClass('dummy')
+	    			})
+	    			// 500毫秒檢查一次所有a tag將其超連結禁用
+	    			let interval = null;
+	    			let checkTime = 0;
+	    			const doInterval = function() {
+	    				// 2秒後不再檢查
+	    				if (checkTime == 4) clearInterval(interval);
+	        		    $('a').each(function(idx, it) {
+	        		    	if (it.className.indexOf('dummy') == -1) {
+	        		    		const $it = $(it);
+	        		    		$it.attr('href', 'javascript:void(0)');
+	        		    		$it.off('click').click(function(e) {
+	            		    		e.preventDefault();
+	            		    	})
+	            		    	$it.addClass('dummy')
+	        		    	}
+	        		    })
+	        		    checkTime++;
+	    			}
+	    			interval = setInterval(doInterval, 500)
+    			},
+    			contentDispatch: function() {
+    				// 定義要被編輯的物件
+    				const $nowTabContent = $('div.mainBox:first');
+    				// 編輯區域是否有異動(偵測鍵盤keyup事件)
+	    			let changed = false;
+    				// 打開編輯器區域
+	    			$('div.i-overlayMask').addClass('open');
+    				// 偵測鍵盤keyup事件
+	    			$('div.editor textarea').keyup(function(){
+	    				changed = true;
+	    			})
+	    			// 讓tab可以在textarea輸入
+	    			$('div.editor textarea').keydown(function(e){
+	    				if (e.key == 'Tab') {
+	    				    e.preventDefault();
+	    				  	//appends a tab and makes the browser's default undo/redo aware and automatically moves cursor
+	    				    document.execCommand("insertText", false, '\t');
+	    				}
+	    			})
+	    			// 每500ms更新一次預覽區塊
+	    			setInterval(function(){
+	    				if (!changed) {
+	    					return;
+	    				}
+	    				changed = false;
+	    				const html = $('div.editor textarea').val()
+	    				if (/<script[^>]*>(?:.*?)(?:\n*?)<\/script>/.test(html)) {
+	    					alert('請勿注入script標籤')
+	    					return;
+	    				}
+	    				if (/<style[^>]*>(?:.*?)(?:\n*?)<\/style>/.test(html)) {
+	    					alert('請勿注入style標籤')
+	    					return;
+	    				}
+	    				$nowTabContent.html(
+                               	html
+								);
+	    			}, 500)
+    			}
+    	}
+    	
+    	return {
+    		init: function() {
+    			// 禁用頁面所有a tag超連結
+    			actions.disableATag();
+//     			actions.contentDispatch();
+    		}
+    	}
+    }
+    </script>
+
 </body>
+
 </html>

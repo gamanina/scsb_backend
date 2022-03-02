@@ -76,10 +76,10 @@
 									<div class="row ml-0 mr-0">
 										<div class="col-lg-12 card-table">
 											<p>
-												申請人： <span>[[${type.get(sheet.creator)}]]</span>
+												申請人： <span>[[${sheet.applicant}]]</span>
 											</p>
 											<p>
-												申請單位： <span>[[${#dates.format(sheet.createTime,
+												申請時間： <span>[[${#dates.format(sheet.createTime,
 													'YYYY/MM/dd HH:mm')}]]</span> ｜ 申請單位：<span>[[${sheet.applicantUnit}]]</span>
 											</p>
 											<p>
@@ -93,23 +93,23 @@
 											<p>
 												標題： <span>[[${sheet.title}]]</span>
 											</p>
-											<p class="announcement">公告內容：
-											<ul>
-												<li th:if="${sheet.image != null}">・圖檔 <a
-													th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-												</li>
-												<li th:if="${sheet.image != null}">・Mobile圖檔 <a
-													th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-												</li>
-												<li th:if="${sheet.imageUrl != null}">・圖檔連結 <a
-													th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a>
-												</li>
-												<li th:if="${sheet.file != null}">・附檔 <a
-													th:href="@{${sheet.file}}">[[${sheet.file}]]</a>
-												</li>
-											</ul>
-											[[${sheet.content}]]
-											</p>
+<!-- 											<p class="announcement">公告內容： -->
+<!-- 											<ul> -->
+<!-- 												<li th:if="${sheet.image != null}">・圖檔 <a -->
+<!-- 													th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a> -->
+<!-- 												</li> -->
+<!-- 												<li th:if="${sheet.image != null}">・Mobile圖檔 <a -->
+<!-- 													th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a> -->
+<!-- 												</li> -->
+<!-- 												<li th:if="${sheet.imageUrl != null}">・圖檔連結 <a -->
+<!-- 													th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a> -->
+<!-- 												</li> -->
+<!-- 												<li th:if="${sheet.file != null}">・附檔 <a -->
+<!-- 													th:href="@{${sheet.file}}">[[${sheet.file}]]</a> -->
+<!-- 												</li> -->
+<!-- 											</ul> -->
+<!-- 											[[${sheet.content}]] -->
+<!-- 											</p> -->
 
 										</div>
 									</div>
@@ -134,7 +134,7 @@
 													[[${approval.status.equals('0')? "申請人" : "簽核人"}]]： <span th:text="${approval.approver}">陳亨利</span>
 												</p>
 												<p>
-													[[${approval.status.equals('0')? "申請時間" : "簽核時間"}]]： <span th:text="${#dates.format(approval.createTime, 'YYYY/MM/dd HH:mm')}">2021/03/11
+													[[${approval.status.equals('0')? "申請時間" : "簽核時間"}]]： <span th:text="${approval.status.equals('0') ? #dates.format(sheet.createTime, 'YYYY/MM/dd HH:mm') : #dates.format(approval.createTime, 'YYYY/MM/dd HH:mm')}">2021/03/11
 														07:26</span>
 												</p>
 												<p th:if="${!approval.status.equals('0')}">
@@ -253,7 +253,7 @@
 <script>
 	function preview() {
 		document.forms['pForm'].target = '_blank';
-		document.forms['pForm'].action = '/scsb-springboot-0.0.3/previewImgUrl';
+		document.forms['pForm'].action = '/scsb-springboot-0.0.3/previewSheet';
 		document.forms['pForm'].submit();
 	}
 	

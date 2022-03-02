@@ -39,6 +39,9 @@ public class SendEmailService {
 	
 	@Autowired
 	private TemplateEngine templateEngine;
+	
+	@Autowired
+	private LdapService ldapService;
 
 	private JavaMailSender javaMailSender;
 
@@ -59,10 +62,15 @@ public class SendEmailService {
 		if (isTest) {
 			return;// 本機測試環境不寄信
 		}
-		List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
+		/*List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 		Map<String, String> emailMap = approverList.stream().collect(Collectors.toMap(Ldap::getCn, Ldap::getMail));
 		String approverEmail = emailMap.get(nextApproverId);
-		String agentEmail = emailMap.get(agentId);
+		String agentEmail = emailMap.get(agentId);*/
+		// [20220301] 直接從Ldap取，避免不同部門取不到的問題
+		Ldap approver = ldapService.getDataByEmpNo(nextApproverId);
+		Ldap agent = ldapService.getDataByEmpNo(agentId);
+		String approverEmail = approver.getMail();
+		String agentEmail = agent.getMail();
 		sendRemindApproveEmail(approverEmail,agentEmail);
 	}
 	

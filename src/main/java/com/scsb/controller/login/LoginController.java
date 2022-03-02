@@ -65,7 +65,8 @@ public class LoginController {
 		request.getSession().removeAttribute(Constants.SESSION_FUNCTION_TASK_KEY);
 		request.getSession().removeAttribute(Constants.SESSION_MEMBER_RISHTS);
 		request.getSession().removeAttribute(Constants.SESSION_LOGIN_TIME_KEY);
-
+		// [20220228] 登入人員是否為A、B級主管
+        request.getSession().removeAttribute(Constants.SESSION_IS_MANAGER);
 		return "views/login/login";
 	}
 
@@ -115,6 +116,9 @@ public class LoginController {
 	        
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
+	        
+	        // [20220228] 登入人員是否為A、B級主管
+	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
 	        
 	        // 若有停刊申請的待核表單
 	        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
@@ -189,6 +193,9 @@ public class LoginController {
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
 	        
+	        // [20220228] 登入人員是否為A、B級主管
+	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
+	        
 	        // 若有停刊申請的待核表單
 	        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
 	        if (sheetList != null && sheetList.size() > 0)
@@ -255,6 +262,9 @@ public class LoginController {
 				request.getSession().setAttribute(Constants.SESSION_MEMBER_KEY, member);
 		        request.getSession().setAttribute(Constants.SESSION_FUNCTION_TASK_KEY, tasks);
 		        request.getSession().setAttribute(Constants.SESSION_LOGIN_TIME_KEY, now);
+		        
+		        // [20220228] 登入人員是否為A、B級主管
+		        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, true);
 		        
 		        // 審核人
 		        List<Ldap> approverList = ldapService.fakeItClassA();
@@ -328,6 +338,8 @@ public class LoginController {
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
 	        
+	        // [20220228] 登入人員是否為A、B級主管
+	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
 	        
 	        // 若有停刊申請的待核表單
 	        System.out.println("###############"+ldap.getCn());

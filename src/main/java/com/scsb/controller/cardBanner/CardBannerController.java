@@ -78,10 +78,10 @@ public class CardBannerController {
 			form.setApplicantUnitId(ldap.getDepartmentNumber());
 	        form.setApplicantUnit(ldap.getDepartmentNumberName());
 	        // TODO 刪除
-	        if (isTest) {
-		        form.setOnTimeDate("2021/01/01");
-		        form.setOffTimeDate("2021/12/30");
-	        }
+//	        if (isTest) {
+//		        form.setOnTimeDate("2021/01/01");
+//		        form.setOffTimeDate("2021/12/30");
+//	        }
 			
 			List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 			
@@ -162,13 +162,14 @@ public class CardBannerController {
 				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.getFullUploadTimeMessage(sheet.getOffTime()), Constants.INDEX_BANNER_URL);
 			}
 			
-			for (Sheet sheet : sheetList)
-			{
-				if (sheet.getApplicantUnitId().equals(form.getApplicantUnitId()))
-				{
-					return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.getRepeatUploadTimeMessage(sheet.getOffTime()), Constants.INDEX_BANNER_URL);
-				}
-			}
+			//[20220212] 單位輪播應無限制則數及期間
+//			for (Sheet sheet : sheetList)
+//			{
+//				if (sheet.getApplicantUnitId().equals(form.getApplicantUnitId()))
+//				{
+//					return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.getRepeatUploadTimeMessage(sheet.getOffTime()), Constants.INDEX_BANNER_URL);
+//				}
+//			}
 			
 			formValidator.validate(form, bindingResult);
 			if (bindingResult.hasErrors()) 

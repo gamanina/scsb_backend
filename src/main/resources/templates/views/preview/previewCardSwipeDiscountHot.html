@@ -115,12 +115,12 @@
                             <div class="leftCol_menu" include-html="assets/preview/common/card_left_menu.html"></div>
                         </div>
                         <div class="col-12 col-lg-9 rightCol">
-                            <ol class="breadcrumb d-none d-lg-flex" aria-label="麵包屑" data-menu-indexer data-ly-a="A04" data-ly-b="B10" data-ly-c="C23">
+                            <ol class="breadcrumb d-none d-lg-flex" aria-label="麵包屑" data-menu-indexer data-ly-a="A04" data-ly-b="B01" data-ly-c="C01">
                                 <li class="accesskey"><a accesskey="C" href="sitemap.jsp" id="accesskey-c" title="中央主內容區塊">:::</a></li>
-                                <li class="breadcrumb-item"><a href="#!" title="開新視窗-上海商業銀行首頁"><span class="icon-home2"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#!">信用卡</a></li>
-                                <li class="breadcrumb-item"><a href="#!">Debit卡</a></li>
+                                <li class="breadcrumb-item"><a href="/newscsbweb/"><span class="icon-home2"></span></a></li>
+                                <li class="breadcrumb-item"><a href="/newscsbweb/card">信用卡</a></li>
                                 <li class="breadcrumb-item active">刷卡優惠</li>
+                                <li class="breadcrumb-item active">熱門活動</li>
                             </ol>
                             <div class="inner-kv">
                                 <div class="inner-kv-wrap r-pic-mode">
@@ -138,7 +138,7 @@
                                             <img on-image-load th:src="@{/assets/preview/images/share/inner-kv-mask-1024.png}" class="img-fluid" alt="*">
                                         </div>
                                         <div class="inner-tag">
-<!--                                             <div th:class="'distag ' + ${tagClass}" th:text="${sheetTag}">旅遊活動旅遊活動</div> -->
+                                            <div th:class="'distag ' + ${tagClass}" th:text="${sheetTag}">旅遊活動旅遊活動</div>
                                             <div class="date" th:text="${#dates.format(onTime, 'yyyy/MM/dd') + '~' + #dates.format(offTime, 'yyyy/MM/dd')}">2021/01/01~2021/12/31</div>
                                         </div>
                                     </div>
@@ -151,14 +151,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="focusBtn btnBlkWrap d-flex pb-0 justify-content-between justify-content-lg-end">
-                                <div class="item flex-grow-1 flex-lg-grow-0">
-                                    <a href="dep07_a.jsp" title="按鈕名稱" class="btn custom_red_solid_style d-block">按鈕名稱</a>
-                                </div>
-                                <div class="item flex-grow-1 flex-lg-grow-0">
-                                    <a href="dep07_b1.jsp" title="按鈕名稱" class="btn btn-gdt-link d-block">按鈕名稱</a>
-                                </div>
-                            </div>
+<!--                             <div class="focusBtn btnBlkWrap d-flex pb-0 justify-content-between justify-content-lg-end"> -->
+<!--                                 <div class="item flex-grow-1 flex-lg-grow-0"> -->
+<!--                                     <a href="dep07_a.jsp" title="按鈕名稱" class="btn custom_red_solid_style d-block">按鈕名稱</a> -->
+<!--                                 </div> -->
+<!--                                 <div class="item flex-grow-1 flex-lg-grow-0"> -->
+<!--                                     <a href="dep07_b1.jsp" title="按鈕名稱" class="btn btn-gdt-link d-block">按鈕名稱</a> -->
+<!--                                 </div> -->
+<!--                             </div> -->
 
                             <div class="mainBox">
                             	<p th:utext="${content}"></p>

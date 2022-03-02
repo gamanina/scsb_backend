@@ -1,12 +1,15 @@
 package com.scsb.service;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -139,35 +142,63 @@ public class SheetService {
 
 	}
 
-	// 根據員編取得表單
-	public List<Sheet> getSheetByApplicant(String memberId, AllSheetForm form) {
+	/**
+	 * 根據員編取得表單
+	 * @param memberId 當前登入行員員編
+	 * @param form 查詢條件
+	 * @param isManager 是否為主管
+	 * @return
+	 * @throws ParseException
+	 */
+	public List<Sheet> getSheetByApplicant(String memberId, AllSheetForm form, boolean isManager) throws ParseException {
 
 		List<Sheet> datasList = new ArrayList<Sheet>();
-		List<Sheet> searchList = new ArrayList<Sheet>();
+//		List<Sheet> searchList = new ArrayList<Sheet>();
 
 		// 取條件
-		String strDate = form.getStrDate();
-		String endDate = form.getEndDate();
-		String applicant = form.getApplicant();
+		String strDateStr = form.getStrDate();
+		String endDateStr = form.getEndDate();
+		String applicant = form.getApplicant();// 申請人
 		String tableName = form.getTableName();
 		String status = form.getStatus();
+		String keyword = form.getKeyword();
 
 		// 判斷條件是否為空 True為空
-		boolean strDateBoolean = strDate == null || strDate.equals("");
-		boolean endDateBoolean = endDate == null || endDate.equals("");
+		boolean strDateBoolean = strDateStr == null || strDateStr.equals("");
+		boolean endDateBoolean = endDateStr == null || endDateStr.equals("");
 		boolean applicantBoolean = applicant == null || applicant.equals("");
 		boolean tableNameBoolean = tableName == null || tableName.equals("");
 		boolean statusBoolean = status == null || status.equals("");
 
 		// 依員編取得表單
-		if (strDateBoolean && endDateBoolean && applicantBoolean && tableNameBoolean && statusBoolean) {
-
+		if (strDateBoolean && endDateBoolean &&	 applicantBoolean && tableNameBoolean && statusBoolean) {
 			datasList = repository.getSheetByApplicant(memberId);
 			return datasList;
 		}
-		// 根據條件取資料(申請人、表單類型、狀態)
-		searchList = repository.getSheetAndConditionByApplicant(memberId, applicant, tableName, status);
-		try {
+		
+		// 根據條件取資料(申請人、表單類型、狀態、關鍵字)
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date strDate = strDateBoolean ? new Date(0L) : df.parse(strDateStr);
+		Date endDate = endDateBoolean ? new Date() : df.parse(endDateStr);
+		if (!isManager && StringUtils.isNotBlank(applicant)) {// 如果為非管理者且有輸入申請者, applicant設為空字串
+			applicant = StringUtils.EMPTY;
+		}
+		if (isManager && StringUtils.isNotBlank(applicant)) {// 如果為管理者且有輸入申請者, memberId設為空字串
+			memberId = StringUtils.EMPTY;
+		}
+		datasList = repository.getSheetAndConditionByApplicant(memberId, applicant == null ? StringUtils.EMPTY : applicant.toUpperCase(), tableName, status, strDate, endDate);
+		
+		if (StringUtils.isNotBlank(keyword)) {
+			final String fkeyword = keyword.toUpperCase();
+			datasList = datasList.stream().filter(
+					sheet -> 
+						(sheet.getTitle() != null && sheet.getTitle().toUpperCase().contains(fkeyword)) || 
+						(sheet.getContent() != null && sheet.getContent().toUpperCase().contains(fkeyword))
+				)
+				.collect(Collectors.toList());
+		}
+		
+		/*try {
 
 			// 時間處理
 
@@ -212,7 +243,7 @@ public class SheetService {
 
 		} catch (java.text.ParseException e) {
 			LogUtil.setErrorLog("SheetByApplicant: ", e);
-		}
+		}*/
 
 		return datasList;
 	}

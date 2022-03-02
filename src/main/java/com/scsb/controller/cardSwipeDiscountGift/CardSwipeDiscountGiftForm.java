@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 /**
- * 信用卡>刷卡優惠>熱門活動表單物件
+ * 信用卡>刷卡優惠>新戶禮表單物件
  */
 @Data
 public class CardSwipeDiscountGiftForm 

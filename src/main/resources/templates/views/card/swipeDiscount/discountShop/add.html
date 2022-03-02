@@ -218,7 +218,7 @@
 
                                             <div class="form-group">
                                                 <label for="titlename">店家名稱<span><br>註：上限 30 字</span></label>
-                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="40" required th:field="*{title}">
+                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="30" required th:field="*{title}">
                                                 <div class="invalidColor" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                                             </div>
 
@@ -265,54 +265,55 @@ window.onload = new Initial().init();
 function Initial() {
 	
 	function fillsample() {
-		const content = $('textarea.ckeditor').val();
+		const content = $('textarea#content').val();
 		if (content && content.trim() != '') {
-			return;
+			$('textarea.ckeditor').text(content)
+		} else {
+			$('textarea.ckeditor').val(
+	 				'<div class=\"mainBox\">\r\n' + 
+	 				'<div class=\"blockWrap\">\r\n' + 
+	 				'<p class=\"titleBlk_b\">活動內容</p>\r\n' + 
+	 				'<ul class=\"decimalType\">\r\n' + 
+	 				'    <li>\r\n' + 
+	 				'        <span class=\"ft-base\">住宿優惠：</span>\r\n' + 
+	 				'        <ul class=\"dotLister\">\r\n' + 
+	 				'            <li>草山雙人房定價新臺幣(下同)7,500元，平日住宿享優惠價6,000元。</li>\r\n' + 
+	 				'            <li>和風雙人房定價9,000元，平日住宿享優惠價7,500元。</li>\r\n' + 
+	 				'        </ul>\r\n' + 
+	 				'    </li>\r\n' + 
+	 				'    <li>\r\n' + 
+	 				'        <span class=\"ft-base\">餐飲優惠：</span>\r\n' + 
+	 				'        平日用餐享定價9折優惠。\r\n' + 
+	 				'    </li>\r\n' + 
+	 				'    <li>\r\n' + 
+	 				'        <span class=\"ft-base\">泡湯優惠：</span>\r\n' + 
+	 				'        使用露天風呂，平日享定價6折、假日享定價85折優惠。\r\n' + 
+	 				'    </li>\r\n' + 
+	 				'</ul>\r\n' + 
+	 				'\r\n' + 
+	 				'\r\n' + 
+	 				'<p class=\"titleBlk_b\">店家資訊</p>\r\n' + 
+	 				'<ul class=\"pointInfo\">\r\n' + 
+	 				'    <li>電話：(02)2408-0000</li>\r\n' + 
+	 				'    <li>地址：新北市金山區重和里名流路1-7號</li>\r\n' + 
+	 				'    <li>網址：<a href=\"#!\" target=\"_blank\" title=\"開新視窗-陽明山天籟渡假酒店\">官方網站</a>、<a href=\"#!\" target=\"_blank\" title=\"開新視窗-FB粉絲團\">FB粉絲團</a></li>\r\n' + 
+	 				'    <li>其他：<a href=\"#!\" target=\"_blank\" title=\"開新視窗-優惠券下載\">優惠券下載</a></li>\r\n' + 
+	 				'</ul>\r\n' + 
+	 				'<div class=\"notice collapseLister\">\r\n' + 
+	 				'    <div class=\"noticeTitle\">\r\n' + 
+	 				'        <p class=\"card-link\" data-toggle=\"collapse\" aria-expanded=\"false\" href=\"#note_a_02\">注意事項</p>\r\n' + 
+	 				'    </div>\r\n' + 
+	 				'    <ul class=\"dotLister collapse show\" id=\"note_a_02\">\r\n' + 
+	 				'        <li>活動期間：請參考各指定行程優惠期間。</li>\r\n' + 
+	 				'        <li>刷卡時請主動告知為上海銀行持卡人，且限使用上海銀行信用卡支付本人及同行者全額費用，方可享上述折扣優惠。</li>\r\n' + 
+	 				'        <li>本活動不得與其他優惠案合併使用。</li>\r\n' + 
+	 				'        <li>除法令或法律另有規定外，上海銀行與信安旅遊保留隨時修改、變更或取消本活動之權利。</li>\r\n' + 
+	 				'    </ul>\r\n' + 
+	 				'</div>\r\n' + 
+	 				'</div>\r\n' + 
+	 				'</div>'
+	 		);
 		}
-		$('textarea.ckeditor').val(
- 				'<div class=\"mainBox\">\r\n' + 
- 				'<div class=\"blockWrap\">\r\n' + 
- 				'<p class=\"titleBlk_b\">活動內容</p>\r\n' + 
- 				'<ul class=\"decimalType\">\r\n' + 
- 				'    <li>\r\n' + 
- 				'        <span class=\"ft-base\">住宿優惠：</span>\r\n' + 
- 				'        <ul class=\"dotLister\">\r\n' + 
- 				'            <li>草山雙人房定價新臺幣(下同)7,500元，平日住宿享優惠價6,000元。</li>\r\n' + 
- 				'            <li>和風雙人房定價9,000元，平日住宿享優惠價7,500元。</li>\r\n' + 
- 				'        </ul>\r\n' + 
- 				'    </li>\r\n' + 
- 				'    <li>\r\n' + 
- 				'        <span class=\"ft-base\">餐飲優惠：</span>\r\n' + 
- 				'        平日用餐享定價9折優惠。\r\n' + 
- 				'    </li>\r\n' + 
- 				'    <li>\r\n' + 
- 				'        <span class=\"ft-base\">泡湯優惠：</span>\r\n' + 
- 				'        使用露天風呂，平日享定價6折、假日享定價85折優惠。\r\n' + 
- 				'    </li>\r\n' + 
- 				'</ul>\r\n' + 
- 				'\r\n' + 
- 				'\r\n' + 
- 				'<p class=\"titleBlk_b\">店家資訊</p>\r\n' + 
- 				'<ul class=\"pointInfo\">\r\n' + 
- 				'    <li>電話：(02)2408-0000</li>\r\n' + 
- 				'    <li>地址：新北市金山區重和里名流路1-7號</li>\r\n' + 
- 				'    <li>網址：<a href=\"#!\" target=\"_blank\" title=\"開新視窗-陽明山天籟渡假酒店\">官方網站</a>、<a href=\"#!\" target=\"_blank\" title=\"開新視窗-FB粉絲團\">FB粉絲團</a></li>\r\n' + 
- 				'    <li>其他：<a href=\"#!\" target=\"_blank\" title=\"開新視窗-優惠券下載\">優惠券下載</a></li>\r\n' + 
- 				'</ul>\r\n' + 
- 				'<div class=\"notice collapseLister\">\r\n' + 
- 				'    <div class=\"noticeTitle\">\r\n' + 
- 				'        <p class=\"card-link\" data-toggle=\"collapse\" aria-expanded=\"false\" href=\"#note_a_02\">注意事項</p>\r\n' + 
- 				'    </div>\r\n' + 
- 				'    <ul class=\"dotLister collapse show\" id=\"note_a_02\">\r\n' + 
- 				'        <li>活動期間：請參考各指定行程優惠期間。</li>\r\n' + 
- 				'        <li>刷卡時請主動告知為上海銀行持卡人，且限使用上海銀行信用卡支付本人及同行者全額費用，方可享上述折扣優惠。</li>\r\n' + 
- 				'        <li>本活動不得與其他優惠案合併使用。</li>\r\n' + 
- 				'        <li>除法令或法律另有規定外，上海銀行與信安旅遊保留隨時修改、變更或取消本活動之權利。</li>\r\n' + 
- 				'    </ul>\r\n' + 
- 				'</div>\r\n' + 
- 				'</div>\r\n' + 
- 				'</div>'
- 		);
 		CKEDITOR.stylesSet.add('scsb', [
 		    { name: '注意事項', element: 'div', attributes: { 'class': 'notice collapseLister' } },
 		    { name: '注意事項標題區塊', element: 'div', attributes: { 'class': 'noticeTitle' } },

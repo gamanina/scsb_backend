@@ -26,6 +26,7 @@ import com.scsb.model.Sheet;
 import com.scsb.model.SheetApproval;
 import com.scsb.service.CheckRightService;
 import com.scsb.service.CommonService;
+import com.scsb.service.LdapService;
 import com.scsb.service.SendEmailService;
 import com.scsb.service.SheetApprovalService;
 import com.scsb.service.SheetService;
@@ -47,6 +48,8 @@ public class PendingSheetController
 	private PendingSheetValidator formValidator;
 	@Autowired
 	private DataOption dataOption;
+	@Autowired
+	private LdapService ldapService;
 	
 	@Value("${web.upload-path}")
 	private String uploadPath;
@@ -97,11 +100,17 @@ public class PendingSheetController
 		
 		// 檢查是否為廣告類、最新活動，並且下階段是公關審核
 		List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
-		if (!sheet.getType().equals("0") && !sheet.getType().equals("3"))
+		if (!Constants.NONE_PORMOTION_LIST.contains(sheet.getType()))
 		{
 			if (sheet.getStep() == 1)
 			{
 				approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_PUBLIC_RELATIONS);
+			}
+			else if (sheet.getStep() == 2)// 最後一關清單為申請人A主管
+			{
+				// TODO [20220214] 第二階段複測: 待上銀測試
+				Ldap agentLdapObj = ldapService.getDataByEmpNo(sheet.getApplicantId());
+				approverList = ldapService.getDepartmentPeople(agentLdapObj);
 			}
 		}
 		
@@ -240,8 +249,10 @@ public class PendingSheetController
 			sheetApproval.setStatus(form.getCheck());
 			
 			// 若為退回
+			boolean isReject = false;
 			if (form.getCheck().equals(Constants.SHEET_APPROVAL_REFUSE))
 			{
+				isReject = true;
 				sheet.setStatus(Constants.SHEET_STATUS_RETURNED);
 			}
 			else if (form.getCheck().equals(Constants.SHEET_APPROVAL_PASS))
@@ -276,7 +287,7 @@ public class PendingSheetController
 				LogUtil.setErrorLog(reFlieName + " sendSheetApproveEmail", e);
 			}
 		    
-			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_INSERT_SUCCESS, Constants.PENDINGSHEET_URL);
+			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, isReject ? MessageConstants.MESSAGE_REJECT_SUCCESS : MessageConstants.MESSAGE_APPROVE_SUCCESS, Constants.PENDINGSHEET_URL);
 		}
 		catch (Exception e) 
 		{

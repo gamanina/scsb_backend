@@ -112,6 +112,7 @@ $( function() {
 });
 
 // datepicker from to今天以後不能選
+// (2022-02-12取消此限制)
 $(function () {
     var dateFormat = "yy/mm/dd";
     $("#fromNodate").datepicker({
@@ -121,8 +122,11 @@ $(function () {
         dateFormat: dateFormat
     });
 
-    $("#fromNodate").datepicker("option", "maxDate", new Date());
-    $("#toNodate").datepicker();
+//    $("#fromNodate").datepicker("option", "maxDate", new Date());
+	const $date = new Date();
+    $("#fromNodate").datepicker('setDate', $date);
+	$date.setDate($date.getDate() + 30)
+    $("#toNodate").datepicker('setDate', $date);
 });
 
 // chosen-select

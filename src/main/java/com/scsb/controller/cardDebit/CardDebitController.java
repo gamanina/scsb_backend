@@ -75,8 +75,8 @@ public class CardDebitController {
 	        form.setApplicantUnitId(manager.getLdap().getDepartmentNumber());
 	        form.setApplicantUnit(manager.getLdap().getDepartmentNumberName());
 //	        form.setType(Constants.CARD_REWARD_SHEET_TYPE);// 加入表單類別，用以驗證預覽時是否填寫類別
-	        form.setOnTimeDate("2021/01/01");
-	        form.setOffTimeDate("2021/12/30");
+//	        form.setOnTimeDate("2021/01/01");
+//	        form.setOffTimeDate("2021/12/30");
 	        
 	        List<Ldap> approverList = (List<Ldap>) request.getSession().getAttribute(Constants.SESSION_APPROVERS);
 

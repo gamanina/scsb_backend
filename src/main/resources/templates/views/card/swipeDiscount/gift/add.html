@@ -218,14 +218,14 @@
 
                                             <div class="form-group">
                                                 <label for="titlename">標題<span><br>註：上限 30 字</span></label>
-                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="40" required th:field="*{title}">
+                                                <input type="text" class="form-control" id="titlename" placeholder="" maxlength="30" required th:field="*{title}">
                                                 <div class="invalidColor" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>
                                                     圖檔
-                                                    <span>寬度1299px，高度729px <br>
+                                                    <span>寬度900px<br>
                                                     	註1：圖片比例若不正確可能圖片會被標題遮擋。<br>
                                                     	註2：圖檔檔名請加上部門或日期，以避免檔名重複造成複寫。<br>
                                                     </span>
@@ -236,7 +236,7 @@
                                                         <i class="fas fa-plus"></i>
                                                     </span>
                                                     <span class="text">上傳</span>
-                                                    <input id="up_imgfile" type="file" class="upload" th:field="*{imageFile}">
+                                                    <input id="up_imgfile" type="file" accept="image/*" class="upload" th:field="*{imageFile}">
                                                 </div>
                                                 <input id="show_imgfile" class="fileUpload" placeholder="未選擇任何檔案" disabled="disabled">
                                              	<div class="invalidColor" th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></div>
@@ -284,11 +284,11 @@ window.onload = new Initial().init();
 function Initial() {
 	
 	function fillsample() {
-		const content = $('textarea.ckeditor').val();
+		const content = $('textarea#content').val();
 		if (content && content.trim() != '') {
-			return;
-		}
- 		$('textarea.ckeditor').val(
+			$('textarea.ckeditor').text(content)
+		} else {
+			$('textarea.ckeditor').text(
  				'<div class=\"mainBox\">\r\n' + 
                 '<p>即日起至2021/4/30止，使用上海銀行之Visa信用卡/金融卡於蝦皮購物海外直送館專區刷卡消費，有機會享以下優惠。</p>\r\n' +
                 '<div class="titleBlk_a h4">優惠一</div>\r\n' +
@@ -321,7 +321,8 @@ function Initial() {
                 '    </ul>\r\n' +
  				'</div>\r\n' + 
                 '</div>'
- 		);
+ 			);
+		}
 		CKEDITOR.stylesSet.add('scsb', [
 		    { name: '標題', element: 'div', attributes: { 'class': 'titleBlk_a h4' } },
 		    { name: '注意事項', element: 'div', attributes: { 'class': 'notice' } },

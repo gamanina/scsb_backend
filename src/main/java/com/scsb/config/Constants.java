@@ -37,6 +37,7 @@ public class Constants {
 	public static final String SESSION_MEMBER_RISHTS = "rights";
 	public static final String SESSION_APPROVERS = "approvers";
 	public static final String SESSION_PUBLIC_RELATIONS = "publicRelations";
+	public static final String SESSION_IS_MANAGER = "isManager";
 	
     /** 後端結果驗證  0:成功 1:錯誤 2:資訊 **/
     public static final String RESULT_SUCCESS = "0";
@@ -90,18 +91,30 @@ public class Constants {
     public static final String SHEET_STATUS_OFF_SHELF = "3";
     public static final String SHEET_STATUS_OFF_SHELF_PROCESSING = "4";
     
-    /** 表單型態 **/
+    //表單型態
+    /** 首頁- 本行公告*/
     public static final String INDEX_ANNOUNCE_SHEET_TYPE = "0";
+    /** 首頁- 最新活動 */
     public static final String INDEX_ACTIVITY_SHEET_TYPE = "1";
+    /** 首頁- 廣告輪播 */
     public static final String INDEX_BANNER_SHEET_TYPE = "2";
+    /** 首頁- 中獎名單 */
     public static final String INDEX_WINNERS_SHEET_TYPE = "3";
+    /** 企金- 廣告輪播 */
     public static final String BUSINESS_BANNER_SHEET_TYPE = "4";
+    /** 企金- 廣告 */
     public static final String BUSINESS_AD_SHEET_TYPE = "5";
+    /** 個金- 廣告輪播 */
     public static final String PERSONAL_BANNER_SHEET_TYPE = "6";
+    /** 個金- 廣告 */
     public static final String PERSONAL_AD_SHEET_TYPE = "7";
+    /** 台外幣存匯- 廣告輪播 */
     public static final String DEPOSIT_BANNER_SHEET_TYPE = "8";
+    /** 台外幣存匯- 廣告 */
     public static final String DEPOSIT_AD_SHEET_TYPE = "9";
+    /** 數金- 廣告輪播 */
     public static final String DIGIT_BANNER_SHEET_TYPE = "10";
+    /** 數金- 廣告 */
     public static final String DIGIT_AD_SHEET_TYPE = "11";
     /** 信用卡 - 廣告輪播 */
     public static final String CARD_BANNER_SHEET_TYPE = "12";
@@ -119,6 +132,9 @@ public class Constants {
     public static final String CARD_REWARD_REDEEM_SHEET_TYPE = "18";
     /** 信用卡 - Debit卡 > 刷卡優惠 */
     public static final String CARD_DEBIT_DISCOUNT_SHEET_TYPE = "19";
+    
+    /** 非廣告類表單 */
+    public static final List<String> NONE_PORMOTION_LIST = Arrays.asList("0", "1", "3", "14", "15", "16", "17", "18", "19");
     
     /** 簽核意見狀態 **/
     public static final String SHEET_APPROVAL_APPLICATION = "0";

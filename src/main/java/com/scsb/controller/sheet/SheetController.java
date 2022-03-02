@@ -98,7 +98,7 @@ public class SheetController {
 
 		// 設置頁面功能表
 		commonService.setCommonInfo(model, request);
-			
+		
 		
 		Manager member = (Manager) request.getSession().getAttribute(Constants.SESSION_MEMBER_KEY);
 		
@@ -114,7 +114,8 @@ public class SheetController {
 		model.addAttribute("msg",Constants.MSG_NO_CONDITION);
 		model.addAttribute("type",dataOption.getSheetTypeMap());
 		model.addAttribute("status",dataOption.getSheetStatusMap());
-		
+		// [2022028] 新增 request attr是否為主管
+		model.addAttribute("isManager",request.getSession().getAttribute(Constants.SESSION_IS_MANAGER));
 		
 		return "views/recordSheet/history";
 	 }
@@ -158,14 +159,23 @@ public class SheetController {
 		//取得登入者ID
 		List<Sheet> sheets = null;
 		String memberId = String.valueOf(member.getLdap().getCn());
+		boolean isManager = (boolean) request.getSession().getAttribute(Constants.SESSION_IS_MANAGER);
+		try {
+			sheets = sheetService.getSheetByApplicant(memberId,form,isManager);
+		}catch (Exception e)
+		{	
+			LogUtil.setErrorLog(reFlieName + " add", e);
+			return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_DATA_ERROR, Constants.LOGIN_URL);
+		}
 		
-		sheets = sheetService.getSheetByApplicant(memberId,form);
 		List<Sheet> sheetList = sheets.stream().distinct().collect(Collectors.toList());
 
 		model.addAttribute("msg",Constants.MSG_NO_DATA);
 		model.addAttribute("sheetList",sheetList);
 		model.addAttribute("type",dataOption.getSheetTypeMap());
 		model.addAttribute("status",dataOption.getSheetStatusMap());
+		// [2022028] 新增 request attr是否為主管
+		model.addAttribute("isManager",request.getSession().getAttribute(Constants.SESSION_IS_MANAGER));
 		
 		
 		return "views/recordSheet/history";

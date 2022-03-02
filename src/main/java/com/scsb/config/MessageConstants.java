@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
  */
 public class MessageConstants {
 	public final static String MESSAGE_INSERT_SUCCESS = "新增成功。";
+	public final static String MESSAGE_APPROVE_SUCCESS = "已核准";
+	public final static String MESSAGE_REJECT_SUCCESS = "已退回";
 	public final static String MESSAGE_UPDATE_SUCCESS = "更新資料成功。";
 	public final static String MESSAGE_DATA_ERROR = "資料有誤，請重新確認。";
 	public final static String MESSAGE_ACCOUNT_ERROR = "帳號或密碼不正確，請再檢查一次。";
