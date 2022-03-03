@@ -115,6 +115,7 @@ public class SendAprroveRemindEmailWork
     }
 
 	private void processEmailContent(Map<String, EmailRecipientVo> emailMap, Sheet sheet, String recipientId, Ldap recipient) {
+		log.info("=== 季送信件1 ===開始");
 		EmailRecipientVo emailRecipient = new EmailRecipientVo();
 		if(emailMap.containsKey(recipientId)) {
 			 emailRecipient = emailMap.get(recipientId);
@@ -127,12 +128,14 @@ public class SendAprroveRemindEmailWork
 			if(Constants.SHEET_STATUS_PROCESSING.contentEquals(sheet.getStatus()) && Constants.SHEET_STATUS_PROCESSING.contentEquals(emailRecipient.getEmailUrlType())) {
 				emailRecipient.setEmailUrlType(Constants.SHEET_STATUS_OFF_SHELF_PROCESSING);
 			}
-			emailRecipient.setRecipientEmail(recipient.getMail());
+			emailRecipient.setRecipientEmail(recipientId+"@notes.scsb.com.tw");
+			log.info("=== 季送信件1 ===:{}",recipientId+"@notes.scsb.com.tw");
 			
 		} else {
+			log.info("=== 季送信件2 ===:{}",recipientId+"@notes.scsb.com.tw");
 			emailRecipient.setSheetCount(1);
 			emailRecipient.setEmailUrlType(sheet.getStatus());
-			emailRecipient.setRecipientEmail("iverson830521@gmail.com");
+			emailRecipient.setRecipientEmail(recipientId+"@notes.scsb.com.tw");
 			emailMap.put(recipientId, emailRecipient);
 		}
 		
