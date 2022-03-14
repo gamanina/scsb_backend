@@ -117,6 +117,9 @@ public class SendAprroveRemindEmailWork
 	private void processEmailContent(Map<String, EmailRecipientVo> emailMap, Sheet sheet, String recipientId, Ldap recipient) {
 		log.info("=== 季送信件1 ===開始");
 		EmailRecipientVo emailRecipient = new EmailRecipientVo();
+		
+		emailRecipient.setAgentId(recipientId);
+		
 		if(emailMap.containsKey(recipientId)) {
 			 emailRecipient = emailMap.get(recipientId);
 			emailRecipient.setSheetCount(emailRecipient.getSheetCount()+1);

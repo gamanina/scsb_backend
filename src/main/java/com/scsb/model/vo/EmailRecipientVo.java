@@ -20,6 +20,17 @@ public class EmailRecipientVo {
 	private int sheetCount;
 	/** 收件者 email連結類型 0:處理中-刊登,4:處理中-停刊**/
 	private String emailUrlType;
+	
+	private String agentId;
+	
+	
+	
+	public String getAgentId() {
+		return agentId;
+	}
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
 	public String getRecipientEmail() {
 		return recipientEmail;
 	}
