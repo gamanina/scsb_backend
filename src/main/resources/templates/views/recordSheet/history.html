@@ -179,7 +179,9 @@
             });
             
             $('#fromNodate').val('')
-            $("#toNodate").datepicker('setDate', new Date());
+            const $date = new Date();
+            $date.setDate($date.getDate() + 1)
+            $("#toNodate").datepicker('setDate', $date);
         });
         
         function submit(){

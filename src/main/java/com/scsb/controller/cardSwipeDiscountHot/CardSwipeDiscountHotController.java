@@ -76,7 +76,6 @@ public class CardSwipeDiscountHotController {
 	        form.setApplicant(manager.getLdap().getGivenName());
 	        form.setApplicantUnitId(manager.getLdap().getDepartmentNumber());
 	        form.setApplicantUnit(manager.getLdap().getDepartmentNumberName());
-	        form.setType(Constants.CARD_SWIPE_HOT_SHEET_TYPE);// 加入表單類別，用以驗證預覽時是否填寫類別
 //	        form.setOnTimeDate("2021/01/01");
 //	        form.setOffTimeDate("2021/12/30");
 	        
@@ -117,6 +116,9 @@ public class CardSwipeDiscountHotController {
 			Map<String, String> categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_HOT_CATEGORYS);
 			model.addAttribute("categoryMap", categoryMap);
 		}
+		
+		form.setType(Constants.CARD_SWIPE_HOT_SHEET_TYPE);// 加入表單類別，用以驗證預覽
+		
 		/** 當前頁TASK ID **/
 		model.addAttribute("taskId", rightsString);
 	}

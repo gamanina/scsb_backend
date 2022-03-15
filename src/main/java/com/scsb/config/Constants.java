@@ -183,24 +183,43 @@ public class Constants {
     public static final String MSG_NO_DATA = "查無相關資料";
     
     /** 預覽頁網址 **/
+    /** 企金-廣告預覽資源路徑 */
     public static final String PREVIEW_BUSINESS_AD="views/preview/previewBusinessAd";
+    /** 企金-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_BUSINESS_BANNER="views/preview/previewBusinessBanner";
+    /** 個金-廣告預覽資源路徑 */
     public static final String PREVIEW_PERSONAL_AD="views/preview/previewPersonalAd";
+    /** 個金-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_PERSONAL_BANNER="views/preview/previewPersonalBanner";
+    /** 台外幣存匯-廣告預覽資源路徑 */
     public static final String PREVIEW_DEPOSIT_AD="views/preview/previewDepositAd";
+    /** 台外幣存匯-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_DEPOSIT_BANNER="views/preview/previewDepositBanner";
+    /** 數金-廣告預覽資源路徑 */
     public static final String PREVIEW_DIGIT_AD="views/preview/previewDigitAd";
+    /** 數金-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_DIGIT_BANNER="views/preview/PreviewDigitBanner";
+    /** 首頁-本行公告預覽預覽資源路徑 */
     public static final String PREVIEW_INDEX_ANNOUNCE="views/preview/previewIndexAnnounce";
+    /** 首頁-最新活動預覽資源路徑 */
     public static final String PREVIEW_INDEX_ACTIVITY="views/preview/previewIndexActivity";
+    /** 首頁-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_INDEX_BANNER="views/preview/previewIndexBanner";
+    /** 首頁-中獎名單預覽資源路徑 */
     public static final String PREVIEW_INDEX_WINNERS="views/preview/previewIndexWinners";
+    /** 信用卡-廣告預覽資源路徑 */
     public static final String PREVIEW_CARD_AD="views/preview/previewCardAd";
+    /** 信用卡-廣告輪播預覽資源路徑 */
     public static final String PREVIEW_CARD_BANNER = "views/preview/previewCardBanner";
+    /** 信用卡-熱門活動預覽資源路徑 */
     public static final String PREVIEW_CARD_DISCOUNT_HOT = "views/preview/previewCardSwipeDiscountHot";
+    /** 信用卡-新戶禮預覽資源路徑 */
     public static final String PREVIEW_CARD_DISCOUNT_GIFT = "views/preview/previewCardSwipeDiscountGift";
+    /** 信用卡-優惠商店預覽資源路徑 */
     public static final String PREVIEW_CARD_DISCOUNT_SHOP = "views/preview/previewCardDiscountShop";
+    /** 信用卡-紅利兌換預覽資源路徑 */
     public static final String PREVIEW_CARD_REWARD = "views/preview/previewCardReward";
+    /** 信用卡-Debit卡-刷卡優惠預覽資源路徑 */
     public static final String PREVIEW_CARD_DEBIT = "views/preview/previewCardDebit";
     
     /** ldap權限群組字 **/

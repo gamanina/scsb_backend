@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Preview-enterprise-ad-企金廣告</title>
+    <title>Preview-card-ad-企金廣告</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/preview.css}">
 </head>
 <body>
     <div class="main">
         <div class="header">
-            <img th:src="@{/assets/img/header2.png}" alt="">
+            <img th:src="@{/assets/img/Preview-card-ad-header.png}" alt="">
         </div>
 
         <div class="footer2">
             <div class="banner2">
-                <img th:src="${image}" alt="">
+                <div th:if="${sheet==null}">
+					<img th:src="${image}" alt="">
+				</div>
+				<div th:if="${sheet!=null}">
+					<img th:src="@{${sheet.image}}" alt="">
+				</div>
             </div>
             <img th:src="@{/assets/img/body2.png}" alt="">
         </div>

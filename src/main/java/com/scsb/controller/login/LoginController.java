@@ -235,8 +235,8 @@ public class LoginController {
 	    		Ldap ldap = new Ldap();
 	    		ldap.setCn("A0001");
 	    		ldap.setGivenName("測試員");
-	    		ldap.setDepartmentNumber("A0001");
-	    		ldap.setDepartmentNumberName("測試部門");
+	    		ldap.setDepartmentNumber("840000");
+	    		ldap.setDepartmentNumberName("信用卡部");
 	    		SecurityEquals se = new SecurityEquals();
 	    		se.setCn(Constants.SECURITYEQUALS_SUPERUSERGRP);
 	    		ldap.setSeObject(se);
@@ -251,10 +251,12 @@ public class LoginController {
 	    		member.setLdap(ldap);
 	    		member.setName(ldap.getGivenName());
 	    		
-	    		Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+	    		boolean isManager = true;
+	    		
+	    		Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	            request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	    		
-	            Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks());
+	            Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toList()));
 	            
 	            Timestamp now = new Timestamp(System.currentTimeMillis());
 	            member.getRole().setTasksMap(tasks);
@@ -264,7 +266,7 @@ public class LoginController {
 		        request.getSession().setAttribute(Constants.SESSION_LOGIN_TIME_KEY, now);
 		        
 		        // [20220228] 登入人員是否為A、B級主管
-		        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, true);
+		        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, isManager);
 		        
 		        // 審核人
 		        List<Ldap> approverList = ldapService.fakeItClassA();
@@ -274,17 +276,19 @@ public class LoginController {
 		        List<Ldap> prList = ldapService.fakePrClassAll();
 		        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
 		        
-		        // 若有停刊申請的待核表單
-		        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
-		        if (sheetList != null && sheetList.size() > 0)
-		        {
-		        	return "redirect:/cancelSheet/list";
-		        }
-		        // 若有上架申請的待核表單
-		        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
-		        if (sheetList != null && sheetList.size() > 0)
-		        {
-		        	return "redirect:/pendingSheet/list";
+		        if (isManager) {// 只有主管帳號才重新導向
+			        // 若有停刊申請的待核表單
+			        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
+			        if (sheetList != null && sheetList.size() > 0)
+			        {
+			        	return "redirect:/cancelSheet/list";
+			        }
+			        // 若有上架申請的待核表單
+			        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
+			        if (sheetList != null && sheetList.size() > 0)
+			        {
+			        	return "redirect:/pendingSheet/list";
+			        }
 		        }
 		        
 				return "redirect:recordSheet/list";
@@ -317,13 +321,16 @@ public class LoginController {
     		member.setRole(role);
 			member.setLdap(ldap);
 			member.setName(ldap.getGivenName());
+			
+	        // [20220228] 登入人員是否為A、B級主管
+	        boolean isManager = ldapService.isManager(ldap);
 	        
 	        //設置權限查詢表
-	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+			Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	        request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	        
 	        //功能列表
-	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks());
+	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toList()));
 	        
 	        Timestamp now = new Timestamp(System.currentTimeMillis());
 	        member.getRole().setTasksMap(tasks);
@@ -338,21 +345,22 @@ public class LoginController {
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
 	        
-	        // [20220228] 登入人員是否為A、B級主管
-	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
+	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, isManager);
 	        
-	        // 若有停刊申請的待核表單
-	        System.out.println("###############"+ldap.getCn());
-	        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
-	        if (sheetList != null && sheetList.size() > 0)
-	        {
-	        	return "redirect:/cancelSheet/list";
-	        }
-	        // 若有上架申請的待核表單
-	        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
-	        if (sheetList != null && sheetList.size() > 0)
-	        {
-	        	return "redirect:/pendingSheet/list";
+	        if (isManager) {// 只有主管帳號才重新導向
+	        	// 若有停刊申請的待核表單
+	        	System.out.println("###############"+ldap.getCn());
+	        	List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
+	        	if (sheetList != null && sheetList.size() > 0)
+	        	{
+	        		return "redirect:/cancelSheet/list";
+	        	}
+	        	// 若有上架申請的待核表單
+	        	sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
+	        	if (sheetList != null && sheetList.size() > 0)
+	        	{
+	        		return "redirect:/pendingSheet/list";
+	        	}
 	        }
 	        
 	        return "redirect:recordSheet/list";

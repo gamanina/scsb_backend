@@ -85,7 +85,7 @@
                                             <img on-image-load th:src="@{/assets/preview/images/share/inner-kv-mask-1024.png}" class="img-fluid" alt="*">
                                         </div>
 										<div class="inner-tag">
-											<div class="distag bonus">銀行資訊</div>
+											<div th:class="'distag ' + ${tagClass}" th:text="${sheetTag}">旅遊活動旅遊活動</div>
 											<div class="date" th:text="${#dates.format(offTime, 'YYYY/MM/dd')}+止"></div>
 											
 										</div>

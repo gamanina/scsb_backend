@@ -54,10 +54,20 @@ public class PreviewFormValidator {
 			result.rejectValue("content", "error", "請勿輸入script或style等非法標籤");
 		}
 
-		
-		if (form.getImageFile() != null && StringUtils.isBlank(form.getImageFile().getOriginalFilename())) {
-			result.rejectValue("imageFile", "error", "請選擇圖片");
+		if (StringUtils.isNotBlank(type)) {
+			switch(form.getType()) {
+			case Constants.INDEX_ANNOUNCE_SHEET_TYPE:// [20220315] 首頁-本行公告,不用一定要上傳圖檔
+			case Constants.INDEX_ACTIVITY_SHEET_TYPE:// [20220315] 首頁-最新活動,不用一定要上傳圖檔
+			case Constants.INDEX_WINNERS_SHEET_TYPE:// [20220315] 首頁-中獎名單,不用一定要上傳圖檔
+				break;
+			default:
+				if (form.getImageFile() != null && StringUtils.isBlank(form.getImageFile().getOriginalFilename())) {
+					result.rejectValue("imageFile", "error", "請選擇圖片");
+				}
+				break;
+			}
 		}
+		
 		if (form.getImageFile() != null && !form.getImageFile().isEmpty()) 
 		{
 			if (!Constants.FILETYPES.contains(fileType))

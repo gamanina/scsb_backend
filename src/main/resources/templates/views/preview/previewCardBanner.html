@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>review-enterprise-banner-企金輪播</title>
+    <title>review-card-banner-信用卡輪播</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/preview.css}">
 </head>
 <body>
     <div class="main">
         <div class="header">
-            <img th:src="@{/assets/img/header.png}" alt="">
+            <img th:src="@{/assets/img/Preview-card-banner-header.png}" alt="">
         </div>
 
         <div class="banner">
-            <img th:src="${image}" alt="">
-<!--             banner img -->
+                <div th:if="${sheet==null}">
+					<img th:src="${image}" alt="">
+				</div>
+				<div th:if="${sheet!=null}">
+					<img th:src="@{${sheet.image}}" alt="">
+				</div>
         </div>
 
         <div class="footer">

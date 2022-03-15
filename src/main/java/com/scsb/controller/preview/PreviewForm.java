@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class PreviewForm {
 	private String scsbSheetId;
+	private String applicantUnitId;
+	private String applicantUnit;
 	private String title;
 	private String type;
 	private String category;
