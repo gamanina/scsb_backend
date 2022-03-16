@@ -161,6 +161,7 @@ public class Constants {
     	CANCELSHEET_URL = WebUtil.getContextPath() + "/cancelSheet/list";
     	RECORDSHEET_URL = WebUtil.getContextPath() + "/recordSheet/list";
     	REMIND_EMAIL_URL = WebUtil.getContextPath() + "/remindEmailSetting/edit";
+    	EMAIL_LOGIN_URL = "/postLogin";
     	System.out.println("====LOGIN_URL>>>" + WebUtil.getContextPath() + "/login");
     	System.out.println("====INDEX_BANNER_URL>>>" + WebUtil.getContextPath() + "/indexBanner/add");
     	System.out.println("====PENDINGSHEET_URL>>>" + WebUtil.getContextPath() + "/pendingSheet/list");
@@ -172,10 +173,12 @@ public class Constants {
     /** 連結網址 **/
     public static final String LOGIN_URL;
     public static final String INDEX_BANNER_URL;
-    public static final String PENDINGSHEET_URL;
-    public static final String CANCELSHEET_URL;
-    public static final String RECORDSHEET_URL;
-    public static final String REMIND_EMAIL_URL;
+    public static final String PENDINGSHEET_URL ;
+    public static final String CANCELSHEET_URL ;
+    public static final String RECORDSHEET_URL ;
+    public static final String REMIND_EMAIL_URL ;
+    public static final String EMAIL_LOGIN_URL ;
+    
 
     
     /** 表單頁訊息提示 **/

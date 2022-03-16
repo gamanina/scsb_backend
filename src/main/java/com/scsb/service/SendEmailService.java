@@ -87,10 +87,10 @@ public class SendEmailService {
 		map.put("subject", subject);
     	map.put("sheetCount", vo.getSheetCount()+"");
     	if(Constants.SHEET_STATUS_OFF_SHELF_PROCESSING.equals(vo.getEmailUrlType())){
-    		map.put("URL", serviceDomain + Constants.CANCELSHEET_URL+"?empNo="+vo.getAgentId());
+    		map.put("URL", serviceDomain + Constants.EMAIL_LOGIN_URL+"?empNo="+vo.getAgentId());
     	}
     	if(Constants.SHEET_STATUS_PROCESSING.equals(vo.getEmailUrlType())){
-    		map.put("URL", serviceDomain + Constants.PENDINGSHEET_URL+"?empNo="+vo.getAgentId());
+    		map.put("URL", serviceDomain + Constants.EMAIL_LOGIN_URL+"?empNo="+vo.getAgentId());
     	}
     	
 		List<String> toList = new ArrayList<String>();
