@@ -251,12 +251,12 @@ public class LoginController {
 	    		member.setLdap(ldap);
 	    		member.setName(ldap.getGivenName());
 	    		
-	    		boolean isManager = true;
+	    		boolean isManager = false;
 	    		
-	    		Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+	    		Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	            request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	    		
-	            Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toList()));
+	            Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toList()));
 	            
 	            Timestamp now = new Timestamp(System.currentTimeMillis());
 	            member.getRole().setTasksMap(tasks);
@@ -326,11 +326,11 @@ public class LoginController {
 	        boolean isManager = ldapService.isManager(ldap);
 	        
 	        //設置權限查詢表
-			Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+			Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	        request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	        
 	        //功能列表
-	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("待核表單".equals(task.getCategory()) || "待核表單".equals(task.getName()))).collect(Collectors.toList()));
+	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toList()));
 	        
 	        Timestamp now = new Timestamp(System.currentTimeMillis());
 	        member.getRole().setTasksMap(tasks);

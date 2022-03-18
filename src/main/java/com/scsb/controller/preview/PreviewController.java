@@ -583,6 +583,9 @@ public class PreviewController {
 			    case Constants.CARD_REWARD_SHEET_TYPE:
 			    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_REWARD_CATEGORYS);
 			    	break;
+			    case Constants.CARD_SWIPE_DISCOUNT_SHOP_SHEET_TYPE:
+			    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_DISCOUNT_SHOP_CATEGORYS);
+			    	break;
 				}
 				
 				if (categoryMap != null && !categoryMap.isEmpty()) {
