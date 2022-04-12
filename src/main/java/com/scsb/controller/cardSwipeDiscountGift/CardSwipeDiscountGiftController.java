@@ -181,6 +181,7 @@ public class CardSwipeDiscountGiftController {
 			{
 				String oldName = form.getImageFile().getOriginalFilename();
 				String newName = now.format(formatter) + reFlieName + oldName.substring(oldName.lastIndexOf("."), oldName.length());
+				newName = newName.replace("/", "").replace("..", "");// 弱掃修正
 				File newFile = new File(imagefolder.getPath(), newName);
 				form.getImageFile().transferTo(newFile);
 				sheet.setImage(imageFolder + now.getYear() + "/" + newName);

@@ -239,6 +239,7 @@ public class PendingSheetController
 					filefolder.mkdirs();
 				}
 				String attachFileName = form.getFile().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile().transferTo(attachfile);
 				

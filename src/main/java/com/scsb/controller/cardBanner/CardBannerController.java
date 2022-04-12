@@ -189,6 +189,7 @@ public class CardBannerController {
 			}
 			String oldName = form.getImageFile().getOriginalFilename();
 			String newName = now.format(formatter) + reFlieName + oldName.substring(oldName.lastIndexOf("."), oldName.length());
+			newName = newName.replace("/", "").replace("..", "");// 弱掃修正
 			File newFile = new File(file.getPath(), newName);
 			form.getImageFile().transferTo(newFile);
 			// 手機版圖片
