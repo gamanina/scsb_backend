@@ -183,6 +183,7 @@ public class IndexActivityController {
 			if (form.getFile() != null && !form.getFile().isEmpty())
 			{
 				String attachFileName = form.getFile().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile().transferTo(attachfile);
 				sheet.setFile(fileFolder + now.getYear() + "/" + attachFileName);
@@ -190,6 +191,7 @@ public class IndexActivityController {
 			if (form.getFile2() != null && !form.getFile2().isEmpty())
 			{
 				String attachFileName = form.getFile2().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile2().transferTo(attachfile);
 				sheet.setFile2(fileFolder + now.getYear() + "/" + attachFileName);
@@ -197,6 +199,7 @@ public class IndexActivityController {
 			if (form.getFile3() != null && !form.getFile3().isEmpty())
 			{
 				String attachFileName = form.getFile3().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile3().transferTo(attachfile);
 				sheet.setFile3(fileFolder + now.getYear() + "/" + attachFileName);
@@ -204,6 +207,7 @@ public class IndexActivityController {
 			if (form.getFile4() != null && !form.getFile4().isEmpty())
 			{
 				String attachFileName = form.getFile4().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile4().transferTo(attachfile);
 				sheet.setFile4(fileFolder + now.getYear() + "/" + attachFileName);
@@ -211,6 +215,7 @@ public class IndexActivityController {
 			if (form.getFile5() != null && !form.getFile5().isEmpty())
 			{
 				String attachFileName = form.getFile5().getOriginalFilename();
+				attachFileName = attachFileName.replace("/", "").replace("..", "");// 弱掃修正
 				File attachfile = new File(filefolder.getPath(), attachFileName);
 				form.getFile5().transferTo(attachfile);
 				sheet.setFile5(fileFolder + now.getYear() + "/" + attachFileName);

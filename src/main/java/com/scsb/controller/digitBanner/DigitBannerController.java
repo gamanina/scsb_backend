@@ -166,6 +166,7 @@ public class DigitBannerController {
 			// 手機版圖片
 			String oldMobileName = form.getImageMobileFile().getOriginalFilename();
 			String newMobileName = now.format(formatter) + reFlieName2 + oldMobileName.substring(oldMobileName.lastIndexOf("."), oldMobileName.length());
+			newMobileName = newMobileName.replace("/", "").replace("..", "");// 弱掃修正
 			File newMobileFile = new File(file.getPath(), newMobileName);
 			form.getImageMobileFile().transferTo(newMobileFile);
 			
