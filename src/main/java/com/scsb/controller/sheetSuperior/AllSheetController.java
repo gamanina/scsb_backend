@@ -139,7 +139,7 @@ public class AllSheetController {
 		
 		//TODO: 最後要調整將ROLE_ID_ADMIN改成LDAP提供的管理者
 		
-		if( roleId.equals(Constants.ROLE_ID_ADMIN) || roleId.equals(Constants.ROLE_ID_TEST)){
+		if( roleId.equals(Constants.ROLE_ID_ADMIN) || roleId.equals(Constants.ROLE_ID_TEST) || roleId.equals("6")){
 			try {
 				sheetList = sheetService.getSearchList(form);
 				

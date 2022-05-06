@@ -51,4 +51,26 @@ public interface SheetRepository extends JpaRepository<Sheet, String>
 	
 	@Query(value = "SELECT * FROM SCSB_SHEET WHERE STATUS in (?1)", nativeQuery = true)
 	List<Sheet> getSheetByStatus(List<String> status);
+
+	//管理者依條件取表單
+		@Query(value = "SELECT * FROM SCSB_SHEET WHERE "
+						+" APPLICANT LIKE %?1%"
+						+" AND TYPE = ?2"
+						+" AND STATUS LIKE %?3%"
+				, nativeQuery = true)
+	List<Sheet> getSearchSheetsWithType(String applicant, String tableName, String status);
+
+		@Query(value = "SELECT * FROM SCSB_SHEET WHERE "
+				+" APPLICANT LIKE %?1%"
+				+" AND TYPE = ?2"
+				+" AND STATUS = ?3"
+		, nativeQuery = true)
+		List<Sheet> getSearchSheetsWithTypeAndStatus(String applicant, String tableName, String status);
+		//管理者依條件取表單
+		@Query(value = "SELECT * FROM SCSB_SHEET WHERE "
+						+" APPLICANT LIKE %?1%"
+						+" AND TYPE LIKE %?2%"
+						+" AND STATUS = ?3"
+				, nativeQuery = true)		
+		List<Sheet> getSearchSheetsWithStatus(String applicant, String tableName, String status);
 }

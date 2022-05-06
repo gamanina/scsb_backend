@@ -91,7 +91,18 @@ public class SheetService {
 			return datasList;
 		}
 		// 根據條件取資料(申請人、表單類型、狀態)
-		searchList = repository.getSearchSheets(applicant, tableName, status);
+		
+		if (!tableNameBoolean && statusBoolean) {
+			searchList = repository.getSearchSheetsWithType(applicant, tableName, status);
+		}else if (!tableNameBoolean && !statusBoolean) {
+			searchList = repository.getSearchSheetsWithTypeAndStatus(applicant, tableName, status);
+		}else if (tableNameBoolean && !statusBoolean) {
+			searchList = repository.getSearchSheetsWithStatus(applicant, tableName, status);
+		}else {
+			searchList = repository.getSearchSheets(applicant, tableName, status);
+		}
+		
+		
 		try {
 
 			// 時間處理

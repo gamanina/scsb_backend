@@ -53,7 +53,7 @@ public class SendAprroveRemindEmailWork
     		return;
     	}
     	//設定檔時間未到
-    	if(emailSetting.getSettingHour() == now.getHour()) {
+    	if(!emailSetting.getSettingHour().equals(now.getHour())) {
     		log.info("=== RemindEmailSetting time is not up yet  ===");
     		log.info("=== SendAprroveRemindEmailWork: end ===");
     		return;

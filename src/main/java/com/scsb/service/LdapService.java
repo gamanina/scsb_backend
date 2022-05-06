@@ -92,27 +92,28 @@ public class LdapService
 		LogUtil.setActionLog("getEmail", "emailLdap: " + emailLdap + "; fixEmail: " + fixEmail);
 		
 		// Set SecurityEquals值
-		Map<String, String> securityEqualsMap = new HashMap<String, String>();
-//		if (ldap.getSecurityEquals().size() > 0)
-//		{
-//			String securityEquals = ldap.getSecurityEquals().get(0);
-//			String[] strArray = securityEquals.split(",");
-//			for (String str : strArray)
-//			{
-//				List<String> equal = Arrays.asList(str.split("="));
-//				if (equal.size() == 2)
-//				{
-//					securityEqualsMap.put(equal.get(0), equal.get(1));
-//				}
-//			}
-//		}
-		SecurityEquals se = new SecurityEquals();
-		se.setCn("test");
-		se.setOu("test");
-		se.setO("test");
-		se.setC("test");
-		ldap.setSeObject(se);
-		return ldap;
+		// Set SecurityEquals值
+				Map<String, String> securityEqualsMap = new HashMap<String, String>();
+				if (ldap.getSecurityEquals().size() > 0)
+				{
+					String securityEquals = ldap.getSecurityEquals().get(0);
+					String[] strArray = securityEquals.split(",");
+					for (String str : strArray)
+					{
+						List<String> equal = Arrays.asList(str.split("="));
+						if (equal.size() == 2)
+						{
+							securityEqualsMap.put(equal.get(0), equal.get(1));
+						}
+					}
+				}
+				SecurityEquals se = new SecurityEquals();
+				se.setCn(securityEqualsMap.get("cn"));
+				se.setOu(securityEqualsMap.get("ou"));
+				se.setO(securityEqualsMap.get("o"));
+				se.setC(securityEqualsMap.get("c"));
+				ldap.setSeObject(se);
+				return ldap;
 	}
 	
 	/**
@@ -249,7 +250,7 @@ public class LdapService
 		Iterator<?> iterator = securityequals.iterator();
 		while(iterator.hasNext()) {
 		    String secequals = (String)iterator.next();
-			if ("cn=OnlineWorkTimeRecGrp,o=apgroup,c=tw".equals(secequals)) {
+			if ("cn=generalGrp,ou=scsbwebDraftSys,o=apgroup,c=tw".equals(secequals)||"cn=superuserGrp,ou=scsbwebDraftSys,o=apgroup,c=tw".equals(secequals)) {
 			    usable = "Y";//有權限
 			}
 		}

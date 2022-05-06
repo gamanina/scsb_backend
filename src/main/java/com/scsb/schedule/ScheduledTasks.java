@@ -21,7 +21,8 @@ public class ScheduledTasks
 	private SendAprroveRemindEmailWork sendAprroveRemindEmailWork;
 
 	//TODO 詹時關閉排程
-	@Scheduled(cron="0 0 12 * * ?")
+//	@Scheduled(cron="0 0 12 * * ?")
+	@Scheduled(cron = "0 0 * * * ?")//每小時執行一次
 	@Async("multiThreadPoolTaskExecutor")
 	public void sendAprroveRemindEmailCron() {
 		if(!isTest) {
