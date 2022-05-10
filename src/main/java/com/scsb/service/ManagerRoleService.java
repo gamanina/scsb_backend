@@ -49,6 +49,8 @@ public class ManagerRoleService
 				return "6";
 			case "850100":
 				return "6";
+			case "910000":
+				return "4";
 			default:
 				return "7";
 		}

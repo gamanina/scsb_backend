@@ -134,7 +134,7 @@ public class Constants {
     public static final String CARD_DEBIT_DISCOUNT_SHEET_TYPE = "19";
     
     /** 非廣告類表單 */
-    public static final List<String> NONE_PORMOTION_LIST = Arrays.asList("0", "1", "3", "14", "15", "16", "17", "18", "19");
+    public static final List<String> NONE_PORMOTION_LIST = Arrays.asList("0",  "3", "14", "15", "16", "17", "18", "19");
     
     /** 簽核意見狀態 **/
     public static final String SHEET_APPROVAL_APPLICATION = "0";
