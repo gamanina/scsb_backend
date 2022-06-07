@@ -1,6 +1,7 @@
 package com.scsb.controller.login;
 
 import java.sql.Timestamp;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -36,6 +37,9 @@ import com.scsb.service.SheetService;
 import com.scsb.service.TaskService;
 import com.scsb.util.LogUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/")
 public class LoginController {
@@ -160,10 +164,23 @@ public class LoginController {
 			Manager member = new Manager();
 			String roleId = managerRoleService.getRoleIdByDepartmentNumber(ldap.getDepartmentNumber());
 			ManagerRole role = managerRoleService.getRoleById(roleId);
+			
+			log.info("=============role:{}",role);
+			
 			// 檢查超級使用者權限
+			boolean  superUser = false;
+			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
+				String type = (String) iterator.next();
+				String[] securityStrings = type.split(",");
+				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
+					superUser = true;
+					log.info("=========superUser:{}",superUser);
+				}
+			}
+			
 			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
 			{
-				if (ldap.getSeObject().getCn().equals(Constants.SECURITYEQUALS_SUPERUSERGRP)|| empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971"))
+				if (superUser|| empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971")|| empNo.equals("17621"))
 				{
 					List<ManagerTask> taskList = taskService.superList();
 					role.getTasks().addAll(taskList);
@@ -174,12 +191,17 @@ public class LoginController {
 			member.setLdap(ldap);
 			member.setName(ldap.getGivenName());
 			
+			// [20220228] 登入人員是否為A、B級主管
+	        boolean isManager = ldapService.isManager(ldap);
+			log.info("=========isManager:{}",isManager);
 			//設置權限查詢表
-	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+//	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+	        Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	        request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	        
+	       
 	        //功能列表
-	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks());
+	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toList()));
 	        
 	        Timestamp now = new Timestamp(System.currentTimeMillis());
 	        member.getRole().setTasksMap(tasks);
@@ -196,18 +218,21 @@ public class LoginController {
 	        // [20220228] 登入人員是否為A、B級主管
 	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
 	        
-	        // 若有停刊申請的待核表單
-	        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
-	        if (sheetList != null && sheetList.size() > 0)
-	        {
-	        	return "redirect:/cancelSheet/list";
-	        }
-	        // 若有上架申請的待核表單
-	        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
-	        if (sheetList != null && sheetList.size() > 0)
-	        {
-	        	return "redirect:/pendingSheet/list";
-	        }
+	        if (isManager) {
+	        	// 若有停刊申請的待核表單
+		        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
+		        if (sheetList != null && sheetList.size() > 0)
+		        {
+		        	return "redirect:/cancelSheet/list";
+		        }
+		        // 若有上架申請的待核表單
+		        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
+		        if (sheetList != null && sheetList.size() > 0)
+		        {
+		        	return "redirect:/pendingSheet/list";
+		        }
+			}
+	        
 	        
 			return "redirect:recordSheet/list";
 		}
@@ -233,7 +258,7 @@ public class LoginController {
 	    		ManagerRole role = managerRoleService.getRoleById(roleId);
 	    		
 	    		Ldap ldap = new Ldap();
-	    		ldap.setCn("A0001");
+	    		ldap.setCn("1732");
 	    		ldap.setGivenName("測試員");
 	    		ldap.setDepartmentNumber("840000");
 	    		ldap.setDepartmentNumberName("信用卡部");
@@ -252,7 +277,7 @@ public class LoginController {
 	    		member.setLdap(ldap);
 	    		member.setName(ldap.getGivenName());
 	    		
-	    		boolean isManager = false;
+	    		boolean isManager = true;
 	    		
 	    		Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	            request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);

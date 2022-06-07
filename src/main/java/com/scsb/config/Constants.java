@@ -226,7 +226,7 @@ public class Constants {
     public static final String PREVIEW_CARD_DEBIT = "views/preview/previewCardDebit";
     
     /** ldap權限群組字 **/
-    public static final String SECURITYEQUALS_SUPERUSERGRP = "superuserGrp";
+    public static final String SECURITYEQUALS_SUPERUSERGRP = "cn=superuserGrp";
     public static final String SECURITYEQUALS_GENERALGRP = "generalGrp";
 	
 

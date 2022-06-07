@@ -18,7 +18,10 @@ import com.scsb.model.Ldap;
 import com.scsb.model.SecurityEquals;
 import com.scsb.util.LogUtil;
 
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @Service
 public class LdapService 
 {
@@ -80,6 +83,9 @@ public class LdapService
 		ldapOperator ldapOper = new ldapOperator();
 		
 		Map<String, Object> ldapMap = (Map<String, Object>)ldapOper.queryUser(empNo);
+		System.out.println("=====ldapMap======");
+		System.out.println(ldapMap.toString());
+		System.out.println("=====ldapMap======");
 		String jsonStr = gson.toJson(ldapMap);
 		Ldap ldap = gson.fromJson(jsonStr, Ldap.class);
 		
@@ -94,19 +100,22 @@ public class LdapService
 		// Set SecurityEquals值
 		// Set SecurityEquals值
 				Map<String, String> securityEqualsMap = new HashMap<String, String>();
-				if (ldap.getSecurityEquals().size() > 0)
-				{
-					String securityEquals = ldap.getSecurityEquals().get(0);
-					String[] strArray = securityEquals.split(",");
-					for (String str : strArray)
+				if (ldap.getSecurityEquals()!=null) {
+					if (ldap.getSecurityEquals().size() > 0)
 					{
-						List<String> equal = Arrays.asList(str.split("="));
-						if (equal.size() == 2)
+						String securityEquals = ldap.getSecurityEquals().get(0);
+						String[] strArray = securityEquals.split(",");
+						for (String str : strArray)
 						{
-							securityEqualsMap.put(equal.get(0), equal.get(1));
+							List<String> equal = Arrays.asList(str.split("="));
+							if (equal.size() == 2)
+							{
+								securityEqualsMap.put(equal.get(0), equal.get(1));
+							}
 						}
 					}
 				}
+				
 				SecurityEquals se = new SecurityEquals();
 				se.setCn(securityEqualsMap.get("cn"));
 				se.setOu(securityEqualsMap.get("ou"));

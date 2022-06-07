@@ -3,6 +3,7 @@ package com.scsb.controller.pendingSheet;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -93,6 +94,9 @@ public class PendingSheetController
 		}
 		
 		// 流程
+		System.out.println("================");
+		System.out.println("流程: "+sheet.getType()+"     "+sheet.getStatus());
+		System.out.println("================");
 		List<String> processList = commonService.getFormProcessFormType(sheet.getType(), sheet.getStatus());
 		
 		// 檢查是否為最後一步驟
@@ -111,6 +115,12 @@ public class PendingSheetController
 				// TODO [20220214] 第二階段複測: 待上銀測試
 				Ldap agentLdapObj = ldapService.getDataByEmpNo(sheet.getApplicantId());
 				approverList = ldapService.getDepartmentPeople(agentLdapObj);
+				System.out.println("================");
+				for (Iterator iterator = approverList.iterator(); iterator.hasNext();) {
+					Ldap ldap2 = (Ldap) iterator.next();
+					System.out.println(ldap2.toString());
+				}
+				System.out.println("================");
 			}
 		}
 		

@@ -118,8 +118,11 @@ public class SendEmailService {
 		List<String> toList = new ArrayList<String>();
 		toList.add(approverEmail);
 		toList.add(agentEmail);
+		System.out.println("=========approverEmail=======");
+		System.out.println(approverEmail);
+		System.out.println("=========approverEmail=======");
     	sendthymeleafEmail(toList,subject,"email/remindEmail.html",map);
-//		sendEmail(Arrays.asList(approverEmail,agentEmail),subject,text);
+		sendEmail(Arrays.asList(approverEmail,agentEmail),subject,text);
 
 	}
 	

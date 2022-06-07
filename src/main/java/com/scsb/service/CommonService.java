@@ -50,12 +50,21 @@ public class CommonService
 
 	public List<String> getFormProcessFormType(String type, String status)
 	{
+		
+		System.out.println("================");
+		System.out.println(status.equals(Constants.SHEET_STATUS_OFF_SHELF) || status.equals(Constants.SHEET_STATUS_OFF_SHELF_PROCESSING));
+		System.out.println("================");
+		
 		if (status.equals(Constants.SHEET_STATUS_OFF_SHELF) || status.equals(Constants.SHEET_STATUS_OFF_SHELF_PROCESSING))
 		{
 			return Arrays.asList("審核", "覆核");
 		}
 		else
 		{
+			
+			System.out.println("================");
+			System.out.println(Constants.NONE_PORMOTION_LIST.contains(type));
+			System.out.println("================");
 			if (Constants.NONE_PORMOTION_LIST.contains(type))// 非廣告類表單只需單位主管審批
 			{
 				return Arrays.asList("審核", "覆核");
