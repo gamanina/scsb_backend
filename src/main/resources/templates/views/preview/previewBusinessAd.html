@@ -9,20 +9,24 @@
 </head>
 <body>
 	<div class="main">
-		<div class="header">
-			<img th:src="@{/assets/img/Preview-business-header.png}" alt="">
-		</div>
+	
 
 		<div class="footer2">
 			<div class="banner2">
 				<div th:if="${sheet==null}">
+				<a th:href="@{${imageURL}}">
 					<img th:src="${image}" alt="">
+				</a>
 				</div>
 				<div th:if="${sheet!=null}">
+				
 					<img th:src="@{${sheet.image}}" alt="">
+				
 				</div>
 			</div>
+			
 			<img th:src="@{/assets/img/body2.png}" alt="">
+			
 		</div>
 	</div>
 </body>

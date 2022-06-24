@@ -103,7 +103,9 @@
 						<div class="mainBox">
 								<div>
 									<th:block th:if="${image != null && !image.empty}">
-										<img th:src="@{${image}}" class="img-fluid">
+									<a th:href="@{${imageURL}}">
+										<img th:src="@{${image}}" class="img-fluid" >
+									</a>
 									</th:block>
 									<div th:utext="${content}"></div>
 								</div>

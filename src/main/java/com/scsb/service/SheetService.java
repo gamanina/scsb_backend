@@ -30,10 +30,7 @@ public class SheetService {
 	private boolean isTest;
 
 	public Sheet save(Sheet sheet) {
-	    // TODO 刪除
-	    if (isTest) {
-	    	sheet.setStatus("1");// 測試環境不審核
-	    }
+	   
 		return repository.save(sheet);
 	}
 

@@ -138,7 +138,7 @@
 														07:26</span>
 												</p>
 												<p th:if="${!approval.status.equals('0')}">
-													簽核意見附檔： <a th:href="${approval.file}"
+													簽核意見附檔： <a th:href="@{${approval.file}}"
 														th:text="${approval.file}">文字修正示意圖</a>
 												</p>
 												<p th:if="${!approval.status.equals('0')}">

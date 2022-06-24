@@ -102,8 +102,13 @@
 						</div>
 						<div class="mainBox">
 								<div>
-									<img th:src="@{${image}}" class="img-fluid">
+									<a th:href="@{${imageURL}}">
+										<img th:src="@{${image}}" class="img-fluid">
+									</a>
 									<div th:utext="${content}"></div>
+									<th:block th:if="${downloadList !=null}">
+                                            <div class="rCol" th:each="download:${downloadList}"><div th:utext="${download}"></div></div>
+                                     </th:block>
 								</div>
 						</div>
 					</div>

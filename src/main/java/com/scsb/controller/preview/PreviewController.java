@@ -67,6 +67,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet",null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -98,6 +99,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet",null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -129,6 +131,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet",null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -160,6 +163,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet",null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -448,6 +452,7 @@ public class PreviewController {
 			model.addAttribute("onTime", sheet.getOnTime());// 上架時間
 			model.addAttribute("offTime", sheet.getOffTime());// 下架時間
 			model.addAttribute("content",sheet.getContent());// 內文
+			model.addAttribute("imageURL",sheet.getImageUrl());// 圖片連結
 			
 			// 此處sheet.getFile()不一定有值，如果有值且讀取第一個檔案的檔名為空，表示使用者沒有上傳檔案
 			if (sheet.getFile() != null && !"".equals(sheet.getFile())) {
@@ -607,6 +612,7 @@ public class PreviewController {
 				model.addAttribute("onTime",form.getOnTimeDate());// 上架時間
 				model.addAttribute("offTime",form.getOffTimeDate());// 下架時間
 				model.addAttribute("content",form.getContent());// 內文
+				model.addAttribute("imageURL",form.getImageUrl());// 內文
 				
 				// 此處form.getFile()不一定有值，如果讀取第一個檔案的檔名為空，表示使用者沒有上傳檔案
 				if (form.getFile() != null && !form.getFile().getOriginalFilename().isEmpty()) {

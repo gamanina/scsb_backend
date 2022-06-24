@@ -3,6 +3,7 @@ package com.scsb.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -160,11 +161,20 @@ public class SendEmailService {
 			helper.setFrom(fromEmail);
 			//helper.setTo(InternetAddress.parse("email1@test.com,email2@test.com"))
 			//helper.setTo(new String[]{"email1@test.com", "email2@test.com"});
-			helper.setTo(toList.toArray(new String[0]));
+			
+			
+				System.out.println("=========toList.toArray(new String[0])=======");
+				System.out.println(toList.get(0));
+				System.out.println("=========toList.toArray(new String[0])=======");
+			
+			
+			
+//			helper.setTo(toList.toArray(new String[0]));
+			helper.setTo(toList.get(0));
 			helper.setSubject(subject);
 			helper.setText(text, true);
 			javaMailSender.send(message);
-			LogUtil.setActionLog("Send Email: " + toList.toArray(new String[0]), "subject: " + subject + " content: " + text);
+			LogUtil.setActionLog("Send Email: " + toList.get(0), "subject: " + subject + " content: " + text);
 		} catch (Exception e) {
 			LogUtil.setErrorLog("EmailUtil.sendEmail", e);
 		}
