@@ -51,6 +51,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet", null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -83,6 +84,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet", null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -115,6 +117,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet", null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -147,6 +150,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet", null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -195,6 +199,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -210,6 +215,7 @@ public class PreviewController {
 		try {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -284,57 +290,120 @@ public class PreviewController {
 		//取得預覽頁面
 		String previewPage="/";
 		
-		switch(sheet.getType()) {
 		
-	    case Constants.BUSINESS_BANNER_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_BUSINESS_BANNER;
+		
+		model.addAttribute("image",sheet.getImage());// 圖片
+		model.addAttribute("title",sheet.getTitle());// 標題
+		model.addAttribute("onTime", sheet.getOnTime());// 上架時間
+		model.addAttribute("offTime", sheet.getOffTime());// 下架時間
+		model.addAttribute("content",sheet.getContent());// 內文
+		model.addAttribute("imageURL",sheet.getImageUrl());// 圖片連結
+		
+		// 此處sheet.getFile()不一定有值，如果有值且讀取第一個檔案的檔名為空，表示使用者沒有上傳檔案
+		if (sheet.getFile() != null && !"".equals(sheet.getFile())) {
+			List<String> downloadList = new ArrayList<String>();
+			addDownloadListSaved(downloadList, sheet.getFile());
+			addDownloadListSaved(downloadList, sheet.getFile2());
+			addDownloadListSaved(downloadList, sheet.getFile3());
+			addDownloadListSaved(downloadList, sheet.getFile4());
+			addDownloadListSaved(downloadList, sheet.getFile5());
+			model.addAttribute("downloadList",downloadList);
+		}
+	   
+		Map<String, String> categoryMap = null;
+		switch(sheet.getType()) {
+		case Constants.INDEX_BANNER_SHEET_TYPE:// 首頁輪播
+			previewPage = Constants.PREVIEW_INDEX_BANNER;
+			break;
+		case Constants.BUSINESS_BANNER_SHEET_TYPE:/** 企金- 廣告輪播 */
+			previewPage = Constants.PREVIEW_BUSINESS_BANNER;
+			break;
+		case Constants.BUSINESS_AD_SHEET_TYPE:/** 企金- 廣告 */
+			previewPage = Constants.PREVIEW_BUSINESS_AD;
+			break;
+		case Constants.PERSONAL_BANNER_SHEET_TYPE:/** 個金- 廣告輪播 */
+			previewPage = Constants.PREVIEW_PERSONAL_BANNER;
+			break;
+		case Constants.PERSONAL_AD_SHEET_TYPE:/** 個金- 廣告 */
+			previewPage = Constants.PREVIEW_PERSONAL_AD;
+			break;
+		case Constants.DEPOSIT_BANNER_SHEET_TYPE:/** 台外幣存匯- 廣告輪播 */
+			previewPage = Constants.PREVIEW_DEPOSIT_BANNER;
+			break;
+		case Constants.DEPOSIT_AD_SHEET_TYPE:/** 台外幣存匯- 廣告 */
+			previewPage = Constants.PREVIEW_DEPOSIT_AD;
+			break;
+		case Constants.DIGIT_BANNER_SHEET_TYPE:/** 數金- 廣告輪播 */
+			previewPage = Constants.PREVIEW_DIGIT_BANNER;
+			break;
+		case Constants.DIGIT_AD_SHEET_TYPE:/** 數金- 廣告 */
+			previewPage = Constants.PREVIEW_DIGIT_AD;
+			break;
+		case Constants.INDEX_ANNOUNCE_SHEET_TYPE: /** 首頁- 本行公告*/
+			previewPage = Constants.PREVIEW_INDEX_ANNOUNCE;
+			categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_DEPT_TAGS_CLASS);// 部門tagCalssMap
+			break;
+		case Constants.INDEX_ACTIVITY_SHEET_TYPE: /** 首頁- 最新活動 */
+			previewPage = Constants.PREVIEW_INDEX_ACTIVITY;
+			categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_DEPT_TAGS_CLASS);// 部門tagCalssMap
+			break;
+		case Constants.INDEX_WINNERS_SHEET_TYPE:/** 首頁- 中獎名單 */
+			previewPage = Constants.PREVIEW_INDEX_WINNERS;
+			categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_DEPT_TAGS_CLASS);// 部門tagCalssMap
+			break;
+	    case Constants.CARD_SWIPE_HOT_SHEET_TYPE:/** 信用卡 - 刷卡優惠 > 熱門活動 */
+	    	previewPage = Constants.PREVIEW_CARD_DISCOUNT_HOT;
+	    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_HOT_CATEGORYS);
 	        break;
-	    case Constants.BUSINESS_AD_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_BUSINESS_AD;
-	        break;
-	    case Constants.PERSONAL_BANNER_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_PERSONAL_BANNER;
-	        break;
-	    case Constants.PERSONAL_AD_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_PERSONAL_AD;
-	        break;
-	    case Constants.DEPOSIT_BANNER_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_DEPOSIT_BANNER;
-	        break;
-	    case Constants.DEPOSIT_AD_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_DEPOSIT_AD;
-	        break;
-	    case Constants.DIGIT_BANNER_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_DIGIT_BANNER;
-	        break;
-	    case Constants.DIGIT_AD_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_DIGIT_AD;
-	        break;
-	    case Constants.INDEX_ANNOUNCE_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_INDEX_ANNOUNCE;
-	        break;
-	    case Constants.INDEX_ACTIVITY_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_INDEX_ACTIVITY;
-	        break;
-	    case Constants.INDEX_BANNER_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_INDEX_BANNER;
-	        break;
-	    case Constants.INDEX_WINNERS_SHEET_TYPE:
-	    	previewPage = Constants.PREVIEW_INDEX_WINNERS;
-	        break;
-	    case Constants.CARD_BANNER_SHEET_TYPE:
+	    case Constants.CARD_SWIPE_GIFT_SHEET_TYPE:/** 信用卡 - 刷卡優惠 > 新戶禮 */
+	    	previewPage = Constants.PREVIEW_CARD_DISCOUNT_GIFT;
+	    	break;
+	    case Constants.CARD_SWIPE_DISCOUNT_SHOP_SHEET_TYPE:/** 信用卡 - 刷卡優惠 > 優惠商店 */
+	    	previewPage = Constants.PREVIEW_CARD_DISCOUNT_SHOP;
+	    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_DISCOUNT_SHOP_CATEGORYS);
+	    	break;
+	    case Constants.CARD_REWARD_SHEET_TYPE: /** 信用卡 - 紅利積點 > 紅利兌換 */
+	    	previewPage = Constants.PREVIEW_CARD_REWARD;
+	    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_REWARD_CATEGORYS);
+	    	break;
+	    case Constants.CARD_DEBIT_DISCOUNT_SHEET_TYPE:/** 信用卡 - Debit卡 > 刷卡優惠 */
+	    	previewPage = Constants.PREVIEW_CARD_DEBIT;
+	    	break;
+	    case Constants.CARD_REWARD_REDEEM_SHEET_TYPE:/** 信用卡 - 紅利積點 > 紅利折抵 */
+	    	previewPage = Constants.PREVIEW_CARD_DEBIT;//TODO
+	    	break;
+	    case Constants.CARD_BANNER_SHEET_TYPE: /** 信用卡 - 廣告輪播 */
 	    	previewPage = Constants.PREVIEW_CARD_BANNER;
 	    	break;
-	    case Constants.CARD_AD_SHEET_TYPE:
+	    case Constants.CARD_AD_SHEET_TYPE:/** 信用卡 - 廣告 */
 	    	previewPage = Constants.PREVIEW_CARD_AD;
 	    	break;
-	        
 	    default:
 	        	model.addAttribute("result",Constants.RESULT_ERROR);
 				model.addAttribute("msg",MessageConstants.MESSAGE_LOAD_PREVIEW_PAGE_ERROR);
-				model.addAttribute("closeWindow", true);
-			    LogUtil.setActionLog(" previewImgUrl loadPage: ", "id: " + sheet.getId() + " type: " + sheet.getType());
+				model.addAttribute("redirectUrl","/");
+			    LogUtil.setActionLog(" previewSheet loadPage: ", "id: " + sheet.getId() + " type: " + sheet.getType());
 				return "views/common/alert";
+		}
+		
+		if (!Constants.NONE_PORMOTION_LIST.contains(sheet.getType())) {
+			model.addAttribute("sheet", sheet);
+		}
+		
+		// 如果預覽頁面有實作則加入sheetTag返回對應預覽頁
+		if (categoryMap != null && !categoryMap.isEmpty()) {
+			switch (sheet.getType()) {
+				case Constants.INDEX_ANNOUNCE_SHEET_TYPE: /** 首頁- 本行公告*/
+				case Constants.INDEX_ACTIVITY_SHEET_TYPE: /** 首頁- 最新活動 */
+				case Constants.INDEX_WINNERS_SHEET_TYPE:/** 首頁- 中獎名單 */
+					model.addAttribute("sheetTag", sheet.getApplicantUnitName());// 表單tagName
+					model.addAttribute("tagClass", categoryMap.get(sheet.getApplicantUnitId()));
+					break;
+				default: 
+					model.addAttribute("sheetTag", categoryMap.get(sheet.getCategory()));// 表單tag
+					model.addAttribute("tagClass", sheet.getCategory());
+					break;
+			}
 		}
 		
 		return previewPage;
@@ -346,6 +415,7 @@ public class PreviewController {
 			String base64 = convertToBase64(form.getImageFile());
 			model.addAttribute("image",base64);
 			model.addAttribute("sheet",null);
+			model.addAttribute("imageURL",form.getImageUrl());
 		} catch (Exception e) {
 			model.addAttribute("result",Constants.RESULT_ERROR);
 			model.addAttribute("msg",MessageConstants.MESSAGE_CONVERT_IMAGE_ERROR);
@@ -515,6 +585,7 @@ public class PreviewController {
 		    	break;
 		    case Constants.CARD_SWIPE_DISCOUNT_SHOP_SHEET_TYPE:/** 信用卡 - 刷卡優惠 > 優惠商店 */
 		    	previewPage = Constants.PREVIEW_CARD_DISCOUNT_SHOP;
+		    	categoryMap = dataOption.getSheetCategoryByIndex(DataOption.INDEX_CARD_SWIPE_DISCOUNT_SHOP_CATEGORYS);
 		    	break;
 		    case Constants.CARD_REWARD_SHEET_TYPE: /** 信用卡 - 紅利積點 > 紅利兌換 */
 		    	previewPage = Constants.PREVIEW_CARD_REWARD;
@@ -550,7 +621,7 @@ public class PreviewController {
 					case Constants.INDEX_ANNOUNCE_SHEET_TYPE: /** 首頁- 本行公告*/
 					case Constants.INDEX_ACTIVITY_SHEET_TYPE: /** 首頁- 最新活動 */
 					case Constants.INDEX_WINNERS_SHEET_TYPE:/** 首頁- 中獎名單 */
-						model.addAttribute("sheetTag", sheet.getApplicantUnit());// 表單tagName
+						model.addAttribute("sheetTag", sheet.getApplicantUnitName());// 表單tagName
 						model.addAttribute("tagClass", categoryMap.get(sheet.getApplicantUnitId()));
 						break;
 					default: 
@@ -598,7 +669,7 @@ public class PreviewController {
 						case Constants.INDEX_ANNOUNCE_SHEET_TYPE: /** 首頁- 本行公告*/
 						case Constants.INDEX_ACTIVITY_SHEET_TYPE: /** 首頁- 最新活動 */
 						case Constants.INDEX_WINNERS_SHEET_TYPE:/** 首頁- 中獎名單 */
-							model.addAttribute("sheetTag", form.getApplicantUnit());// 表單tagName
+							model.addAttribute("sheetTag", form.getApplicantUnitName());// 表單tagName
 							model.addAttribute("tagClass", categoryMap.get(form.getApplicantUnitId()));
 							break;
 						default: 

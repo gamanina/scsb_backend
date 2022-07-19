@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +34,9 @@ import com.scsb.service.SheetApprovalService;
 import com.scsb.service.SheetService;
 import com.scsb.util.LogUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/pendingSheet")
 public class PendingSheetController 
@@ -124,6 +128,12 @@ public class PendingSheetController
 			}
 		}
 		
+		
+		
+		
+		
+		log.info(sheet.toString());
+
 		model.addAttribute("processList", processList);
 		model.addAttribute("finalStepFilter", finalStepFilter);
 		model.addAttribute("approverList", approverList);

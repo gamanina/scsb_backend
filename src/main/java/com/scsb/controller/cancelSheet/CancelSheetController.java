@@ -258,7 +258,7 @@ public class CancelSheetController
 				LogUtil.setErrorLog(reFlieName + " sendSheetApproveEmail", e);
 			}
 		    
-			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_INSERT_SUCCESS, Constants.PENDINGSHEET_URL);
+			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_REJECTED_SUCCESS, Constants.PENDINGSHEET_URL);
 		}
 		catch (Exception e) 
 		{

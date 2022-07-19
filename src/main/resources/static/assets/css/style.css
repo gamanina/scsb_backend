@@ -363,7 +363,7 @@ input.form-check-input {
     color: #5A5C69;
     min-width: 160px;
 }
-.card-table ul {
+.cardMain {
     padding: 0;
     list-style: none;
 }
@@ -1048,4 +1048,14 @@ body {
     color: #5A5C69;
     text-align: center;
     font-size: 24px;
+}
+
+.btnNext .btn-renext {
+   	color: #C91936;
+    background-color: #F8F9FC;
+    border-color: #C91936;
+}
+.btnNext .btn-renext:hover {
+    background-color: #C91936;
+    color: #F8F9FC;
 }

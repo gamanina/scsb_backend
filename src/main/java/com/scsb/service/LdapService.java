@@ -218,7 +218,9 @@ public class LdapService
 		List<Ldap> c = getDataByDepartmentNumberAndTitleNo(ldap.getDepartmentNumber(), " ");
 		finalList.addAll(a);
 		finalList.addAll(b);
-		finalList.addAll(c);
+//		finalList.addAll(c);
+		log.info("c:{}",c.toString());
+		log.info("finalList:{}",finalList.toString());
 		return finalList;
 	}
 	
@@ -246,24 +248,18 @@ public class LdapService
 	 * @return
 	 * @throws Exception
 	 */
-	public String getAuthorityForSystem(String userdn,String emppwd) throws Exception
+	public Ldap getAuthorityForSystem(String user,String emppwd) throws Exception
 	{
 		ldapOperator ldapOper = new ldapOperator();
-		
+		String userdn = ldapOper.getUserDirectoryName(user);
 		Map<String, Object> map = ldapOper.userLoginLdap(userdn, emppwd);
 
-		Vector securityequals = (Vector)map.get("securityEquals");
-		//預設沒有權限
-		String usable = "N";
-			  
-		Iterator<?> iterator = securityequals.iterator();
-		while(iterator.hasNext()) {
-		    String secequals = (String)iterator.next();
-			if ("cn=generalGrp,ou=scsbwebDraftSys,o=apgroup,c=tw".equals(secequals)||"cn=superuserGrp,ou=scsbwebDraftSys,o=apgroup,c=tw".equals(secequals)) {
-			    usable = "Y";//有權限
-			}
+		if(map.isEmpty()) {
+			
+			return null;
 		}
-		return usable;
+		Ldap ldap = getDataByEmpNo(user);
+		return ldap;
 	}
 	
 	/**

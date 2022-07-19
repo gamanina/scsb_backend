@@ -14,7 +14,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 ['Source','Bold','Italic'],
 
-['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+['NumberedList', 'BulletedList','Link', 'Unlink','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
 
 
 ['Styles','Font','FontSize'],

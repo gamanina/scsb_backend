@@ -19102,33 +19102,7 @@ a.disabled {
   border-radius: 3px;
 }
 
-[data-format-pdf]:before {
-  background: url(../images/pdf.svg) no-repeat center center/32px auto;
-}
 
-[data-format-xls]:before {
-  background: url(../images/xls.svg) no-repeat center center/32px auto;
-}
-
-[data-format-doc]:before {
-  background: url(../images/doc.svg) no-repeat center center/32px auto;
-}
-
-[data-format-exe]:before {
-  background: url(../images/exe.svg) no-repeat center center/32px auto;
-}
-
-[data-format-zip]:before {
-  background: url(../images/zip.svg) no-repeat center center/32px auto;
-}
-
-[data-format-html]:before {
-  background: url(../images/html.svg) no-repeat center center/32px auto;
-}
-
-[data-format-link]:before {
-  background: url(../images/arrow-2r.svg) no-repeat center center/25px auto;
-}
 
 hr {
   border-top: 1px solid rgba(0, 0, 0, 0.1);

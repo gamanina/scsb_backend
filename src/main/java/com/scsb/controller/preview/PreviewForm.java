@@ -24,4 +24,12 @@ public class PreviewForm {
     private String content;
     private String imageUrl;
     
+    public String getApplicantUnitName() {
+		if ("個人金融事業部".equals(getApplicantUnit())) {
+			return applicantUnit = "個人金融";
+		}
+		return applicantUnit;
+		
+	}
+    
 }

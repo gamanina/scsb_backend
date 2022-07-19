@@ -27,14 +27,14 @@ img {
 
 .banner2 {
     position: absolute;
-    width: 320px;
-    height: 180px;
+    width: 30%;
+    height: 33%;
     background-color: #666;
-    bottom: 55px;
-    left: 95px;
+    bottom: 9%;
+    left: 10%;
 }
 .banner2 img {
-    height: 180px;
+    height: 100%;
 }
 .footer2 {
     position: relative;

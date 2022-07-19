@@ -26,6 +26,7 @@ public class MessageConstants {
 	public final static String MESSAGE_SAME_DATA_ERROR = "資料重複";
 	public final static String MESSAGE_LOGIN_LDAP_ERROR = "登入發生預期外錯誤。";
 	public final static String MESSAGE_APPROVED_ERROR = "此表單已被簽核";
+	public final static String MESSAGE_REJECTED_SUCCESS = "停刊成功!";
 	
 	public final static String EMPTY_ACCOUNT = "查無此帳號。";
 	public final static String EMPTY_DATA = "查無資料。";

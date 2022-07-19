@@ -72,7 +72,7 @@ public class SendEmailService {
 		Ldap agent = ldapService.getDataByEmpNo(agentId);
 		String approverEmail = approver.getMail();
 		String agentEmail = agent.getMail();
-		sendRemindApproveEmail(approverEmail,agentEmail);
+		sendRemindApproveEmail(approverEmail,agentEmail,nextApproverId);
 	}
 	
 	/**
@@ -106,24 +106,28 @@ public class SendEmailService {
 	
 	/**
 	 * 寄送新表單審核通知email
+	 * @param nextApproverId 
 	 * @param request
 	 * @param nextApproverId
 	 * @param agentId
 	 * @throws Exception 
 	 */
-	public void sendRemindApproveEmail(String approverEmail, String agentEmail) throws Exception {
+	public void sendRemindApproveEmail(String approverEmail, String agentEmail, String nextApproverId) throws Exception {
 		String subject = "主網站後台管理系統待審核通知"; 
 		String text = "您好，您有待審核的申請，請您盡速燈入主網站後台管理系統審核";
 		Map<String,String> map = new HashMap<String,String>();
     	map.put("text", text);
+    	map.put("URL", serviceDomain + Constants.EMAIL_LOGIN_URL+"?empNo="+nextApproverId);
 		List<String> toList = new ArrayList<String>();
 		toList.add(approverEmail);
 		toList.add(agentEmail);
 		System.out.println("=========approverEmail=======");
 		System.out.println(approverEmail);
 		System.out.println("=========approverEmail=======");
+		
+		
     	sendthymeleafEmail(toList,subject,"email/remindEmail.html",map);
-		sendEmail(Arrays.asList(approverEmail,agentEmail),subject,text);
+//		sendEmail(Arrays.asList(approverEmail,agentEmail),subject,text);
 
 	}
 	

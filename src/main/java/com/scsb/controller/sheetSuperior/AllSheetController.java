@@ -276,8 +276,8 @@ public class AllSheetController {
 			sheetCancel.setScsbSheetId(id);
 			sheetCancel.setApproverId(ldap.getCn());
 //			TODO: 正式接的時候要改這個
-//			sheetCancel.setApprover(ldapMap.get(ldap.getCn()));
-			sheetCancel.setApprover("測試人");
+			sheetCancel.setApprover(ldap.getGivenName());
+//			sheetCancel.setApprover("測試人");
 
 			sheetCancel.setSort(0);
 			sheetCancel.setStatus("3"); //狀態:緊急下架
@@ -297,7 +297,7 @@ public class AllSheetController {
 			sheetCancelService.save(sheetCancel);
 			sheetService.save(sheet);
 			
-			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_INSERT_SUCCESS, Constants.RECORDSHEET_URL);
+			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_REJECTED_SUCCESS, Constants.RECORDSHEET_URL);
 
 		} catch (Exception e) {
 			LogUtil.setErrorLog(reFlieName + " save", e);

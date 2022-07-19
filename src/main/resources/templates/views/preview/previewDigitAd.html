@@ -6,6 +6,11 @@
     <title>Preview-enterprise-ad-企金廣告</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/preview.css}">
 </head>
+<style>
+	.main{
+		width:100%
+	}
+</style>
 <body>
     <div class="main">
         <div class="header">
@@ -13,13 +18,14 @@
         </div>
 
         <div class="footer2">
+        
             <div class="banner2">
-				<div th:if="${sheet==null}">
+				<div style="height: 100%;" th:if="${sheet==null}">
 				<a th:href="@{${imageURL}}">
 					<img th:src="${image}" alt="">
 				</a>
 				</div>
-				<div th:if="${sheet!=null}">
+				<div style="height: 100%;" th:if="${sheet!=null}">
 				<a th:href="@{${imageURL}}">
 					<img th:src="@{${sheet.image}}" alt="">
 				</a>
@@ -28,6 +34,7 @@
 			
             <img th:src="@{/assets/img/body2.png}" alt="">
             
+           
         </div>
     </div>
 </body>

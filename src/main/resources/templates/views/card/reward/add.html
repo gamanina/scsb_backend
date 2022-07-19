@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW" xmlns:th="http://www.thymeleaf.org">
 <head th:include="views/common/head :: head"></head>
+
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -225,8 +226,8 @@
                                             
                                             <div class="form-group">
                                                 <label for="titlename">內容</label>
-                                                <textarea class="ckeditor" rows="20" placeholder="" id="tmp"></textarea>
-                                                <textarea class="" rows="20" placeholder="" th:field="*{content}" style="display:none"></textarea>
+                                                <textarea class="ckeditor" rows="20" placeholder="" th:field="*{content}" id="tmp"></textarea>
+                                                <textarea class="" rows="20" placeholder=""  style="display:none"></textarea>
                                             	<div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
                                             </div>
                                         </div>
@@ -290,7 +291,7 @@ function Initial() {
 	 				'	<div class=\"noticeTitle\">\r\n' + 
 	 				'		<p class=\"card-link\" data-toggle=\"collapse\" aria-expanded=\"true\" href=\"#note_a_01\">注意事項</p>\r\n' + 
 	 				'	</div>\r\n' + 
-	 				'	<ul class=\"decimalType collapse show\" id=\"note_a_01\" style=\"\">\r\n' + 
+	 				'	<ul class=\"decimalType collapse show\" id=\"note_a_01\" style=\"list-style-type: auto !important;\">\r\n' + 
 	 				'		<li>使用2.0國產車或同等級車種，指定進口車或七人座車，升等加價300元。</li>\r\n' + 
 	 				'		<li>紅利兌換請於出發前十個工作日(不含出發日當天)進行兌換。</li>\r\n' + 
 	 				'		<li>兌換完成後本行將以簡訊傳送兌換序號至您留存於本行的手機號碼，請於兌換前再次確認您所留存的手機號碼是否正確，以確保您的權益。</li>\r\n' + 

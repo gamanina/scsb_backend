@@ -19,7 +19,7 @@ public class CloseSheetValidator {
 	
 		if (StringUtils.isBlank(form.getArchiveReason()))
 		{
-			result.rejectValue("ArchiveReason", "error", "請填寫更動原因");
+			result.rejectValue("ArchiveReason", "error", "請填寫停刊原因");
 		}
 	
 	

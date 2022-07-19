@@ -6,6 +6,11 @@
     <title>review-enterprise-banner-企金輪播</title>
     <link rel="stylesheet" type="text/css" th:href="@{/assets/css/preview.css}">
 </head>
+<style>
+	.main{
+		width:100%
+	}
+</style>
 <body>
     <div class="main">
         <div class="header">
@@ -14,18 +19,20 @@
 
         <div class="banner">
 			<div th:if="${sheet==null}">
-				<img th:src="${image}" alt="">
-				<!--             banner img -->
+				<a th:href="@{${imageURL}}">
+					<img th:src="${image}" alt="">
+				</a>
 			</div>
 			<div th:if="${sheet!=null}">
-				<img th:src="@{${sheet.image}}" alt="">
+				<a th:href="@{${imageURL}}">
+					<img th:src="@{${sheet.image}}" alt="">
+				</a>
 			</div>
 		</div>
 		<div class="footer">
-            <img th:src="@{/assets/img/curve.png}" alt="">
-            <img th:src="@{/assets/img/body.png}" alt="">
-            
-        </div>
+			<img th:src="@{/assets/img/curve.png}" alt=""> <img
+				th:src="@{/assets/img/index_body.png}" alt="">
+		</div>
 		<div class="footer">
             <img th:src="@{/assets/img/banner1.png}" alt="">
         </div>

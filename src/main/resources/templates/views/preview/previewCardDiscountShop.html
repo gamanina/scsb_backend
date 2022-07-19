@@ -334,6 +334,10 @@
 	    window.onload = new Initial().init();
 	    
 	    function Initial() {
+	    $('.noticeTitle > p').attr('data-toggle','collapse')
+	   	$('.noticeTitle > p').attr('aria-expanded','true')
+	    $('.noticeTitle > p').attr('href','#note_a_05')
+	    $('.collapse.dotLister').attr('id','note_a_05')
 	    		const actions = {
 	    			disableATag: function() {
 		    			// mainBox內的超連結不禁用

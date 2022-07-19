@@ -35,9 +35,12 @@ import com.scsb.service.SheetCancelService;
 import com.scsb.service.SheetService;
 import com.scsb.util.LogUtil;
 
+import lombok.extern.slf4j.Slf4j;
+
 //import oracle.net.aso.c;
 //import oracle.net.aso.l;
 
+@Slf4j
 @Controller
 @RequestMapping("/recordSheet")
 public class SheetController {
@@ -312,6 +315,8 @@ public class SheetController {
 			for(Ldap approver : approverList) {
 				ldapMap.put(approver.getCn(), approver.getGivenName());
 			}
+			log.info("ldapMap:{}",ldapMap.toString());
+			log.info("ldap.getCn:{}",ldap.getCn());
 
 			//取前端資料 sheet
 			sheet.setId(id);
@@ -329,7 +334,7 @@ public class SheetController {
 			sheetCancel.setScsbSheetId(id);
 			sheetCancel.setApproverId(ldap.getCn());
 
-			sheetCancel.setApprover(ldapMap.get(ldap.getCn()));
+			sheetCancel.setApprover(ldap.getGivenName());
 //			sheetCancel.setApprover("測試人");
 
 			sheetCancel.setSort(0);
@@ -352,7 +357,7 @@ public class SheetController {
 			sheetCancelService.save(sheetCancel);
 			sheetService.save(sheet);
 			
-			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_INSERT_SUCCESS, Constants.RECORDSHEET_URL);
+			return commonService.alertPageSetUp(model, Constants.RESULT_SUCCESS, MessageConstants.MESSAGE_REJECTED_SUCCESS, Constants.RECORDSHEET_URL);
 
 		} catch (Exception e) {
 			LogUtil.setErrorLog(reFlieName + " save", e);

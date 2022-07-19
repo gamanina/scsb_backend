@@ -381,28 +381,28 @@ public class Sheet implements java.lang.Cloneable
 		{
 			return "";
 		}
-		return getFile().substring(getFile().lastIndexOf("/") + 1);
+		return getFile2().substring(getFile2().lastIndexOf("/") + 1);
 	}
 	public String getFileName3() {
 		if (StringUtils.isBlank(getFile3()))
 		{
 			return "";
 		}
-		return getFile().substring(getFile().lastIndexOf("/") + 1);
+		return getFile3().substring(getFile3().lastIndexOf("/") + 1);
 	}
 	public String getFileName4() {
 		if (StringUtils.isBlank(getFile4()))
 		{
 			return "";
 		}
-		return getFile().substring(getFile().lastIndexOf("/") + 1);
+		return getFile4().substring(getFile4().lastIndexOf("/") + 1);
 	}
 	public String getFileName5() {
 		if (StringUtils.isBlank(getFile5()))
 		{
 			return "";
 		}
-		return getFile().substring(getFile().lastIndexOf("/") + 1);
+		return getFile5().substring(getFile5().lastIndexOf("/") + 1);
 	}
 	
 	public String getFile2Name() {
@@ -451,6 +451,14 @@ public class Sheet implements java.lang.Cloneable
 		
 		return time;
 	}
+	
+	 public String getApplicantUnitName() {
+			if ("個人金融事業部".equals(getApplicantUnit())) {
+				return applicantUnit = "個人金融";
+			}
+			return applicantUnit;
+			
+		}
 	
 	public Timestamp getDateTime(){
 		Timestamp date = new Timestamp(System.currentTimeMillis()); 

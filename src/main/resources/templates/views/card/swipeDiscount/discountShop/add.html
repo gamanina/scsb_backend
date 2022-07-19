@@ -225,8 +225,8 @@
                                             
                                             <div class="form-group">
                                                 <label for="titlename">優惠商店內容</label>
-                                                <textarea class="ckeditor" rows="20" placeholder="" id="tmp"></textarea>
-                                                <textarea class="" rows="20" placeholder="" th:field="*{content}" style="display:none"></textarea>
+                                                <textarea class="ckeditor" rows="20" placeholder="" id="tmp" th:field="*{content}"></textarea>
+                                                <textarea class="" rows="20" placeholder=""  style="display:none"></textarea>
                                             	<div class="invalidColor" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></div>
                                             </div>
                                         </div>

@@ -234,7 +234,7 @@ public class LoginController {
 			}
 	        
 	        
-			return "redirect:recordSheet/list";
+			return "redirect:/recordSheet/list";
 		}
 		catch(Exception e)
 		{
@@ -261,7 +261,7 @@ public class LoginController {
 	    		ldap.setCn("1732");
 	    		ldap.setGivenName("測試員");
 	    		ldap.setDepartmentNumber("840000");
-	    		ldap.setDepartmentNumberName("信用卡部");
+	    		ldap.setDepartmentNumberName("個人金融事業部");
 	    		SecurityEquals se = new SecurityEquals();
 	    		se.setCn(Constants.SECURITYEQUALS_SUPERUSERGRP);
 	    		ldap.setSeObject(se);
@@ -317,44 +317,54 @@ public class LoginController {
 			        }
 		        }
 		        
-				return "redirect:recordSheet/list";
+				return "redirect:/recordSheet/list";
 			}
 			
 			// ldap登入
-			Ldap ldap = ldapService.login(form.getZhho(), form.getMima());
-			String authorityForSystem = ldapService.getAuthorityForSystem(form.getZhho(), form.getMima());
-	        
-			if ("N".equals(authorityForSystem)) {
-				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_RIGHTS_ERROR, Constants.LOGIN_URL);
+			Ldap ldap = ldapService.getAuthorityForSystem(form.getZhho(), form.getMima());
+	        String empNo = form.getZhho();
+			if(ldap == null || StringUtils.isBlank(ldap.getCn()))
+				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_SYSTEM_ERROR, Constants.LOGIN_URL);
+	
+			Manager member = new Manager();
+			String roleId = managerRoleService.getRoleIdByDepartmentNumber(ldap.getDepartmentNumber());
+			ManagerRole role = managerRoleService.getRoleById(roleId);
+			
+			log.info("=============role:{}",role);
+			
+			// 檢查超級使用者權限
+			boolean  superUser = false;
+			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
+				String type = (String) iterator.next();
+				String[] securityStrings = type.split(",");
+				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
+					superUser = true;
+					log.info("=========superUser:{}",superUser);
+				}
 			}
 			
-	        if (ldap == null) 
-				return commonService.alertPageSetUp(model, Constants.RESULT_ERROR, MessageConstants.MESSAGE_ACCOUNT_ERROR, Constants.LOGIN_URL);
-	        
-	        Manager member = new Manager();
-			String roleId = managerRoleService.getRoleIdByDepartmentNumber(ldap.getDepartmentNumber());
-    		ManagerRole role = managerRoleService.getRoleById(roleId);
-    		// 檢查超級使用者權限
 			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
 			{
-				if (ldap.getSeObject().getCn().equals(Constants.SECURITYEQUALS_SUPERUSERGRP))
+				if (superUser|| empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971")|| empNo.equals("17621"))
 				{
 					List<ManagerTask> taskList = taskService.superList();
 					role.getTasks().addAll(taskList);
 					role.setTasks(role.getTasks());
 				}
 			}
-    		member.setRole(role);
+			member.setRole(role);
 			member.setLdap(ldap);
 			member.setName(ldap.getGivenName());
 			
-	        // [20220228] 登入人員是否為A、B級主管
+			// [20220228] 登入人員是否為A、B級主管
 	        boolean isManager = ldapService.isManager(ldap);
-	        
-	        //設置權限查詢表
-			Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+			log.info("=========isManager:{}",isManager);
+			//設置權限查詢表
+//	        Map<String, String> rights = member.getRole().getTasks().stream().collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
+	        Map<String, String> rights = member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toMap(ManagerTask::getId, ManagerTask::getName));
 	        request.getSession().setAttribute(Constants.SESSION_MEMBER_RISHTS, rights);
 	        
+	       
 	        //功能列表
 	        Map<String, List<ManagerTask>> tasks = taskService.organizeTasks(member.getRole().getTasks().stream().filter(task -> isManager || !("200".equals(task.getId()) || "200".equals(task.getParentId()))).collect(Collectors.toList()));
 	        
@@ -364,32 +374,32 @@ public class LoginController {
 	        request.getSession().setAttribute(Constants.SESSION_FUNCTION_TASK_KEY, tasks);
 	        request.getSession().setAttribute(Constants.SESSION_LOGIN_TIME_KEY, now);
 	        
-
 	        List<Ldap> approverList = ldapService.getDepartmentPeople(ldap);
 	        request.getSession().setAttribute(Constants.SESSION_APPROVERS, approverList);
 	        
 	        List<Ldap> prList = ldapService.getPrDepartmentPeople();
 	        request.getSession().setAttribute(Constants.SESSION_PUBLIC_RELATIONS, prList);
 	        
-	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, isManager);
+	        // [20220228] 登入人員是否為A、B級主管
+	        request.getSession().setAttribute(Constants.SESSION_IS_MANAGER, ldapService.isManager(ldap));
 	        
-	        if (isManager) {// 只有主管帳號才重新導向
+	        if (isManager) {
 	        	// 若有停刊申請的待核表單
-	        	System.out.println("###############"+ldap.getCn());
-	        	List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
-	        	if (sheetList != null && sheetList.size() > 0)
-	        	{
-	        		return "redirect:/cancelSheet/list";
-	        	}
-	        	// 若有上架申請的待核表單
-	        	sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
-	        	if (sheetList != null && sheetList.size() > 0)
-	        	{
-	        		return "redirect:/pendingSheet/list";
-	        	}
-	        }
+		        List<Sheet> sheetList = sheetService.getCancelSheetListByCn(ldap.getCn());
+		        if (sheetList != null && sheetList.size() > 0)
+		        {
+		        	return "redirect:/cancelSheet/list";
+		        }
+		        // 若有上架申請的待核表單
+		        sheetList = sheetService.getPendingSheetListByCn(ldap.getCn());
+		        if (sheetList != null && sheetList.size() > 0)
+		        {
+		        	return "redirect:/pendingSheet/list";
+		        }
+			}
 	        
-	        return "redirect:recordSheet/list";
+	        
+			return "redirect:/recordSheet/list";
 		}
 		catch (Exception e)
 		{

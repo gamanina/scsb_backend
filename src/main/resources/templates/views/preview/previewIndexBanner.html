@@ -15,11 +15,14 @@
 
 		<div class="banner">
 			<div th:if="${sheet==null}">
-				<img th:src="${image}" alt="">
-				<!--             banner img -->
+				<a th:href="@{${imageURL}}">
+					<img th:src="${image}" alt="">
+				</a>
 			</div>
 			<div th:if="${sheet!=null}">
-				<img th:src="@{${sheet.image}}" alt="">
+				<a th:href="@{${imageURL}}">
+					<img th:src="@{${sheet.image}}" alt="">
+				</a>
 			</div>
 		</div>
 
