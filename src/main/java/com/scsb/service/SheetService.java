@@ -188,6 +188,9 @@ public class SheetService {
 		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date strDate = strDateBoolean ? new Date(0L) : df.parse(strDateStr);
 		Date endDate = endDateBoolean ? new Date() : df.parse(endDateStr);
+		System.out.println("+++++++++++++++++++++");
+		System.out.println(isManager);
+		System.out.println("+++++++++++++++++++++");
 		if (!isManager && StringUtils.isNotBlank(applicant)) {// 如果為非管理者且有輸入申請者, applicant設為空字串
 			applicant = StringUtils.EMPTY;
 		}

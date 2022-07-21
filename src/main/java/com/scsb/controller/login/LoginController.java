@@ -90,14 +90,11 @@ public class LoginController {
 			String roleId = managerRoleService.getRoleIdByDepartmentNumber(ldap.getDepartmentNumber());
 			ManagerRole role = managerRoleService.getRoleById(roleId);
 			// 檢查超級使用者權限
-			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
+			if ( empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971"))
 			{
-				if (ldap.getSeObject().getCn().equals(Constants.SECURITYEQUALS_SUPERUSERGRP))
-				{
-					List<ManagerTask> taskList = taskService.superList();
-					role.getTasks().addAll(taskList);
-					role.setTasks(role.getTasks());
-				}
+				List<ManagerTask> taskList = taskService.superList();
+				role.getTasks().addAll(taskList);
+				role.setTasks(role.getTasks());
 			}
 			member.setRole(role);
 			member.setLdap(ldap);
@@ -168,25 +165,29 @@ public class LoginController {
 			log.info("=============role:{}",role);
 			
 			// 檢查超級使用者權限
-			boolean  superUser = false;
-			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
-				String type = (String) iterator.next();
-				String[] securityStrings = type.split(",");
-				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
-					superUser = true;
-					log.info("=========superUser:{}",superUser);
-				}
-			}
+//			boolean  superUser = false;
+//			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
+//				String type = (String) iterator.next();
+//				String[] securityStrings = type.split(",");
+//				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
+//					superUser = true;
+//					log.info("=========superUser:{}",superUser);
+//				}
+//			}
+			log.info("=============ldap.getSeObject:{}",ldap.getSeObject());
+			log.info("=============ldap.getSeObject:{}",ldap.getSeObject() != null);
+			log.info("=============ldap.getSeObject().getCn:{}",ldap.getSeObject().getCn());
+			log.info("=============ldap.getSeObject().getCn:{}",!StringUtils.isBlank(ldap.getSeObject().getCn()));
 			
-			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
-			{
-				if (superUser|| empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971")|| empNo.equals("17621"))
+//			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
+//			{
+				if ( empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971"))
 				{
 					List<ManagerTask> taskList = taskService.superList();
 					role.getTasks().addAll(taskList);
 					role.setTasks(role.getTasks());
 				}
-			}
+//			}
 			member.setRole(role);
 			member.setLdap(ldap);
 			member.setName(ldap.getGivenName());
@@ -258,7 +259,7 @@ public class LoginController {
 	    		ManagerRole role = managerRoleService.getRoleById(roleId);
 	    		
 	    		Ldap ldap = new Ldap();
-	    		ldap.setCn("1732");
+	    		ldap.setCn("62090");
 	    		ldap.setGivenName("測試員");
 	    		ldap.setDepartmentNumber("840000");
 	    		ldap.setDepartmentNumberName("個人金融事業部");
@@ -333,25 +334,25 @@ public class LoginController {
 			log.info("=============role:{}",role);
 			
 			// 檢查超級使用者權限
-			boolean  superUser = false;
-			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
-				String type = (String) iterator.next();
-				String[] securityStrings = type.split(",");
-				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
-					superUser = true;
-					log.info("=========superUser:{}",superUser);
-				}
-			}
+//			boolean  superUser = false;
+//			for (Iterator iterator = ldap.getSecurityEquals().iterator(); iterator.hasNext();) {
+//				String type = (String) iterator.next();
+//				String[] securityStrings = type.split(",");
+//				if (Constants.SECURITYEQUALS_SUPERUSERGRP.equals(securityStrings[0])) {
+//					superUser = true;
+//					log.info("=========superUser:{}",superUser);
+//				}
+//			}
 			
-			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
-			{
-				if (superUser|| empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971")|| empNo.equals("17621"))
+//			if (ldap.getSeObject() != null && !StringUtils.isBlank(ldap.getSeObject().getCn()))
+//			{
+				if ( empNo.equals("1732")|| empNo.equals("12815")|| empNo.equals("9971"))
 				{
 					List<ManagerTask> taskList = taskService.superList();
 					role.getTasks().addAll(taskList);
 					role.setTasks(role.getTasks());
 				}
-			}
+//			}
 			member.setRole(role);
 			member.setLdap(ldap);
 			member.setName(ldap.getGivenName());

@@ -5,6 +5,28 @@
 .collapse.decimalType{
 	padding-left: 1%;
 }
+
+.pointInfo{
+	padding: 0;
+    list-style: none;
+}
+
+.lowerAlphaType {
+    padding-left: 1.8rem;
+    list-style-type: lower-alpha;
+}
+
+ul ul {
+    list-style-type: disc;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+}
+
+.notice .decimalType{
+	list-style-type: auto;
+}
+
+
 </style>
 
 <body id="page-top">
@@ -97,59 +119,34 @@
 												標題： <span>[[${sheet.title}]]</span>
 											</p>
 											<p class="announcement">公告內容：
-											<ul>
-                                                        <li th:if="${sheet.image != null and sheet.type == '2'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
+											<ul class="cardMain">
+                                                        <li th:if="${sheet.image != null and (sheet.type == '2'||sheet.type == '4'||sheet.type == '6'||sheet.type == '8'||sheet.type == '10')}">
+                                                        	・PC圖檔 <a th:href="@{${sheet.image}}" target="_blank">[[${sheet.imageName}]]</a>
                                                         </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '2'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
+                                                        <li th:if="${sheet.imageMobile != null and (sheet.type == '2'||sheet.type == '4'||sheet.type == '6'||sheet.type == '8'||sheet.type == '10')}">
+                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}" target="_blank">[[${sheet.imageMobileName}]]</a>
                                                         </li>
-                                                        <li th:if="${sheet.image != null and sheet.type == '8'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '8'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.image != null and sheet.type == '4'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '4'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.image != null and sheet.type == '6'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '6'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.image != null and sheet.type == '10'}">
-                                                        	・PC圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
-                                                        </li>
-                                                        <li th:if="${sheet.imageMobile != null and sheet.type == '10'}">
-                                                        	・Mobile圖檔 <a th:href="@{${sheet.imageMobile}}">[[${sheet.imageMobileName}]]</a>
-                                                        </li>
-                                                        
                                                         <li th:if="${sheet.image != null and sheet.type != '2' and sheet.type != '4' and sheet.type != '6' and sheet.type != '8' and sheet.type != '10'}">
-                                                        	・圖檔 <a th:href="@{${sheet.image}}">[[${sheet.imageName}]]</a>
+                                                        	・圖檔 <a th:href="@{${sheet.image}}" target="_blank">[[${sheet.imageName}]]</a>
                                                         </li>
                         
                                                         <li th:if="${sheet.imageUrl != null}">
-                                                        	・圖檔連結 <a th:href="@{${sheet.imageUrl}}">[[${sheet.imageUrl}]]</a>
+                                                        	・圖檔連結 <a th:href="@{${sheet.imageUrl}}"  target="_blank">[[${sheet.imageUrl}]]</a>
                                                         </li>
                                                         <li th:if="${sheet.file != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file}}">[[${sheet.fileName}]]</a>
+                                                        	 ・附檔 <a th:href="@{${sheet.file}}" download>[[${sheet.fileName}]]</a>
                                                         </li>
                                                          <li th:if="${sheet.file2 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file2}}">[[${sheet.fileName2}]]</a>
+                                                        	 ・附檔 <a th:href="@{${sheet.file2}}" download>[[${sheet.fileName2}]]</a>
                                                         </li>
                                                          <li th:if="${sheet.file3 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file3}}">[[${sheet.fileName3}]]</a>
+                                                        	 ・附檔 <a th:href="@{${sheet.file3}}" download>[[${sheet.fileName3}]]</a>
                                                         </li>
                                                          <li th:if="${sheet.file4 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file4}}">[[${sheet.fileName4}]]</a>
+                                                        	 ・附檔 <a th:href="@{${sheet.file4}}" download>[[${sheet.fileName4}]]</a>
                                                         </li>
                                                          <li th:if="${sheet.file5 != null}">
-                                                        	 ・附檔 <a th:href="@{${sheet.file5}}">[[${sheet.fileName5}]]</a>
+                                                        	 ・附檔 <a th:href="@{${sheet.file5}}" download>[[${sheet.fileName5}]]</a>
                                                         </li>
                                                     </ul>
 											<div th:utext="${#strings.unescapeJava(#strings.replace(#strings.escapeJava(sheet.content),'\n','&lt;br/&gt;'))}"></div>
@@ -183,7 +180,7 @@
 												</p>
 												<p th:if="${!approval.status.equals('0')}">
 													簽核意見附檔： <a th:href="@{${approval.file}}"
-														th:text="${approval.file}">文字修正示意圖</a>
+														th:text="${approval.file}" download>文字修正示意圖</a>
 												</p>
 												<p th:if="${!approval.status.equals('0')}">
 													簽核意見： <br> <span th:text="${approval.content}">文字部分修正，將
